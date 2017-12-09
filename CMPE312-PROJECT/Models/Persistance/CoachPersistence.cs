@@ -56,7 +56,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdateCoach(Coach coach1)
         {
 
-            string sql = "Update COACH set NAME='" + coach1.name + "', SURNAME='" + coach1.surname + "', BIRTH_DATE='" + coach1.birthDate + "', SALARY='" + coach1.salary + "', TEAM_ID='" + coach1.teamID + "' where ID=" + player1.ID;
+            string sql = "Update COACH set NAME='" + coach1.name + "', SURNAME='" + coach1.surname + "', BIRTH_DATE='" + coach1.birthDate + "', SALARY='" + coach1.salary + "', TEAM_ID='" + coach1.teamID + "' where ID=" + coach1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
