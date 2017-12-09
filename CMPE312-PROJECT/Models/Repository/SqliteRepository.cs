@@ -116,15 +116,20 @@ namespace SqliteTest.Models.Repository
             bool openResult = Open();
             if (success & openResult)
             {
-                string sql = "CREATE TABLE book (title VARCHAR(50), isbn DECIMAL, dateadded DATE, PRIMARY KEY(isbn))";
-                DoCommand(sql);
-
-                sql = "insert into book (title, isbn, dateadded) values "
+                string teamTable = "CREATE TABLE TEAM ( ID NUMBER, NAME VARCHAR(50), CITY VARCHAR(50), FOUNDATION DATE, BUDGET NUMBER, NUMBER_OF_CHAMPIONSHIP NUMBER, PRIMARY KEY(ID))";
+                string playerTable = "CREATE TABLE PLAYER (ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, POSITION VARCHAR(50), TRANSFER_FEE NUMBER, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string coachTable = "CREATE TABLE COACH ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string presidentTable = "CREATE TABLE PRESIDENT ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                DoCommand(teamTable);
+                DoCommand(playerTable);
+                DoCommand(coachTable);
+                DoCommand(presidentTable);
+                /*sql = "insert into book (title, isbn, dateadded) values "
                     + "('Gone With The Wind', 67890123, '2011-01-03')"
                     + ", ('Platos Republic', 80192837, '2013-02-25')"
                     + ", ('Selcuk Altun', 22334455778, '1944-06-15')"
                     + ", ('Die Blechtrommel', 90897856453, '1896-07-06')";
-                DoCommand(sql);
+                DoCommand(sql);*/
             }
 
             return success;
