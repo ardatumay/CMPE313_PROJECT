@@ -12,40 +12,66 @@ namespace CMPE312_PROJECT.Models.Repository
         static UserPersistence()
         {
             users = new List<User>();
-
-            string salt = EncryptionManager.PasswordSalt;
-            users.Add(new User ("user1", "Alpha Romeo", salt,(EncryptionManager.EncodePassword("abc123", salt)), false));
-
-            salt = EncryptionManager.PasswordSalt;
-            users.Add(new User("admin1", "Charlie Eagle", salt, (EncryptionManager.EncodePassword("abcd1234", salt)), true));
         }
         /*
          * Get one user from the repository, identified by userId
          */
         public static User GetUser(string userId)
         {
-            foreach (User user in users)
+            string sqlQuery = "select * from USER where USER_ID='" + userId + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            User user=null;
+
+            foreach (object[] dataRow in rows)
             {
-                if (userId == user.UserId)
-                {
-                    return user;
-                }
+                user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
             }
+
+
+            if (userId == user.userID)
+            {
+                return user;
+            }
+
             return null;
         }
 
         // Not Implemented
-        public static bool UpdateUser(User user)
+        public static bool UpdateUser(User user1)
         {
+
+            string sql = "Update USER set USER_ID='" + user1.userID + "', NAME='" + user1.name + "', EMAIL='" + user1.email + "', IS_ADMIN='" + user1.isAdmin + "', STATUS='" + user1.status + "' where USER_ID=" + user1.userID;
+            int result = RepositoryManager.Repository.DoCommand(sql);
+            if (result == 1)
+            {
+                return true;
+            }
             return false;
         }
-        public static bool DeleteUser(User user)
+        public static bool DeleteUser(User user1)
         {
+            string sql = "delete from USER where USER_ID=" + user1.userID;
+            int result = RepositoryManager.Repository.DoCommand(sql);
+            if (result == 1)
+            {
+                return true;
+            }
             return false;
         }
         public static List<User> GetAllUsers()
         {
-            return null;
+            List<User> users = new List<User>();
+
+            string sqlQuery = "select * from USER";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+
+            foreach (object[] dataRow in rows)
+            {
+                User user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
+                users.Add(user);
+            }
+
+            return users;
         }
     }
 }
