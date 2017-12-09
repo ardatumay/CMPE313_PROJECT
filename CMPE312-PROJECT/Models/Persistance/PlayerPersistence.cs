@@ -38,22 +38,22 @@ namespace CMPE312_PROJECT.Models.Repository
          * Return true iff the add succeeds.
          */
          public static bool AddPlayer(Player player1)
-        {
+         {
             System.Diagnostics.Debug.WriteLine("DateTime: " + player1.birthDate.ToString("yyyy-MM-dd"));
 
             string sql = "insert into PLAYER values ('"
-                + player1.ID + ", '"
+                + player1.ID + "', '"
                 + player1.name + "', "
-                + player1.surname + ", '" 
-                + player1.birthDate.ToString("yyyy-MM-dd") + ", '"
-                + player1.position + ", '"
-                + player1.transferFee + ", '"
-                + player1.salary + ", '"
-                + player1.teamID + "')"
-                ;
+                + player1.surname + "', '"
+                + player1.birthDate.ToString("yyyy-MM-dd") + "', '"
+                + player1.position + "', '"
+                + player1.transferFee + "', '"
+                + player1.salary + "', '"
+                + player1.teamID + "')";
+
             RepositoryManager.Repository.DoCommand(sql);
             return true;
-        }
+         }
 
         public static bool DeletePlayer(Player player1)
         {
@@ -72,7 +72,7 @@ namespace CMPE312_PROJECT.Models.Repository
          * Return false if the book is not found, based on key field match.
          */
          public static bool UpdatePlayer(Player player1)
-        {
+         {
           
             string sql = "Update PLAYER set NAME='" +  player1.name + "', SURNAME='" + player1.surname + "', BIRTH_DATE='" + player1.birthDate + "', POSITION='" + player1.position + "', TRANSFER_FEE='" + player1.transferFee + "', SALARY='" + player1.salary + "', TEAM_ID='" + player1.teamID + "' where ID=" + player1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
@@ -81,26 +81,6 @@ namespace CMPE312_PROJECT.Models.Repository
                 return true;
             }
             return false;
-        }
-
-        /*
-         * Get all Book data from the database and return an array of Books.
-         */
-        public static List<Player> GetTeamPlayers(int teamID)
-        {
-            List<Player> players = new List<Player>();
-
-            string sqlQuery = "select * from PLAYER where TEAM_ID='" + teamID + "'";
-            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
-
-            foreach (object[] dataRow in rows)
-            {
-                DateTime dateAdded = Convert.ToDateTime(dataRow[3]);
-                Player player = new Player { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = dateAdded, position = (String)dataRow[4], transferFee = (long)dataRow[5], salary = (long)dataRow[6], teamID = (int)dataRow[7] };
-                players.Add(player);
-            }
-
-            return players;
-        }
+         }
     }
 }
