@@ -7,11 +7,20 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class User
     {
-        String userid { get; set; }
-        String password { get; set; }
-        String name { get; set; }
-        String salt { get; set; }
-        String passwordHash { get; set; }
-        bool isAdmin { get; set; }
+        public String UserId { get; set; }
+        public String Password { get; set; }
+        public String Name { get; set; }
+        public String Salt { get; set; }
+        public String PasswordHash { get; set; }
+        public bool IsAdmin { get; set; }
+
+        public User (String userid1, String name1, String salt1, String passwordHash1, bool isAdmin1)
+        {
+            UserId = userid1;
+            Name = name1;
+            Salt = salt1;
+            PasswordHash = passwordHash1;
+            IsAdmin = isAdmin1;
+        }
     }
 }
