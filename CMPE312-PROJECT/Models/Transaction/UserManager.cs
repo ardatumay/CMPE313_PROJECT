@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Lab7.Models.Entity;
-using Lab7.Models.Repository;
+using CMPE312_PROJECT.Models.Entity;
+using CMPE312_PROJECT.Models.Repository;
 
-namespace Lab7.Models.Transaction
+namespace CMPE312_PROJECT.Models.Transaction
 {
     public class UserManager
     {

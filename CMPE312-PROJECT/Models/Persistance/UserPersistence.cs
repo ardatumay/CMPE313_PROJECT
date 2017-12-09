@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lab7.Models.Entity;
-using Lab7.Models.Transaction;
+using CMPE312_PROJECT.Models.Entity;
+using CMPE312_PROJECT.Models.Transaction;
 
-namespace Lab7.Models.Repository
+namespace CMPE312_PROJECT.Models.Repository
 {
     public class UserPersistence
     {
@@ -14,24 +14,10 @@ namespace Lab7.Models.Repository
             users = new List<User>();
 
             string salt = EncryptionManager.PasswordSalt;
-            users.Add(new User
-            {
-                UserId = "user1",
-                Name = "Alpha Romeo",
-                Salt = salt,
-                PasswordHash = EncryptionManager.EncodePassword("abc123", salt),
-                IsAdmin = false
-            });
+            users.Add(new User ("user1", "Alpha Romeo", salt,(EncryptionManager.EncodePassword("abc123", salt)), false));
 
             salt = EncryptionManager.PasswordSalt;
-            users.Add(new User
-            {
-                UserId = "admin1",
-                Name = "Charlie Eagle",
-                Salt = salt,
-                PasswordHash = EncryptionManager.EncodePassword("abcd1234", salt),
-                IsAdmin = true
-            });
+            users.Add(new User("admin1", "Charlie Eagle", salt, (EncryptionManager.EncodePassword("abcd1234", salt)), true));
         }
         /*
          * Get one user from the repository, identified by userId

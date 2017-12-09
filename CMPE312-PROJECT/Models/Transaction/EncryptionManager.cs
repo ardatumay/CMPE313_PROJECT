@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Lab7.Models.Transaction
+namespace CMPE312_PROJECT.Models.Transaction
 {
     public class EncryptionManager
     {

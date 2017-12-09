@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
-using CMPE312_PROJECT.Models.;
+using CMPE312_PROJECT.Models.Transaction;
+using CMPE312_PROJECT.Models.Persistance;
 
 namespace Lab7.Controllers
 {
