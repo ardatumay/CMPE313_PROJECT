@@ -19,15 +19,15 @@ namespace CMPE312_PROJECT.Models.Transaction
             if(user == null) { 
             return false;
             }
-            string passHash = EncryptionManager.EncodePassword(cre.Password, user.Salt);
-            if(passHash != user.PasswordHash)
+            string passHash = EncryptionManager.EncodePassword(cre.Password, user.salt);
+            if(passHash != user.passwordHash)
             {
                 return false;
             }
             else
             {
                 session["LoggedIn"] = true;
-                session["IsAdmin"] = user.IsAdmin;
+                session["IsAdmin"] = user.isAdmin;
                 return true;
             }
         }
