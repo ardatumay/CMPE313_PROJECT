@@ -166,6 +166,7 @@
     <Compile Include="Models\Entity\President.cs" />
     <Compile Include="Models\Entity\Team.cs" />
     <Compile Include="Models\Entity\User.cs" />
+    <Compile Include="Models\Persistance\UserPersistence.cs" />
     <Compile Include="Models\Repository\BookPersistence.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RepositoryManager.cs" />
