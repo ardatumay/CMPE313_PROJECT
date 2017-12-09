@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
-using CMPE312_PROJECT.Models.;
+using CMPE312_PROJECT.Models.Transaction;
 
-namespace Lab7.Controllers
+namespace CMPE312_PROJECT.Controllers
 {
     public class AuthenticationController : Controller
     {

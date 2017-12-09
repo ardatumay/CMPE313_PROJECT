@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lab7.Models.Entity;
-using Lab7.Models.Transaction;
+using CMPE312_PROJECT.Models.Entity;
+using CMPE312_PROJECT.Models.Transaction;
 
-namespace Lab7.Models.Repository
+namespace CMPE312_PROJECT.Models.Repository
 {
     public class UserPersistence
     {
