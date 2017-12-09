@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMPE312-PROJECT", "CMPE312-PROJECT\CMPE312-PROJECT.csproj", "{77647F28-7462-47AC-B63A-089894B31CE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMPE312_PROJECT", "CMPE312-PROJECT\CMPE312_PROJECT.csproj", "{77647F28-7462-47AC-B63A-089894B31CE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
