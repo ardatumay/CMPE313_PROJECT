@@ -20,9 +20,6 @@ namespace CMPE312_PROJECT.Controllers
 
             return View();
         }
-        /*
-         * asdqwdwqfqwfqwfqwkhdgwqkjdgqwjldgqwjldghqwld
-         */
 
         public ActionResult Contact()
         {
