@@ -116,14 +116,16 @@ namespace CMPE312_PROJECT.Models.Repository
             bool openResult = Open();
             if (success & openResult)
             {
-                string teamTable = "CREATE TABLE TEAM ( ID NUMBER, NAME VARCHAR(50), CITY VARCHAR(50), FOUNDATION DATE, BUDGET NUMBER, NUMBER_OF_CHAMPIONSHIP NUMBER, PRIMARY KEY(ID))";
-                string playerTable = "CREATE TABLE PLAYER (ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, POSITION VARCHAR(50), TRANSFER_FEE NUMBER, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string coachTable = "CREATE TABLE COACH ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string presidentTable = "CREATE TABLE PRESIDENT ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                DoCommand(teamTable);
-                DoCommand(playerTable);
-                DoCommand(coachTable);
-                DoCommand(presidentTable);
+                string TeamTable = "CREATE TABLE TEAM ( ID NUMBER, NAME VARCHAR(50), CITY VARCHAR(50), FOUNDATION DATE, BUDGET NUMBER, NUMBER_OF_CHAMPIONSHIP NUMBER, PRIMARY KEY(ID))";
+                string PlayerTable = "CREATE TABLE PLAYER (ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, POSITION VARCHAR(50), TRANSFER_FEE NUMBER, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string CoachTable = "CREATE TABLE COACH ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string PresidentTable = "CREATE TABLE PRESIDENT ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASWORD VARCHAR(50), IS_ADMIN NUMBER, STATUS VARCHAR(1), PRIMARY KEY (USERID))";
+                DoCommand(TeamTable);
+                DoCommand(PlayerTable);
+                DoCommand(CoachTable);
+                DoCommand(PresidentTable);
+                DoCommand(UserTable);
                 /*sql = "insert into book (title, isbn, dateadded) values "
                     + "('Gone With The Wind', 67890123, '2011-01-03')"
                     + ", ('Platos Republic', 80192837, '2013-02-25')"

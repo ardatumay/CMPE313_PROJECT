@@ -1,0 +1,14 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Credential
+@{
+
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post" action="~/Authentication/Login">
+    <label>User ID<input name="UserId" value="@Model.UserId" type="text" /></label>
+    <label>Password<input name="Password" value="@Model.Password" type="password" /></label>
+    <input type="submit" value="Login" />
+</form>
