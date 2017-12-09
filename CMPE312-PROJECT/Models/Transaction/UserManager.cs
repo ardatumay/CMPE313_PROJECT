@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
+using CMPE312_PROJECT.Models.Transaction;
+
 
 namespace CMPE312_PROJECT.Models.Transaction
 {
