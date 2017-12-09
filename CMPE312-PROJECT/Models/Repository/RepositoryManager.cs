@@ -1,7 +1,7 @@
 ﻿using System;
-using SqliteTest.Models.Repository;
+using CMPE312_PROJECT.Models.Repository;
 
-namespace SqliteDemo.Models.Repository
+namespace CMPE312_PROJECT.Models.Repository
 {
     /*
      * This class instantiates an instance of IRepository, and provides

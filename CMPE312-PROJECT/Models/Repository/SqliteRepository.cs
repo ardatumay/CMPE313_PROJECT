@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 
-namespace SqliteTest.Models.Repository
+namespace CMPE312_PROJECT.Models.Repository
 {
     /*
      * This class creates and accesses an SQLite database.

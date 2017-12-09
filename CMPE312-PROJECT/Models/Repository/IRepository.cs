@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SqliteTest.Models.Repository
+namespace CMPE312_PROJECT.Models.Repository
 {
 
     /*

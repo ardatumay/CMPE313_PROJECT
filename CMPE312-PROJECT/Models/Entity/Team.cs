@@ -8,13 +8,13 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Team
     {
-        int ID { get; set; }
-        string name { get; set; }
-        string city { get; set; }
-        DateTime foundation { get; set; }
-        long budget { get; set; }
-        int numberOfChampionship { get; set; }
-        ArrayList players = new ArrayList();
+        public int ID { get; set; }
+        public string name { get; set; }
+        public string city { get; set; }
+        public DateTime foundation { get; set; }
+        public long budget { get; set; }
+        public int numberOfChampionship { get; set; }
+        public ArrayList players = new ArrayList();
         
         public Team()
         {
