@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,6 +183,7 @@
     <Compile Include="Models\Repository\RepositoryManager.cs" />
     <Compile Include="Models\Repository\SqliteRepository.cs" />
     <Compile Include="Models\Transaction\EncryptionManager.cs" />
+    <Compile Include="Models\Transaction\TeamManager.cs" />
     <Compile Include="Models\Transaction\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -224,6 +226,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\Signup.cshtml" />
+    <Content Include="Views\Team\AddTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

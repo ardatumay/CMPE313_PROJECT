@@ -43,15 +43,7 @@ namespace CMPE312_PROJECT.Models.Transaction
             string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
             user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, 0, "A");
             signup = UserPersistence.InsertUser(user);
-            if (signup)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
+            return signup;
         }
         public static void LogoutUSer(HttpSessionStateBase session)
         {

@@ -57,6 +57,7 @@ namespace CMPE312_PROJECT.Models.Repository
             }
             return false;
         }
+
         public static bool DeleteUser(User user1)
         {
             string sql = "delete from USER where USER_ID=" + user1.userID;
@@ -67,6 +68,7 @@ namespace CMPE312_PROJECT.Models.Repository
             }
             return false;
         }
+
         public static bool InsertUser(User user1)
         {
             string sql = "insert into USER (USER_ID, NAME, EMAIL, SALT, HASHEDPASSWORD, IS_ADMIN, STATUS) VALUES ('" + user1.userID + "','" + user1.name + "','" + user1.email + "','" + user1.salt + "','" + user1.passwordHash + "','" + user1.isAdmin + "','" + user1.status + "')";

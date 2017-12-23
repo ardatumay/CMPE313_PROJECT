@@ -1,0 +1,39 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Team
+@{
+    ViewBag.Title = "AddTeam";
+}
+
+
+<script type="text/JavaScript">
+
+    function trimFoundation(field) {
+        var val = field.value;
+        val = val.replace(/[\D]+/, '');
+        field.value = val;
+        if (val.length > 3) {
+            val = val.trim();
+            val = val.substring(0,3)
+            field.value = val;         
+        }
+    }
+    /*var budgetVal = get('budget').value;
+    if (budgetVal.length > 4) {
+        budgetVal = budgetVal.substring(0, 3);
+        get('budget').value = budgetVal;
+    }*/
+    function get(id) { return document.getElementById(id) }
+</script>
+
+
+<h2>AddTeam</h2>
+
+<form method="post" action="~/Team/AddTeam">
+    <p><label>Team Name<input name="name" value="@Model.Name" type="text" /></label></p>
+    <p><label>Team City<input name="city" value="@Model.City" type="text" /></label></p>
+    <p><label>Team Foundation Year<input id="budget" onkeydown="trimFoundation(this)" name="foundation" value="@Model.Foundation" type="text" /></label></p>
+    <p><label>Team Budget<input name="budget"  value="@Model.Budget" type="text" /></label></p>
+    <p><label>Number Of Championships<input name="numberOfChampionship" value="@Model.NumberOfChampionship" type="text" /></label></p>
+
+    <input type="submit" value="Add Team" />
+</form>

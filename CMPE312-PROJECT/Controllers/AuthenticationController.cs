@@ -69,13 +69,12 @@ namespace CMPE312_PROJECT.Controllers
             {
                 TempData["message"] = "All inputs are required.";
                 return View(credential);
-            } else if (!credential.Password1.Equals(credential.Password2))
+            }
+            else if (!credential.Password1.Equals(credential.Password2))
             {
                 TempData["message"] = "Passwords are not same.";
                 return View(credential);
             }
-
-
             else
             {
                 signup = UserManager.SignupUser(credential);
