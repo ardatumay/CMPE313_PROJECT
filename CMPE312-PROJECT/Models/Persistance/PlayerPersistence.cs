@@ -16,7 +16,7 @@ namespace CMPE312_PROJECT.Models.Repository
          * the parameter.
          * Return null if the book can't be found.
          */
-        public static Player getPlayer(Player player1)
+        public static Player GetPlayer(Player player1)
         {
             string sqlQuery = "select * from PLAYER where ID=" + player1.ID;
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
@@ -28,8 +28,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
-            DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            Player player = new Player { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = dateAdded, position = (String)dataRow[4], transferFee = (long)dataRow[5], salary = (long)dataRow[6], teamID = (int)dataRow[7] };
+            Player player = new Player { ID = (decimal)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], position = (String)dataRow[4], transferFee = (decimal)dataRow[5], salary = (decimal)dataRow[6], teamID = (decimal)dataRow[7] };
             return player;
         }
 
@@ -39,13 +38,25 @@ namespace CMPE312_PROJECT.Models.Repository
          */
          public static bool AddPlayer(Player player1)
          {
-            System.Diagnostics.Debug.WriteLine("DateTime: " + player1.birthDate.ToString("yyyy-MM-dd"));
+            string sql1 = "SELECT * FROM PLAYER WHERE ID = (SELECT MAX(ID) from PLAYER); ";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sql1);
+
+            if (rows.Count == 0)
+            {
+                player1.ID = 1;
+            }
+
+            else { 
+
+            object[] dataRow = rows[0];
+            player1.ID = Convert.ToDecimal(dataRow[0])+1;
+            }
 
             string sql = "insert into PLAYER values ('"
                 + player1.ID + "', '"
-                + player1.name + "', "
+                + player1.name + "', '"
                 + player1.surname + "', '"
-                + player1.birthDate.ToString("yyyy-MM-dd") + "', '"
+                + player1.birthDate + "', '"
                 + player1.position + "', '"
                 + player1.transferFee + "', '"
                 + player1.salary + "', '"
