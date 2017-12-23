@@ -31,6 +31,12 @@ namespace CMPE312_PROJECT.Models.Repository
                 {
                     user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
                 }
+
+                if (user == null)
+                {
+                    return null;
+                }
+
                 if (userId == user.userID)
                 {
                     return user;

@@ -11,7 +11,7 @@ namespace CMPE312_PROJECT.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\user\\cmpe312-project.sqlite";
+        private string databaseFile = "C:\\Users\\Batuhan\\cmpe312-project.sqlite";
 
 
         private SQLiteConnection dbConnection;
@@ -121,7 +121,7 @@ namespace CMPE312_PROJECT.Models.Repository
                 string PlayerTable = "CREATE TABLE PLAYER (ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, POSITION VARCHAR(50), TRANSFER_FEE NUMBER, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
                 string CoachTable = "CREATE TABLE COACH ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, SALARY NUMBER, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
                 string PresidentTable = "CREATE TABLE PRESIDENT ( ID NUMBER, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, TEAM_ID NUMBER, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN NUMBER, STATUS VARCHAR(1), PRIMARY KEY (USERID))";
+                string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN NUMBER, STATUS VARCHAR(1), PRIMARY KEY (USER_ID))";
                 DoCommand(TeamTable);
                 DoCommand(PlayerTable);
                 DoCommand(CoachTable);

@@ -1,4 +1,12 @@
-﻿@{
+﻿
+@using CMPE312_PROJECT.Models.Repository;
+@{
     ViewBag.Title = "Home Page";
+
+    bool result = RepositoryManager.Repository.Initialize();
 }
+
+
 <h4>Home Page</h4>
+
+

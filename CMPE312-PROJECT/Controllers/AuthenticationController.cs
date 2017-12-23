@@ -74,6 +74,8 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Passwords are not same.";
                 return View(credential);
             }
+
+
             else
             {
                 signup = UserManager.SignupUser(credential);
