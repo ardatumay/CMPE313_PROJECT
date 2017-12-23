@@ -29,7 +29,7 @@ namespace CMPE312_PROJECT.Models.Repository
             {
                 foreach (object[] dataRow in rows)
                 {
-                    user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
+                    user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (decimal)dataRow[5], status = (String)dataRow[6] };
                 }
 
                 if (user == null)
