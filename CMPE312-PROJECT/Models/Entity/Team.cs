@@ -8,17 +8,22 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Team
     {
-        public int ID { get; set; }
+        public decimal ID { get; set; }
         public string name { get; set; }
         public string city { get; set; }
-        public DateTime foundation { get; set; }
-        public long budget { get; set; }
-        public int numberOfChampionship { get; set; }
+        public decimal foundation { get; set; }
+        public decimal budget { get; set; }
+        public decimal numberOfChampionship { get; set; }
         public ArrayList players = new ArrayList();
         
         public Team()
         {
 
+        }
+
+        public Team(String name1)
+        {
+            name = name1;
         }
     }
 }

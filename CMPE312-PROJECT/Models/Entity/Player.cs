@@ -7,14 +7,15 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Player
     {
-        public int ID { get; set; }
+        public decimal ID { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
-        public DateTime birthDate { get; set; }
+        public string birthDate { get; set; }
         public string position { get; set; }
-        public long transferFee { get; set; }
-        public long salary { get; set; }
-        public int teamID { get; set; }
+        public decimal transferFee { get; set; }
+        public decimal salary { get; set; }
+        public decimal teamID { get; set; }
+        public String teamName { get; set; }
 
         public Player()
         {

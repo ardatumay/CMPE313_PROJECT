@@ -41,7 +41,7 @@ namespace CMPE312_PROJECT.Models.Transaction
             }
             string salt = EncryptionManager.PasswordSalt;
             string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
-            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, 0, "A");
+            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, cre.IsAdmin, "A");
             signup = UserPersistence.InsertUser(user);
             if (signup)
             {

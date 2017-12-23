@@ -181,6 +181,7 @@
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RepositoryManager.cs" />
     <Compile Include="Models\Repository\SqliteRepository.cs" />
+    <Compile Include="Models\Transaction\PlayerManager.cs" />
     <Compile Include="Models\Transaction\EncryptionManager.cs" />
     <Compile Include="Models\Transaction\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,10 +225,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Authentication\Signup.cshtml" />
+    <Content Include="Views\Player\AddPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -7,16 +7,28 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Credential
     {
+
+        public string UserId { get; set; }
+        public string Password1 { get; set; }
+        public string Password2 { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public int IsAdmin { get; set; }
+
         public Credential()
         {
 
         }
 
-        public string UserId { get; set; }
-        public string Password1 { get; set; }
-        public string Password2{ get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
+        public Credential(string UserId1, string Password, string Email1, string Name1, int IsAdmin1) 
+        {
+            UserId = UserId1;
+            Password1 = Password;
+            Password2 = Password;
+            Email = Email1;
+            Name = Name1;
+            IsAdmin = IsAdmin1;
+        }
 
     }
 }

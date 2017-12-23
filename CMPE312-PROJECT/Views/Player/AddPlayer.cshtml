@@ -1,0 +1,22 @@
+﻿    @using CMPE312_PROJECT.Models.Entity;
+    @model Player
+    @{
+        ViewBag.Title = "AddPlayer";
+    }
+
+    <h2>AddPlayer</h2>
+
+    <form method="post" action="~/Player/AddPlayer">
+        <ul>
+            <li><label>Name<input name="Name" value="@Model.name" type="text" /></label></li>
+            <li><label>Surname<input name="Surname" value="@Model.surname" type="text" /></label></li>
+            <li><label>Birth Date<input name="BirthDate" value="@Model.birthDate" type="date" /></label></li>
+            <li><label>Position<input name="Position" value="@Model.position" type="text" /></label></li>
+            <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
+            <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
+            <li><label>Team Name<input name="TeamName" value="@Model.teamName" type="text" /></label></li>
+
+        </ul>
+        <input type="submit" value="Register" />
+
+    </form>
