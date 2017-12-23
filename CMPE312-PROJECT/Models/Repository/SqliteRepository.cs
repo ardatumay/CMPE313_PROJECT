@@ -15,7 +15,7 @@ namespace CMPE312_PROJECT.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\Batuhan\\cmpe312-project.sqlite";
+        private string databaseFile = "C:\\Users\\user\\cmpe312-project.sqlite";
 
 
         private SQLiteConnection dbConnection;
