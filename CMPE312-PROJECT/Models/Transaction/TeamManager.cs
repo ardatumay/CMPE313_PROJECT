@@ -20,7 +20,7 @@ namespace CMPE312_PROJECT.Models.Transaction
             {
                 return false;
             }
-            isAdded = TeamPersistance.InsertTeam(team_);
+            isAdded = TeamPersistance.AddTeam(team_);
             return isAdded;
         }
 

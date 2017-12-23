@@ -46,7 +46,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         /*
          * Inserts new team into database.
          */
-        public static bool InsertTeam(Team team1)
+        public static bool AddTeam(Team team1)
         {
             int result = -2;
             string sql1 = "Select * from TEAM";
