@@ -31,7 +31,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Credential());
             }
-            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password == null) || (credential.Password.Length == 0))
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
             {
                 TempData["message"] = "Both user id and password are required";
                 return View(credential);
@@ -50,6 +50,44 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Invalid login credentials";
                 return View(credential);
             }    
+        }
+        [HttpGet]
+        public ActionResult Signup()
+        {
+            return View(new Credential());
+        }
+
+        [HttpPost]
+        public ActionResult Signup(Credential credential)
+        {
+            bool signup;
+            if (credential == null)
+            {
+                return View(new Credential());
+            }
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0)|| (credential.Password2 == null) || (credential.Password2.Length == 0) || (credential.Email == null) || (credential.Email.Length == 0) || (credential.Name == null) || (credential.Name.Length == 0))
+            {
+                TempData["message"] = "All inputs are required.";
+                return View(credential);
+            } else if (!credential.Password1.Equals(credential.Password2))
+            {
+                TempData["message"] = "Passwords are not same.";
+                return View(credential);
+            }
+            else
+            {
+                signup = UserManager.SignupUser(credential);
+                if(signup == false)
+                {
+                    TempData["message"] = "User already exists.";
+                    return View(credential);
+                }
+                else
+                {
+                    TempData["message"] = "You are registered. You can login.";
+                    return RedirectToAction("Index", "Home");
+                }
+            }
         }
         public ActionResult Logout()
         {

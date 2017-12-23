@@ -19,5 +19,15 @@ namespace CMPE312_PROJECT.Models.Entity
         {
 
         }
+        public User(String userID_, String name_, String email_, String salt_, String passwordHash_, int isAdmin_, String status_)
+        {
+            userID = userID_;
+            name = name_;
+            email = email_;
+            salt = salt_;
+            passwordHash = passwordHash_;
+            isAdmin = isAdmin_;
+            status = status_;        
+        }
     }
 }

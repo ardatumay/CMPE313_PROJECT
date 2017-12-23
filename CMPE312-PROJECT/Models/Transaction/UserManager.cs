@@ -19,7 +19,7 @@ namespace CMPE312_PROJECT.Models.Transaction
             if(user == null) { 
             return false;
             }
-            string passHash = EncryptionManager.EncodePassword(cre.Password, user.salt);
+            string passHash = EncryptionManager.EncodePassword(cre.Password1, user.salt);
             if(passHash != user.passwordHash)
             {
                 return false;
@@ -31,8 +31,29 @@ namespace CMPE312_PROJECT.Models.Transaction
                 return true;
             }
         }
+        public static bool SignupUser(Credential cre)
+        {
+            bool signup;
+            User user = UserPersistence.GetUser(cre.UserId);
+            if (user != null)
+            {
+                return false;
+            }
+            string salt = EncryptionManager.PasswordSalt;
+            string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
+            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, 0, "A");
+            signup = UserPersistence.InsertUser(user);
+            if (signup)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-      public static void LogoutUSer(HttpSessionStateBase session)
+        }
+        public static void LogoutUSer(HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
             session["IsAdmin"] = false;

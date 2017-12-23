@@ -21,18 +21,21 @@ namespace CMPE312_PROJECT.Models.Repository
             string sqlQuery = "select * from USER where USER_ID='" + userId + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             User user=null;
-
-            foreach (object[] dataRow in rows)
+            if(rows == null)
             {
-                user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
+                return null;
             }
-
-
-            if (userId == user.userID)
+            else
             {
-                return user;
+                foreach (object[] dataRow in rows)
+                {
+                    user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
+                }
+                if (userId == user.userID)
+                {
+                    return user;
+                }
             }
-
             return null;
         }
 
@@ -51,6 +54,16 @@ namespace CMPE312_PROJECT.Models.Repository
         public static bool DeleteUser(User user1)
         {
             string sql = "delete from USER where USER_ID=" + user1.userID;
+            int result = RepositoryManager.Repository.DoCommand(sql);
+            if (result == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool InsertUser(User user1)
+        {
+            string sql = "insert into USER (USER_ID, NAME, EMAIL, SALT, HASHEDPASSWORD, IS_ADMIN, STATUS) VALUES ('" + user1.userID + "','" + user1.name + "','" + user1.email + "','" + user1.salt + "','" + user1.passwordHash + "','" + user1.isAdmin + "','" + user1.status + "')";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

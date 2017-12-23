@@ -23,15 +23,25 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if(Session["isLoggedin"])
-                    <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
-                    <li>@Html.ActionLink("Signup", "Signup", "Authentication")</li>
+                    @{
+                        if ((Session["isLoggedin"] == null)||((bool)Session["isLoggedin"] == false))
+                        {
+                         <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
+                         <li>@Html.ActionLink("Signup", "Signup", "Authentication")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
+        @ViewBag.message
+        @TempData["message"]
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
