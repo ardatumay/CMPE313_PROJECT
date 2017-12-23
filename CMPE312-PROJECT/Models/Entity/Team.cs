@@ -23,7 +23,7 @@ namespace CMPE312_PROJECT.Models.Entity
 
         public Team(String name1)
         {
-            name = name1;
+            Name = name1;
         }
     }
 }
