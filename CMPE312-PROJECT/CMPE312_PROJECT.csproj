@@ -180,6 +180,7 @@
     <Compile Include="Models\Entity\Team.cs" />
     <Compile Include="Models\Entity\User.cs" />
     <Compile Include="Models\Persistance\CoachPersistence.cs" />
+    <Compile Include="Models\Persistance\CommentPersistence.cs" />
     <Compile Include="Models\Persistance\PresidentPersistance.cs" />
     <Compile Include="Models\Persistance\TeamPersistance.cs" />
     <Compile Include="Models\Persistance\UserPersistence.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\Repository\RepositoryManager.cs" />
     <Compile Include="Models\Repository\SqliteRepository.cs" />
     <Compile Include="Models\Transaction\CoachManager.cs" />
+    <Compile Include="Models\Transaction\CommentManager.cs" />
     <Compile Include="Models\Transaction\PresidentManager.cs" />
     <Compile Include="Models\Transaction\PlayerManager.cs" />
     <Compile Include="Models\Transaction\EncryptionManager.cs" />
@@ -239,6 +241,7 @@
     <Content Include="Views\President\ChangePresident.cshtml" />
     <Content Include="Views\Coach\ChangeCoach.cshtml" />
     <Content Include="Views\Comment\CommentTeam.cshtml" />
+    <Content Include="Views\Comment\CommentPresident.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

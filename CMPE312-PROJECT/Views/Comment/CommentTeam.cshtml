@@ -3,7 +3,38 @@
 @{
     ViewBag.Title = "Comment Team";
 }
+<script>
+    function submit() {
+            var comment = document.getElementById("comment");
+    @Model.comment= comment.text;
 
-<h2>CommentTeam</h2>
+    var selectTeam = document.getElementById("selectTeam");
+    @Model.teamName = selectTeam.value
+    }
 
-@Html.DropDownList("ID", new SelectList(ViewBag.Teams, "ID", "Name"))
+</script>
+
+<h2>Comment Team</h2>
+
+
+<!--Html.DropDownList("ID", new SelectList(ViewBag.Teams, "ID", "Name"))-->
+<form method="post" action="~/Comment/CommentTeam" id="commentForm">
+    <ul>
+        <li>
+            <p><label>Choose Team</label></p>
+            @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name"></label>
+            }
+        </li>
+    </ul>
+    <textarea id="comment" name="comment" form="commentForm" >Enter comment here...</textarea>
+    <p><input type="submit" onclick="submit()" value="Add Comment" /></p>
+</form>
+
+
+<div >
+
+
+
+</div>
