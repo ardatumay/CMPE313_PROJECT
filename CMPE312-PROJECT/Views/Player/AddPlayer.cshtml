@@ -7,6 +7,11 @@
 <script>
     //var dropdown = document.getElementById("select");
     //Model.teamID = dropdown.value
+    var selectTeam = document.getElementById("selectTeam");
+    @Model.teamName = selectTeam.value
+
+    var selectPosition = document.getElementById("selectPosition");
+    @Model.position = selectPosition.value
 </script>
 
 
@@ -17,7 +22,14 @@
             <li><label>Name<input name="Name" value="@Model.name" type="text" /></label></li>
             <li><label>Surname<input name="Surname" value="@Model.surname" type="text" /></label></li>
             <li><label>Birth Date<input name="BirthDate" value="@Model.birthDate" type="date" /></label></li>
-            <li><label>Position<input name="Position" value="@Model.position" type="text" /></label></li>
+            <li>
+                <p><label>Select Position</label></p>
+                @foreach (Position position in (List<Position>)ViewData["Positions"])
+                {
+                    <label>@position.position<input id="selectPosition" type="radio" name="position" value="@position.position"></label>
+                }
+            </li>
+
             <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
             <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
             <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
