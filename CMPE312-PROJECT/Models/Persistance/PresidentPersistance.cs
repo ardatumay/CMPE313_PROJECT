@@ -42,8 +42,8 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             string sql = "insert into PRESIDENT values ('"
                 + president1.ID + "', '"
-                + president1.name + "', '"
-                + president1.surname + "', '"
+                + president1.name.ToUpper() + "', '"
+                + president1.surname.ToUpper() + "', '"
                 + president1.birthDate + "', '"
                 + president1.teamID + "')";
 
@@ -65,7 +65,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdatePresident(President president1)
         {
 
-            string sql = "Update PRESIDENT set NAME='" + president1.name + "', SURNAME='" + president1.surname + "', BIRTH_DATE='" + president1.birthDate + "', TEAM_ID='" + president1.teamID + "' where ID=" + president1.ID;
+            string sql = "Update PRESIDENT set NAME='" + president1.name.ToUpper() + "', SURNAME='" + president1.surname.ToUpper() + "', BIRTH_DATE='" + president1.birthDate + "', TEAM_ID='" + president1.teamID + "' where ID=" + president1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

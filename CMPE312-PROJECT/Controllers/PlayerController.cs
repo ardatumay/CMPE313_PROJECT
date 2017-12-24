@@ -24,6 +24,9 @@ namespace CMPE312_PROJECT.Controllers
             var teams = TeamPersistance.GetTeams();
             ViewData["Teams"] = teams;
             //ViewBag.Teams = teams;
+
+            var positions = PlayerPersistence.GetPositions();
+            ViewData["Positions"] = positions;
             return View(new Player());
         }
 

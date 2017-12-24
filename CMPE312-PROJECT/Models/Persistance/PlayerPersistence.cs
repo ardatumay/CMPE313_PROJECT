@@ -18,7 +18,7 @@ namespace CMPE312_PROJECT.Models.Repository
          */
         public static Player GetPlayer(Player player1)
         {
-            string sqlQuery = "select * from PLAYER where NAME='" + player1.name + "'";
+            string sqlQuery = "select * from PLAYER where NAME='" + player1.name.ToUpper() + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -52,10 +52,10 @@ namespace CMPE312_PROJECT.Models.Repository
 
             string sql = "insert into PLAYER values ('"
                 + player1.ID + "', '"
-                + player1.name + "', '"
-                + player1.surname + "', '"
+                + player1.name.ToUpper() + "', '"
+                + player1.surname.ToUpper() + "', '"
                 + player1.birthDate + "', '"
-                + player1.position + "', '"
+                + player1.position.ToUpper() + "', '"
                 + player1.transferFee + "', '"
                 + player1.salary + "', '"
                 + player1.teamID + "')";
@@ -83,7 +83,7 @@ namespace CMPE312_PROJECT.Models.Repository
          public static bool UpdatePlayer(Player player1)
          {
           
-            string sql = "Update PLAYER set NAME='" +  player1.name + "', SURNAME='" + player1.surname + "', BIRTH_DATE='" + player1.birthDate + "', POSITION='" + player1.position + "', TRANSFER_FEE='" + player1.transferFee + "', SALARY='" + player1.salary + "', TEAM_ID='" + player1.teamID + "' where ID=" + player1.ID;
+            string sql = "Update PLAYER set NAME='" +  player1.name.ToUpper() + "', SURNAME='" + player1.surname.ToUpper() + "', BIRTH_DATE='" + player1.birthDate + "', POSITION='" + player1.position.ToUpper() + "', TRANSFER_FEE='" + player1.transferFee + "', SALARY='" + player1.salary + "', TEAM_ID='" + player1.teamID + "' where ID=" + player1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -91,5 +91,27 @@ namespace CMPE312_PROJECT.Models.Repository
             }
             return false;
          }
+
+        public static List<Position> GetPositions()
+        {
+            List<Position> positions = new List<Position>();
+            string sqlQuery = "select * from POSITIONS";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            foreach (object[] dataRow in rows)
+            {
+                //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
+                Position position = new Position { position = (string)dataRow[0] };
+                positions.Add(position);
+            }
+
+            return positions;
+        }
     }
 }
