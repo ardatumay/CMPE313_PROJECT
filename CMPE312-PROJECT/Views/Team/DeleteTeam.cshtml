@@ -1,0 +1,16 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Team
+@{
+    ViewBag.Title = "DeleteTeam";
+}
+
+<h2>DeleteTeam</h2>
+
+<form method="post" action="~/Team/DeleteTeam">
+    <ul>
+        <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
+    </ul>
+
+    <p><input type="submit" value="Delete Team" /></p>
+
+</form>

@@ -18,7 +18,7 @@ namespace CMPE312_PROJECT.Models.Repository
          */
         public static Player GetPlayer(Player player1)
         {
-            string sqlQuery = "select * from PLAYER where NAME='" + player1.name.ToUpper() + "'";
+            string sqlQuery = "select * from PLAYER where NAME='" + player1.name.ToUpper() + "' AND SURNAME='" + player1.surname.ToUpper() + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)

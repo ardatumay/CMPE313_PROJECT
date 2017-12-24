@@ -21,6 +21,7 @@
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
                 <label>@team.Name<input id="select" type="radio" name="teamName" value="@team.Name"></label>
+                <br />
             }
         </li>
 

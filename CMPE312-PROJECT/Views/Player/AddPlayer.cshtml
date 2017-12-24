@@ -14,7 +14,6 @@
     @Model.position = selectPosition.value
 </script>
 
-
     <h2>AddPlayer</h2>
 
     <form method="post" action="~/Player/AddPlayer">
@@ -27,6 +26,7 @@
                 @foreach (Position position in (List<Position>)ViewData["Positions"])
                 {
                     <label>@position.position<input id="selectPosition" type="radio" name="position" value="@position.position"></label>
+                    <br />
                 }
             </li>
 
@@ -40,6 +40,7 @@
                 @foreach (Team team in (List<Team>)ViewData["Teams"])
                 {
                     <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name"></label>
+                    <br />
                 }
             </li>
 
