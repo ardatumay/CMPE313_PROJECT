@@ -1,8 +1,14 @@
-﻿    @using CMPE312_PROJECT.Models.Entity;
+    @using CMPE312_PROJECT.Models.Entity;
     @model Player
     @{
         ViewBag.Title = "AddPlayer";
     }
+    
+<script>
+    var dropdown = document.getElementById("select");
+    @Model.teamName = dropdown.value
+</script>
+
 
     <h2>AddPlayer</h2>
 
@@ -14,10 +20,15 @@
             <li><label>Position<input name="Position" value="@Model.position" type="text" /></label></li>
             <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
             <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
-            <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li>
-
+            <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
+            <li>
+                  @foreach (Team team in (List<Team>)ViewData["Teams"])
+                  {
+                    <label>@team.Name<input id="select" type="radio" name="teamName" value="@team.Name"></label>
+                  }
+              </li>
         </ul>
         
-        <p><input type="submit" value="Register" /></p>
+        <p><input type="submit" value="Add Player" /></p>
 
     </form>

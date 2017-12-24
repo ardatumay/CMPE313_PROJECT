@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\PresidentController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,6 +185,7 @@
     <Compile Include="Models\Repository\RepositoryManager.cs" />
     <Compile Include="Models\Repository\SqliteRepository.cs" />
     <Compile Include="Models\Transaction\CoachManager.cs" />
+    <Compile Include="Models\Transaction\PresidentManager.cs" />
     <Compile Include="Models\Transaction\PlayerManager.cs" />
     <Compile Include="Models\Transaction\EncryptionManager.cs" />
     <Compile Include="Models\Transaction\TeamManager.cs" />
@@ -231,6 +233,7 @@
     <Content Include="Views\Authentication\Signup.cshtml" />
     <Content Include="Views\Player\AddPlayer.cshtml" />
     <Content Include="Views\Team\AddTeam.cshtml" />
+    <Content Include="Views\President\ChangePresident.cshtml" />
     <Content Include="Views\Coach\ChangeCoach.cshtml" />
   </ItemGroup>
   <ItemGroup>

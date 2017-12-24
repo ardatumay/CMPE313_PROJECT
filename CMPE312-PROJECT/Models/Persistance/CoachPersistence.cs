@@ -34,7 +34,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                 + coach1.ID + "', '"
                 + coach1.name + "', "
                 + coach1.surname + "', '"
-                + coach1.birthDate.ToString("yyyy-MM-dd") + "', '"
+                + coach1.birthDate + "', '"
                 + coach1.salary + "', '"
                 + coach1.teamID + "')";
                 
