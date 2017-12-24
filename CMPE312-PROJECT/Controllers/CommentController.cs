@@ -52,9 +52,13 @@ namespace CMPE312_PROJECT.Controllers
         [HttpPost]
         public ActionResult CommentTeam(Comment comment)
         {
+            
             bool isAdded;
             if (comment == null)
             {
+                TempData["message"] = "Please write a comment.";
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 return View(new Comment());
             }
             if (comment.teamName == null || comment.teamName.Length == 0 || comment.comment == null || comment.comment.Length == 0)
