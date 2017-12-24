@@ -34,7 +34,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdateTeam(Team team1)
         {
 
-            string sql = "Update TEAM set NAME='" + team1.Name + "', CITY='" + team1.City + "', FOUNDATION='" + team1.Foundation + "', BUDGET='" + team1.Budget + "', NUMBER_OF_CHAMPIONSHIP='" + team1.NumberOfChampionship + "' where ID=" + team1.ID;
+            string sql = "Update TEAM set NAME='" + team1.Name.ToUpper() + "', CITY='" + team1.City.ToUpper() + "', FOUNDATION='" + team1.Foundation + "', BUDGET='" + team1.Budget + "', NUMBER_OF_CHAMPIONSHIP='" + team1.NumberOfChampionship + "' where ID=" + team1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -55,7 +55,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + 1 + "','" + team1.Name + "','" + team1.City + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
+                string sql2 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + 1 + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -69,7 +69,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                     MaxId = Convert.ToDecimal(dataRow[0]);
                 }
                 decimal NewId = MaxId + 1; 
-                string sql4 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + NewId + "','" + team1.Name + "','" + team1.City + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
+                string sql4 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + NewId + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
             }
             if (result == 1)
