@@ -65,7 +65,7 @@ namespace CMPE312_PROJECT.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        
         public List<Team> GetTeams ()
         {
             return TeamPersistance.GetTeams();

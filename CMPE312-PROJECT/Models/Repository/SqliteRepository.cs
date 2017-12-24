@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using CMPE312_PROJECT.Models.Entity;
+using CMPE312_PROJECT.Models.Repository;
+using CMPE312_PROJECT.Models.Transaction;
+using CMPE312_PROJECT.Models.Persistance;
 
 namespace CMPE312_PROJECT.Models.Repository
 {
@@ -11,7 +15,7 @@ namespace CMPE312_PROJECT.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\user\\cmpe312-project.sqlite";
+        private string databaseFile = "C:\\Users\\Batuhan\\cmpe312-project.sqlite";
 
 
         private SQLiteConnection dbConnection;
@@ -118,21 +122,17 @@ namespace CMPE312_PROJECT.Models.Repository
             if (success & openResult)
             {
                 string TeamTable = "CREATE TABLE TEAM ( ID DECIMAL, NAME VARCHAR(50) UNIQUE, CITY VARCHAR(50), FOUNDATION DECIMAL, BUDGET DECIMAL, NUMBER_OF_CHAMPIONSHIP DECIMAL, PRIMARY KEY(ID))";
-                string PlayerTable = "CREATE TABLE PLAYER (ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, POSITION VARCHAR(50), TRANSFER_FEE DECIMAL, SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string CoachTable = "CREATE TABLE COACH ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string PresidentTable = "CREATE TABLE PRESIDENT ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE DATE, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string PlayerTable = "CREATE TABLE PLAYER (ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), POSITION VARCHAR(50), TRANSFER_FEE DECIMAL, SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string CoachTable = "CREATE TABLE COACH ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
+                string PresidentTable = "CREATE TABLE PRESIDENT ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
                 string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN DECIMAL, STATUS VARCHAR(1), PRIMARY KEY (USER_ID))";
                 DoCommand(TeamTable);
                 DoCommand(PlayerTable);
                 DoCommand(CoachTable);
                 DoCommand(PresidentTable);
                 DoCommand(UserTable);
-                /*sql = "insert into book (title, isbn, dateadded) values "
-                    + "('Gone With The Wind', 67890123, '2011-01-03')"
-                    + ", ('Platos Republic', 80192837, '2013-02-25')"
-                    + ", ('Selcuk Altun', 22334455778, '1944-06-15')"
-                    + ", ('Die Blechtrommel', 90897856453, '1896-07-06')";
-                DoCommand(sql);*/
+
+                UserManager.SignupUser(new Credential("admin", "123", "email", "admin", 1));
             }
 
             return success;

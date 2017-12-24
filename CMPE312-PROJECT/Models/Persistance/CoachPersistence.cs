@@ -21,20 +21,17 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
-            DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            Coach coach = new Coach { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = dateAdded, salary = (long)dataRow[4], teamID = (int)dataRow[5] };
+            Coach coach = new Coach { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], salary = (long)dataRow[4], teamID = (int)dataRow[5] };
             return coach;
         }
 
         public static bool AddCoach(Coach coach1)
         {
-            System.Diagnostics.Debug.WriteLine("DateTime: " + coach1.birthDate.ToString("yyyy-MM-dd"));
-
             string sql = "insert into COACH values ('"
                 + coach1.ID + "', '"
                 + coach1.name + "', "
                 + coach1.surname + "', '"
-                + coach1.birthDate.ToString("yyyy-MM-dd") + "', '"
+                + coach1.birthDate + "', '"
                 + coach1.salary + "', '"
                 + coach1.teamID + "')";
                 

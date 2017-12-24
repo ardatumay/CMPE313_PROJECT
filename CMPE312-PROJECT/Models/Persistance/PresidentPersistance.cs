@@ -21,20 +21,30 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
-            DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            President president = new President { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = dateAdded, teamID = (int)dataRow[4] };
+            President president = new President { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], teamID = (int)dataRow[4] };
             return president;
         }
 
         public static bool AddPresident(President president1)
         {
-            System.Diagnostics.Debug.WriteLine("DateTime: " + president1.birthDate.ToString("yyyy-MM-dd"));
+            string sql1 = "SELECT * FROM PRESIDENT WHERE ID = (SELECT MAX(ID) from PRESIDENT); ";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sql1);
+
+            if (rows.Count == 0)
+            {
+                president1.ID = 1;
+            }
+            else
+            {
+                object[] dataRow = rows[0];
+                president1.ID = Convert.ToDecimal(dataRow[0]) + 1;
+            }
 
             string sql = "insert into PRESIDENT values ('"
                 + president1.ID + "', '"
-                + president1.name + "', "
+                + president1.name + "', '"
                 + president1.surname + "', '"
-                + president1.birthDate.ToString("yyyy-MM-dd") + "', '"
+                + president1.birthDate + "', '"
                 + president1.teamID + "')";
 
             RepositoryManager.Repository.DoCommand(sql);
@@ -43,7 +53,7 @@ namespace CMPE312_PROJECT.Models.Persistance
 
         public static bool DeletePresident(President president1)
         {
-            string sql = "delete from PRESIDENT where ID=" + president1.ID;
+            string sql = "delete from PRESIDENT where TEAM_ID=" + president1.teamID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
