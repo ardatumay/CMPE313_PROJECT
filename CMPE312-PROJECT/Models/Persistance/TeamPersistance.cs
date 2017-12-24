@@ -12,7 +12,7 @@ namespace CMPE312_PROJECT.Models.Persistance
 
         public static Team GetTeam (Team team1)
         {
-            string sqlQuery = "select * from TEAM where NAME='" + team1.Name + "'"; 
+            string sqlQuery = "select * from TEAM where NAME='" + team1.Name.ToUpper() + "'"; 
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -118,6 +118,17 @@ namespace CMPE312_PROJECT.Models.Persistance
             }
 
             return teams;
+        }
+
+        public static bool DeleteTeam(Team team1)
+        {
+            string sql = "delete from TEAM where NAME='" + team1.Name.ToUpper() + "'";
+            int result = RepositoryManager.Repository.DoCommand(sql);
+            if (result == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

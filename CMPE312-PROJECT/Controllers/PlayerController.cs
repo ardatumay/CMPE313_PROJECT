@@ -68,7 +68,44 @@ namespace CMPE312_PROJECT.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [HttpGet]
+        public ActionResult DeletePlayer()
+        {
+            return View(new Player());
+        }
         
+        [HttpPost]
+        public ActionResult DeletePlayer (Player player)
+        {
+            bool isExist = true;
+            if (player == null)
+            {
+                return View(new Player());
+            }
+            if (player.name == null || player.name.Length == 0 || player.surname == null || player.surname.Length == 0 )
+            {
+                TempData["message"] = "All fields are required.";
+                return View(player);
+            }
+
+            isExist = PlayerManager.CheckPlayer(player);
+            Player player1 = PlayerPersistence.GetPlayer(player);
+
+            if (isExist)
+            {
+                PlayerPersistence.DeletePlayer(player1);
+                TempData["message"] = player1.name + " " + player1.surname + " is deleted successfully.";
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                TempData["message"] = "This player is not exist. Please check the fields.";
+                return View(player);
+            }
+        }
+
+
         public List<Team> GetTeams ()
         {
             return TeamPersistance.GetTeams();
