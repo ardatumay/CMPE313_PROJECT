@@ -23,7 +23,7 @@ namespace CMPE312_PROJECT.Controllers
         {
             var teams = TeamPersistance.GetTeams();
             ViewData["Teams"] = teams;
-            //ViewBag.Teams = teams;
+            //ViewBag.Teams = new SelectList(teams,"ID", "Name");
 
             var positions = PlayerPersistence.GetPositions();
             ViewData["Positions"] = positions;

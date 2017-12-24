@@ -172,6 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity\Coach.cs" />
+    <Compile Include="Models\Entity\Comment.cs" />
     <Compile Include="Models\Entity\Credential.cs" />
     <Compile Include="Models\Entity\Player.cs" />
     <Compile Include="Models\Entity\Position.cs" />
@@ -237,10 +238,10 @@
     <Content Include="Views\Team\AddTeam.cshtml" />
     <Content Include="Views\President\ChangePresident.cshtml" />
     <Content Include="Views\Coach\ChangeCoach.cshtml" />
+    <Content Include="Views\Comment\CommentTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

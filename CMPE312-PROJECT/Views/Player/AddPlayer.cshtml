@@ -5,8 +5,8 @@
     }
     
 <script>
-    var dropdown = document.getElementById("select");
-    @Model.teamName = dropdown.value
+    //var dropdown = document.getElementById("select");
+    //Model.teamID = dropdown.value
 </script>
 
 
@@ -21,12 +21,16 @@
             <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
             <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
             <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
-            <li><p><label>Choose Team</label></p>
-                  @foreach (Team team in (List<Team>)ViewData["Teams"])
-                  {
+            <!--Html.DropDownList("select", list, "All", null)-->
+            <!--Html.DropDownListFor(model => model.teamID, (SelectList)ViewBag.Teams)-->
+            <li>
+                <p><label>Choose Team</label></p>
+                @foreach (Team team in (List<Team>)ViewData["Teams"])
+                {
                     <label>@team.Name<input id="select" type="radio" name="teamName" value="@team.Name"></label>
-                  }
-              </li>
+                }
+            </li>
+
         </ul>
         
         <p><input type="submit" value="Add Player" /></p>

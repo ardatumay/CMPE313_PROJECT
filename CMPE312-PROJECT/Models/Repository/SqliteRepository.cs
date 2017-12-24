@@ -127,12 +127,14 @@ namespace CMPE312_PROJECT.Models.Repository
                 string PresidentTable = "CREATE TABLE PRESIDENT ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
                 string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN DECIMAL, STATUS VARCHAR(1), PRIMARY KEY (USER_ID))";
                 string PositionsTable = "CREATE TABLE POSITIONS (POSITION VARCHAR(50), PRIMARY KEY (POSITION))";
+                string CommentTable = "CREATE TABLE COMMENT (ID DECIMAL, COMMENT VARCHAR(280), PLAYER_ID DECIMAL, COACH_ID DECIMAL, PRESIDENT_ID DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (PLAYER_ID) REFERENCES PLAYER (ID), FOREIGN KEY (COACH_ID) REFERENCES COACH (ID), FOREIGN KEY (PRESIDENT_ID) REFERENCES PRESIDENT (ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM (ID))";
                 DoCommand(TeamTable);
                 DoCommand(PlayerTable);
                 DoCommand(CoachTable);
                 DoCommand(PresidentTable);
                 DoCommand(UserTable);
                 DoCommand(PositionsTable);
+                DoCommand(CommentTable);
 
                 string AddingPositions = "INSERT INTO POSITIONS VALUES ('GK'), ('LB'), ('CB'), ('RB'), ('CDM'), ('LM'), ('CM'), ('RM'), ('CAM'), ('ST');";
                 DoCommand(AddingPositions);

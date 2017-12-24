@@ -1,14 +1,14 @@
 ﻿@using CMPE312_PROJECT.Models.Entity;
 @model Coach
 @{
-    ViewBag.Title = "AddCoach";
+    ViewBag.Title = "Change Coach";
 }
 
 <h2>AddCoach</h2>
 
 <form method="post" action="~/Coach/ChangeCoach">
     <ul>
-        <li><label>Cach Name<input name="Name" value="@Model.name" type="text" /></label></li>
+        <li><label>Coach Name<input name="Name" value="@Model.name" type="text" /></label></li>
         <li><label>Coach Surname<input name="Surname" value="@Model.surname" type="text" /></label></li>
         <li><label>Birth Date<input name="BirthDate" value="@Model.birthDate" type="date" /></label></li>
         <li><label>Coach Salary<input name="Salary" value="@Model.salary" type="text" /></label></li>
