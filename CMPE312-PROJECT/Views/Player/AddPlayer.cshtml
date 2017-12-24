@@ -39,7 +39,7 @@
                 <p><label>Choose Team</label></p>
                 @foreach (Team team in (List<Team>)ViewData["Teams"])
                 {
-                    <label>@team.Name<input id="select" type="radio" name="teamName" value="@team.Name"></label>
+                    <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name"></label>
                 }
             </li>
 
