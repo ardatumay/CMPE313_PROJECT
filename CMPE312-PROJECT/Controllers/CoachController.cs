@@ -22,6 +22,8 @@ namespace CMPE312_PROJECT.Controllers
         [HttpGet]
         public ActionResult ChangeCoach()
         {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
             return View(new Coach());
         }
 
