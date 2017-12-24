@@ -185,6 +185,26 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('17', 'SAMET', 'AYBABA', '05/09/1956', '1.5', '17')," +
                 "('18', 'TONY', 'POPOVÝC', '04/07/1973', '1.5', '18');";
 
+            string DefaultPresidents = "INSERT INTO PRESIDENT VALUES ('1', 'FÝKRET', 'ORMAN', '04/11/1967', '1')," +
+                "('2', 'DURSUN', 'ÖZBEK', '25/03/1949', '2')," +
+                "('3', 'AZÝZ', 'YILDIRIM', '02/11/1952', '3')," +
+                "('4', 'GÖKSEL', 'GÜMÜÞDAÐ', '10/10/1972', '4')," +
+                "('5', 'MUHARREM', 'USTA', '6/12/1965', '5')," +
+                "('6', 'ALÝ ÞAFAK', 'ÖZTÜRK', '17/02/1984', '6')," +
+                "('7', 'SADIK', 'DÝK', '01/01/1969', '7')," +
+                "('8', 'ALÝ', 'AY', '04/03/1957', '8')," +
+                "('9', 'EROL', 'BEDÝR', '15/10/1958', '9')," +
+                "('10', 'MEHMET', 'SERPÝL', '01/01/1955', '10')," +
+                "('11', 'FATÝH', 'YILMAZ', '01/01/1971', '11')," +
+                "('12', 'HASAN', 'ÇAVUÞOÐLU', '01/01/1975', '12')," +
+                "('13', 'MURAT', 'CAVCAV', '01/01/1963', '13')," +
+                "('14', 'ADÝL', 'GEVREK', '03/03/1976', '14')," +
+                "('15', 'HÜSEYÝN', 'ERYÜKSEL', '02/06/1960', '15')," +
+                "('16', 'TURGAY', 'CÝNER', '01/03/1956', '16')," +
+                "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
+                "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
+                
+
             string DefaultPlayers1 = "INSERT INTO PLAYER VALUES ('1', 'ATIBA', 'HUTCHINSON', '08/02/1983', 'CDM', '1.5', '1.5', '1')," +
                 "('2', 'FABRICIO', 'RAMIREZ', '31/12/1987', 'GK', '2.75', '1.5', '1')," +
                 "('3', 'OÐUZHAN', 'ÖZYAKUP', '23/09/1992', 'CM', '12', '1.5', '1')," +
@@ -197,6 +217,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             DoCommand(DefaultTeams);
             DoCommand(DefaultCoaches);
+            DoCommand(DefaultPresidents);
             DoCommand(DefaultPlayers1);
         }
     }
