@@ -7,16 +7,21 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Coach
     {
-        public int ID { get; set; }
+        public decimal ID { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
-        public DateTime birthDate { get; set; }
-        public long salary { get; set; }
-        public int teamID { get; set; }
+        public string birthDate { get; set; }
+        public decimal salary { get; set; }
+        public decimal teamID { get; set; }
+        public string teamName { get; set; }
 
         public Coach()
         {
 
+        }
+        public Coach(string name_)
+        {
+            name = name_;
         }
     }
 }

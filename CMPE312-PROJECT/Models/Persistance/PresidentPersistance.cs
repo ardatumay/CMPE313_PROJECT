@@ -11,7 +11,7 @@ namespace CMPE312_PROJECT.Models.Persistance
     {
         public static President GetPresident(President president1)
         {
-            string sqlQuery = "select * from PRESIDENT where ID=" + president1.ID;
+            string sqlQuery = "select * from PRESIDENT where ID='" + president1.ID + "'"; 
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
