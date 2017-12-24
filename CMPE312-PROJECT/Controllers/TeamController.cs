@@ -34,7 +34,7 @@ namespace CMPE312_PROJECT.Controllers
             }
             if ((team.Name == null) || (team.Name.Length == 0) || (team.City== null) || (team.City.Length == 0) || (team.Foundation.ToString().Equals(null)) || (team.Foundation.ToString().Length == 0) || (team.Budget.ToString().Equals(null)) || (team.Budget.ToString().Length == 0) || (team.NumberOfChampionship.ToString().Equals(null)) || (team.NumberOfChampionship.ToString().Length == 0))
             {
-                TempData["message"] = "All inputs are required.";
+                TempData["message"] = "All fields are required.";
                 return View(team);
             }
             bool isAdded = TeamManager.AddTeam(team);

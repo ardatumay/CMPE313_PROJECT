@@ -21,6 +21,9 @@ namespace CMPE312_PROJECT.Controllers
         [HttpGet]
         public ActionResult AddPlayer()
         {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
+            //ViewBag.Teams = teams;
             return View(new Player());
         }
 
@@ -32,12 +35,9 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Player());
             }
-
-            
-
-            if (player.name == null || player.surname == null || player.birthDate == null || player.position == null || player.transferFee < 0 || player.salary < 0)
+            if (player.name == null || player.name.Length == 0 || player.surname == null || player.surname.Length == 0 || player.birthDate == null || player.birthDate.Length == 0 || player.position == null || player.position.Length == 0 || player.transferFee < 0 || player.transferFee.ToString().Equals(null) || player.salary < 0 || player.salary.ToString().Equals(null) || player.teamName == null || player.teamName.Length == 0 )
             {
-                TempData["message"] = "Be sure that you filled the required fields correctly.";
+                TempData["message"] = "All fields are required.";
                 return View(player);
             }
 
@@ -47,19 +47,17 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Invalid Team! Please check team name.";
                 return View(player);
             }
-
             else
             {
                 player.teamID = team.ID;
-                isExist = PlayerManager.CheckPlayer(player);
-            }
 
+            }
+            isExist = PlayerManager.CheckPlayer(player);
             if (isExist)
             {
                 TempData["message"] = "This player is already exist.";
                 return View(player);
             }
-
             else
             {
                 PlayerPersistence.AddPlayer(player);
@@ -70,7 +68,7 @@ namespace CMPE312_PROJECT.Controllers
 
         public List<Team> GetTeams ()
         {
-            return Models.Persistance.TeamPersistance.GetTeams();
+            return TeamPersistance.GetTeams();
         }
     }
 

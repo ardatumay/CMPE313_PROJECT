@@ -109,11 +109,11 @@ namespace CMPE312_PROJECT.Models.Persistance
                 return null;
             }
 
-            // Use the data from the first returned row (should be the only one) to create a Book.
+            // Use the data from the first returned row (should be the only one) to create a Team.
             foreach (object[] dataRow in rows)
             {
-                DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-                Team team = new Team { ID = (int)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (long)dataRow[4], NumberOfChampionship = (int)dataRow[5] };
+                //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
+                Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5] };
                 teams.Add(team); 
             }
 

@@ -67,7 +67,7 @@ namespace CMPE312_PROJECT.Controllers
             }
             if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0)|| (credential.Password2 == null) || (credential.Password2.Length == 0) || (credential.Email == null) || (credential.Email.Length == 0) || (credential.Name == null) || (credential.Name.Length == 0))
             {
-                TempData["message"] = "All inputs are required.";
+                TempData["message"] = "All fields are required.";
                 return View(credential);
             }
             else if (!credential.Password1.Equals(credential.Password2))

@@ -12,13 +12,12 @@ namespace CMPE312_PROJECT.Models.Transaction
     {
         public static bool CheckPlayer (Player player1)
         {
-            Player p = PlayerPersistence.GetPlayer(player1);
+            Player player = PlayerPersistence.GetPlayer(player1);
 
-            if (p == null)
+            if (player == null)
             {
                 return false;
             }
-
             else
             {
                 return true;

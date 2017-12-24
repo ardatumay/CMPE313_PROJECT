@@ -15,7 +15,7 @@ namespace CMPE312_PROJECT.Models.Entity
         public decimal transferFee { get; set; }
         public decimal salary { get; set; }
         public decimal teamID { get; set; }
-        public String teamName { get; set; }
+        public string teamName { get; set; }
 
         public Player()
         {

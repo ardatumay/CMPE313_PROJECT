@@ -14,9 +14,15 @@
             <li><label>Position<input name="Position" value="@Model.position" type="text" /></label></li>
             <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
             <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
-            <li><label>Team Name<input name="TeamName" value="@Model.teamName" type="text" /></label></li>
-
+            <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
+            <li><select >
+                  @foreach (var team in (List<Team>)ViewData["Teams"])
+                   {
+                        <option value="@Model.teamName">@team.Name</option>
+                    }
+                </select></li>
         </ul>
-        <input type="submit" value="Register" />
+        
+        <p><input type="submit" value="Register" /></p>
 
     </form>

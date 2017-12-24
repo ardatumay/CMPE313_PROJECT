@@ -26,14 +26,14 @@ namespace CMPE312_PROJECT.Models.Repository
                 return null;
             }
 
-            // Use the data from the first returned row (should be the only one) to create a Book.
+            // Use the data from the first returned row (should be the only one) to create a Player.
             object[] dataRow = rows[0];
             Player player = new Player { ID = (decimal)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], position = (String)dataRow[4], transferFee = (decimal)dataRow[5], salary = (decimal)dataRow[6], teamID = (decimal)dataRow[7] };
             return player;
         }
 
         /*
-         * Add a Book to the database.
+         * Add a Player to the database.
          * Return true iff the add succeeds.
          */
          public static bool AddPlayer(Player player1)
@@ -45,9 +45,7 @@ namespace CMPE312_PROJECT.Models.Repository
             {
                 player1.ID = 1;
             }
-
-            else { 
-
+            else {
             object[] dataRow = rows[0];
             player1.ID = Convert.ToDecimal(dataRow[0])+1;
             }
