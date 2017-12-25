@@ -19,7 +19,7 @@ namespace CMPE312_PROJECT.Models.Entity
         {
 
         }
-        public User(String userID_, String name_, String email_, String salt_, String passwordHash_, int isAdmin_, String status_)
+        public User(String userID_, String name_, String email_, String salt_, String passwordHash_, decimal isAdmin_, String status_)
         {
             UserID = userID_;
             Name = name_;

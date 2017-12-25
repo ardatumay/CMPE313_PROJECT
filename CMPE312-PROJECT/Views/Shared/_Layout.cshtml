@@ -20,27 +20,54 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
+
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <!--<li>Html.ActionLink("Contact", "Contact", "Home")</li>-->
-                    <li>@Html.ActionLink("Add Team", "AddTeam", "Team")</li>
-                    <li>@Html.ActionLink("Delete Team", "DeleteTeam", "Team")</li>
-                    <li>@Html.ActionLink("Add Player", "AddPlayer", "Player")</li>
-                    <li>@Html.ActionLink("Delete Player", "DeletePlayer", "Player")</li>
-                    <li>@Html.ActionLink("Change President", "ChangePresident", "President")</li>
-                    <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
-                    <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
+
                     @{
-                        if ((Session["LoggedIn"] == null)||((bool)Session["LoggedIn"] == false))
+
+                        if ((Session["LoggedIn"] == null) || ((bool)Session["LoggedIn"] == false))
                         {
-                         <li style="float:right">@Html.ActionLink("Login", "Login", "Authentication")</li>
-                         <li style="float:right">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
+                            <li style="float:right">@Html.ActionLink("Login", "Login", "Authentication")</li>
+                            <li style="float:right">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
                         }
+
                         else
                         {
-                         <li style="float:right">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
-                         <li style="float:right">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                            <li style="float:right">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
+                            <li style="float:right">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
                         }
+
+                        if ((Session["LoggedIn"] == null) || (Session["IsAdmin"] == null))
+                        {
+
+                        }
+
+                        else if ((bool)Session["IsAdmin"] == false)
+                        {
+                            <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
+                            <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+                        }
+
+                        else if ((bool)Session["IsAdmin"] == true)
+                        {
+                            <li>@Html.ActionLink("Add Team", "AddTeam", "Team")</li>
+                            <li>@Html.ActionLink("Delete Team", "DeleteTeam", "Team")</li>
+                            <li>@Html.ActionLink("Add Player", "AddPlayer", "Player")</li>
+                            <li>@Html.ActionLink("Delete Player", "DeletePlayer", "Player")</li>
+                            <li>@Html.ActionLink("Change President", "ChangePresident", "President")</li>
+                            <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
+                            <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
+                            <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+                        }
+
+
+
+
+
+
                     }
                 </ul>
             </div>

@@ -28,7 +28,17 @@ namespace CMPE312_PROJECT.Models.Transaction
             else
             {
                 session["LoggedIn"] = true;
-                session["IsAdmin"] = user.IsAdmin;
+
+                if (user.IsAdmin == 1)
+                {
+                    session["IsAdmin"] = true;
+                }
+
+                if (user.IsAdmin == 0)
+                {
+                    session["IsAdmin"] = false;
+                }
+
                 return true;
             }
         }

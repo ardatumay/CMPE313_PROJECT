@@ -18,11 +18,15 @@
         <li><label>Birth Date<input name="birthDate" value="@Model.BirthDate" type="date" /></label></li>
         <!--<li><label>Team Name<input name="teamName" value="" type="text" /></label></li>-->
         <li>
-            @foreach (Team team in (List<Team>)ViewData["Teams"])
-            {
-                <label>@team.Name<input id="select" type="radio" name="teamName" value="@team.Name"></label>
-                <br />
-            }
+            <p>
+                <select name="TeamName">
+                    @foreach (Team team in (List<Team>)ViewData["Teams"])
+                    {
+                        <option value="@team.Name">@team.Name</option>
+                    }
+                </select>
+            </p>
+
         </li>
 
     </ul>
