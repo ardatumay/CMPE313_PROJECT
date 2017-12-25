@@ -74,7 +74,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
-                TempData["message"] = "HERE";
+                TempData["message"] = "Comment object is null.";
 
                 return View(new Comment());
             }
