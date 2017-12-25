@@ -6,11 +6,10 @@
 }
 <script>
     function submit() {
-    var comment = document.getElementById("comment");
-    @Model.CommentValue= comment.text;
 
-    var selectTeam = document.getElementById("selectTeam");
-    @Model.TeamName = selectTeam.value
+        var comment = document.getElementById("comment");
+        @Model.CommentValue= comment.text;
+
     }
 
 </script>
@@ -21,10 +20,10 @@
 <!--Html.DropDownList("ID", new SelectList(ViewBag.Teams, "ID", "Name"))-->
 <form method="post" action="~/Comment/CommentTeam" id="commentForm">    
     <p>
-        <select name="TeamID">
+        <select name="TeamName">
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
-                <option value="@team.ID">@team.Name</option>
+                <option value="@team.Name">@team.Name</option>
             }
         </select>
     </p>
