@@ -11,11 +11,12 @@ namespace CMPE312_PROJECT.Models.Transaction
 {
     public class UserManager
     {
+        public static User user;
         public static bool AuthenticateUser(Credential cre, HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
             session["IsAdmin"] = false;
-            User user = UserPersistence.GetUser(cre.UserId);
+            user = UserPersistence.GetUser(cre.UserId);
             if(user == null) { 
             return false;
             }
@@ -50,6 +51,24 @@ namespace CMPE312_PROJECT.Models.Transaction
             session["LoggedIn"] = false;
             session["IsAdmin"] = false;
             
+        }
+
+        public static bool UpdateUser (Credential cre, HttpSessionStateBase session)
+        {
+            user = UserPersistence.GetUser(cre.UserId);
+            if (user == null)
+            {
+                return false;
+            }
+
+            string salt = EncryptionManager.PasswordSalt;
+            string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
+
+            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, cre.IsAdmin, "A");
+
+            bool done = UserPersistence.UpdateUser(user);
+            return done;
+
         }
     }
 }

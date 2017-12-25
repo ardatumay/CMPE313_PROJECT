@@ -1,0 +1,17 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model User
+@{
+    ViewBag.Title = "GetUserInfo";
+}
+
+<h2>GetUserInfo</h2>
+
+<p>Name: @Model.Name</p>
+<p>Username: @Model.UserID</p>
+<p>E-mail: @Model.Email</p>
+
+
+<form method="post" action="~/Authentication/GetUserInfo">
+
+    <p><button value="Change Information" /></p>
+</form>
