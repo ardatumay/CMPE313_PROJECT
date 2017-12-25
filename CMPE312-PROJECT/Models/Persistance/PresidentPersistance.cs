@@ -21,7 +21,7 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
-            President president = new President { ID = (int)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], teamID = (int)dataRow[4] };
+            President president = new President { ID = (int)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], TeamID = (int)dataRow[4] };
             return president;
         }
 
@@ -42,10 +42,10 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             string sql = "insert into PRESIDENT values ('"
                 + president1.ID + "', '"
-                + president1.name.ToUpper() + "', '"
-                + president1.surname.ToUpper() + "', '"
-                + president1.birthDate + "', '"
-                + president1.teamID + "')";
+                + president1.Name.ToUpper() + "', '"
+                + president1.Surname.ToUpper() + "', '"
+                + president1.BirthDate + "', '"
+                + president1.TeamID + "')";
 
             RepositoryManager.Repository.DoCommand(sql);
             return true;
@@ -53,7 +53,7 @@ namespace CMPE312_PROJECT.Models.Persistance
 
         public static bool DeletePresident(President president1)
         {
-            string sql = "delete from PRESIDENT where TEAM_ID=" + president1.teamID;
+            string sql = "delete from PRESIDENT where TEAM_ID=" + president1.TeamID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -65,7 +65,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdatePresident(President president1)
         {
 
-            string sql = "Update PRESIDENT set NAME='" + president1.name.ToUpper() + "', SURNAME='" + president1.surname.ToUpper() + "', BIRTH_DATE='" + president1.birthDate + "', TEAM_ID='" + president1.teamID + "' where ID=" + president1.ID;
+            string sql = "Update PRESIDENT set NAME='" + president1.Name.ToUpper() + "', SURNAME='" + president1.Surname.ToUpper() + "', BIRTH_DATE='" + president1.BirthDate + "', TEAM_ID='" + president1.TeamID + "' where ID=" + president1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

@@ -29,7 +29,7 @@ namespace CMPE312_PROJECT.Models.Repository
             {
                 foreach (object[] dataRow in rows)
                 {
-                    user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (decimal)dataRow[5], status = (String)dataRow[6] };
+                    user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (decimal)dataRow[5], Status = (String)dataRow[6] };
                 }
 
                 if (user == null)
@@ -37,7 +37,7 @@ namespace CMPE312_PROJECT.Models.Repository
                     return null;
                 }
 
-                if (userId == user.userID)
+                if (userId == user.UserID)
                 {
                     return user;
                 }
@@ -49,7 +49,7 @@ namespace CMPE312_PROJECT.Models.Repository
         public static bool UpdateUser(User user1)
         {
 
-            string sql = "Update USER set USER_ID='" + user1.userID + "', NAME='" + user1.name + "', EMAIL='" + user1.email + "', IS_ADMIN='" + user1.isAdmin + "', STATUS='" + user1.status + "' where USER_ID=" + user1.userID;
+            string sql = "Update USER set USER_ID='" + user1.UserID + "', NAME='" + user1.Name + "', EMAIL='" + user1.Email + "', IS_ADMIN='" + user1.IsAdmin + "', STATUS='" + user1.Status + "' where USER_ID=" + user1.UserID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -60,7 +60,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
         public static bool DeleteUser(User user1)
         {
-            string sql = "delete from USER where USER_ID=" + user1.userID;
+            string sql = "delete from USER where USER_ID=" + user1.UserID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -71,7 +71,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
         public static bool InsertUser(User user1)
         {
-            string sql = "insert into USER (USER_ID, NAME, EMAIL, SALT, HASHEDPASSWORD, IS_ADMIN, STATUS) VALUES ('" + user1.userID + "','" + user1.name + "','" + user1.email + "','" + user1.salt + "','" + user1.passwordHash + "','" + user1.isAdmin + "','" + user1.status + "')";
+            string sql = "insert into USER (USER_ID, NAME, EMAIL, SALT, HASHEDPASSWORD, IS_ADMIN, STATUS) VALUES ('" + user1.UserID + "','" + user1.Name + "','" + user1.Email + "','" + user1.Salt + "','" + user1.PasswordHash + "','" + user1.IsAdmin + "','" + user1.Status + "')";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -88,7 +88,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             foreach (object[] dataRow in rows)
             {
-                User user = new User { userID = (String)dataRow[0], name = (String)dataRow[1], email = (String)dataRow[2], salt = (String)dataRow[3], passwordHash = (String)dataRow[4], isAdmin = (int)dataRow[5], status = (String)dataRow[6] };
+                User user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (int)dataRow[5], Status = (String)dataRow[6] };
                 users.Add(user);
             }
 

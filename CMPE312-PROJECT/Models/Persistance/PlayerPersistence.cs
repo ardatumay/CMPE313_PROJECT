@@ -18,7 +18,7 @@ namespace CMPE312_PROJECT.Models.Repository
          */
         public static Player GetPlayer(Player player1)
         {
-            string sqlQuery = "select * from PLAYER where NAME='" + player1.name.ToUpper() + "' AND SURNAME='" + player1.surname.ToUpper() + "'";
+            string sqlQuery = "select * from PLAYER where NAME='" + player1.Name.ToUpper() + "' AND SURNAME='" + player1.Surname.ToUpper() + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -28,7 +28,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             // Use the data from the first returned row (should be the only one) to create a Player.
             object[] dataRow = rows[0];
-            Player player = new Player { ID = (decimal)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], position = (String)dataRow[4], transferFee = (decimal)dataRow[5], salary = (decimal)dataRow[6], teamID = (decimal)dataRow[7] };
+            Player player = new Player { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], Position = (String)dataRow[4], TransferFee = (decimal)dataRow[5], Salary = (decimal)dataRow[6], TeamID = (decimal)dataRow[7] };
             return player;
         }
 
@@ -52,13 +52,13 @@ namespace CMPE312_PROJECT.Models.Repository
 
             string sql = "insert into PLAYER values ('"
                 + player1.ID + "', '"
-                + player1.name.ToUpper() + "', '"
-                + player1.surname.ToUpper() + "', '"
-                + player1.birthDate + "', '"
-                + player1.position.ToUpper() + "', '"
-                + player1.transferFee + "', '"
-                + player1.salary + "', '"
-                + player1.teamID + "')";
+                + player1.Name.ToUpper() + "', '"
+                + player1.Surname.ToUpper() + "', '"
+                + player1.BirthDate + "', '"
+                + player1.Position.ToUpper() + "', '"
+                + player1.TransferFee + "', '"
+                + player1.Salary + "', '"
+                + player1.TeamID + "')";
 
             RepositoryManager.Repository.DoCommand(sql);
             return true;
@@ -83,7 +83,7 @@ namespace CMPE312_PROJECT.Models.Repository
          public static bool UpdatePlayer(Player player1)
          {
           
-            string sql = "Update PLAYER set NAME='" +  player1.name.ToUpper() + "', SURNAME='" + player1.surname.ToUpper() + "', BIRTH_DATE='" + player1.birthDate + "', POSITION='" + player1.position.ToUpper() + "', TRANSFER_FEE='" + player1.transferFee + "', SALARY='" + player1.salary + "', TEAM_ID='" + player1.teamID + "' where ID=" + player1.ID;
+            string sql = "Update PLAYER set NAME='" +  player1.Name.ToUpper() + "', SURNAME='" + player1.Surname.ToUpper() + "', BIRTH_DATE='" + player1.BirthDate + "', POSITION='" + player1.Position.ToUpper() + "', TRANSFER_FEE='" + player1.TransferFee + "', SALARY='" + player1.Salary + "', TEAM_ID='" + player1.TeamID + "' where ID=" + player1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

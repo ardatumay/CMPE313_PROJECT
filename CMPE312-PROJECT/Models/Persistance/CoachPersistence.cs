@@ -11,7 +11,7 @@ namespace CMPE312_PROJECT.Models.Persistance
     {
         public static Coach GetCoach(Coach coach1)
         {
-            string sqlQuery = "select * from COACH where NAME='" + coach1.name.ToUpper() + "'"; 
+            string sqlQuery = "select * from COACH where NAME='" + coach1.Name.ToUpper() + "'"; 
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -22,7 +22,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
             //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            Coach coach = new Coach { ID = (decimal)dataRow[0], name = (String)dataRow[1], surname = (String)dataRow[2], birthDate = (String)dataRow[3], salary = (decimal)dataRow[4], teamID = (decimal)dataRow[5] };
+            Coach coach = new Coach { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], Salary = (decimal)dataRow[4], TeamID = (decimal)dataRow[5] };
             return coach;
         }
 
@@ -48,7 +48,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + 1 + "','" + coach1.name.ToUpper() + "','" + coach1.surname.ToUpper() + "','" + coach1.birthDate + "','" + coach1.salary + "','" + coach1 .teamID + "')";
+                string sql2 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + 1 + "','" + coach1.Name.ToUpper() + "','" + coach1.Surname.ToUpper() + "','" + coach1.BirthDate + "','" + coach1.Salary + "','" + coach1 .TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -62,7 +62,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                     MaxId = Convert.ToDecimal(dataRow[0]);
                 }
                 decimal NewId = MaxId + 1;
-                string sql4 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + NewId + "','" + coach1.name.ToUpper() + "','" + coach1.surname.ToUpper() + "','" + coach1.birthDate + "','" + coach1.salary + "','" + coach1.teamID + "')";
+                string sql4 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + NewId + "','" + coach1.Name.ToUpper() + "','" + coach1.Surname.ToUpper() + "','" + coach1.BirthDate + "','" + coach1.Salary + "','" + coach1.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
             }
             if (result == 1)
@@ -86,7 +86,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdateCoach(Coach coach1)
         {
 
-            string sql = "Update COACH set NAME='" + coach1.name.ToUpper() + "', SURNAME='" + coach1.surname.ToUpper() + "', BIRTH_DATE='" + coach1.birthDate + "', SALARY='" + coach1.salary + "', TEAM_ID='" + coach1.teamID + "' where ID=" + coach1.ID;
+            string sql = "Update COACH set NAME='" + coach1.Name.ToUpper() + "', SURNAME='" + coach1.Surname.ToUpper() + "', BIRTH_DATE='" + coach1.BirthDate + "', SALARY='" + coach1.Salary + "', TEAM_ID='" + coach1.TeamID + "' where ID=" + coach1.ID;
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

@@ -7,13 +7,13 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Comment
     {
-        public decimal commentId { get; set; }
-        public string comment { get; set; }
-        public decimal playerId { get; set; }
-        public decimal coachId { get; set; }
-        public decimal presidentId { get; set; }
-        public string teamName { get; set; }
-        public decimal teamID { get; set; }
+        public decimal CommentId { get; set; }
+        public string CommentText { get; set; }
+        public decimal PlayerId { get; set; }
+        public decimal CoachId { get; set; }
+        public decimal PresidentId { get; set; }
+        public string TeamName { get; set; }
+        public decimal TeamID { get; set; }
 
         public Comment()
         {

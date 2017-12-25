@@ -61,12 +61,12 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Teams"] = teams;
                 return View(new Comment());
             }
-            if (comment.teamName == null || comment.teamName.Length == 0 || comment.comment == null || comment.comment.Length == 0)
+            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentText == null || comment.CommentText.Length == 0)
             {
                 TempData["message"] = "All fields are required.";
                 return View(comment);
             }
-            Team team = TeamPersistance.GetTeam(new Team(comment.teamName));
+            Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             if (team == null)
             {
                 TempData["message"] = "Invalid Team! Please check team.";
@@ -74,7 +74,7 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
-                comment.teamID = team.ID;
+                comment.TeamID = team.ID;
             }
             isAdded = CommentManager.AddComment(comment);
             TempData["message"] = "Comment is added succesfully.";
