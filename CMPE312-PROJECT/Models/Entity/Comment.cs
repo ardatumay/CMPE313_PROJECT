@@ -8,7 +8,7 @@ namespace CMPE312_PROJECT.Models.Entity
     public class Comment
     {
         public decimal CommentId { get; set; }
-        public string CommentText { get; set; }
+        public string CommentValue { get; set; }
         public decimal PlayerId { get; set; }
         public decimal CoachId { get; set; }
         public decimal PresidentId { get; set; }

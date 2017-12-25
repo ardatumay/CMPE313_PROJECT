@@ -21,7 +21,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + 1 + "','" + comment.CommentText + "','" + 0 + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
+                string sql2 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + 1 + "','" + comment.CommentValue + "','" + 0 + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -35,7 +35,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                     MaxId = Convert.ToDecimal(dataRow[0]);
                 }
                 decimal NewId = MaxId + 1;
-                string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentText + "','" + 0 + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
+                string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentValue + "','" + 0 + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
             }
             if (result == 1)

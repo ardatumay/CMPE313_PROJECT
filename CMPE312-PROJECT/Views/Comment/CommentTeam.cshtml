@@ -6,11 +6,11 @@
 }
 <script>
     function submit() {
-        var comment = document.getElementsByName("comment")
-        @Model.CommentText= comment.text;
+    var comment = document.getElementById("comment");
+    @Model.CommentValue= comment.text;
 
-        var selectTeam = document.getElementById("selectTeam");
-        @Model.TeamName = selectTeam.value
+    var selectTeam = document.getElementById("selectTeam");
+    @Model.TeamName = selectTeam.value
     }
 
 </script>
@@ -19,27 +19,19 @@
 
 
 <!--Html.DropDownList("ID", new SelectList(ViewBag.Teams, "ID", "Name"))-->
-<form method="post" action="~/Comment/CommentTeam" id="commentForm">
-    <ul>
-        <li>
-            <p><label>Choose Team</label></p>
-            
-            
-            @{ if ((List<Team>)ViewData["Teams"] != null)
-                {
+<form method="post" action="~/Comment/CommentTeam" id="commentForm">    
+    <p>
+        <select name="TeamID">
+            @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                <option value="@team.ID">@team.Name</option>
+            }
+        </select>
+    </p>
 
-                    foreach (Team team in (List<Team>)ViewData["Teams"])
-                    {
-                <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name"></label>
-
-                        }
-                    }
-                }
-        </li>
-    </ul>
-
-    <label>Enter your comment here: <input id="Addcomment" name="comment" value="@Model.CommentText"></label>
-        <p><input type="submit" onclick="submit()" value="Add Comment" /></p>
+    <!--<input type="hidden" name="TeamName" val />--> 
+    <label>Comment<input name="CommentValue" id="comment" type="text" /></label>
+    <p><input type="submit"  value="Add Comment" /></p>
 </form>
 
 

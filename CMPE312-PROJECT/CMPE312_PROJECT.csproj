@@ -241,9 +241,9 @@
     <Content Include="Views\President\ChangePresident.cshtml" />
     <Content Include="Views\Coach\ChangeCoach.cshtml" />
     <Content Include="Views\Comment\CommentTeam.cshtml" />
-    <Content Include="Views\Comment\CommentPresident.cshtml" />
     <Content Include="Views\Player\DeletePlayer.cshtml" />
     <Content Include="Views\Team\DeleteTeam.cshtml" />
+    <Content Include="Views\Comment\CommentPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

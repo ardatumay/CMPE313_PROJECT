@@ -1,9 +1,10 @@
     @using CMPE312_PROJECT.Models.Entity;
     @model Player
     @{
-        ViewBag.Title = "AddPlayer";
+        ViewBag.Title = "Add Player";
     }
     
+
 <script>
     //var dropdown = document.getElementById("select");
     //Model.teamID = dropdown.value
@@ -13,7 +14,6 @@
     var selectPosition = document.getElementById("selectPosition");
     @Model.Position = selectPosition.value
 </script>
-
     <h2>AddPlayer</h2>
 
     <form method="post" action="~/Player/AddPlayer">

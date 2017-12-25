@@ -1,0 +1,62 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Comment
+@{
+    ViewBag.Title = "Comment Player";
+}
+<script type="text/JavaScript">
+    window.onload = function () {
+        try { // Firefox, Opera, IE7
+            request = new XMLHttpRequest()
+        }
+        catch (e) {
+            try { // IE6
+                request = new ActiveXObject('MSXML2.XMLHTTP.5.0')
+            }
+            catch (e) {
+                request = false
+            }
+        }
+        if (!request) alert('Ajax setup failed')
+    }
+
+    function checkTeam() {
+        if (!request) return
+        var team = get("selectTeam")
+        var prefix = team.value
+        var url = "/Team/GetTeamPlayers?teamName=" + prefix
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send(null)
+    }
+
+    function updatePage() {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                var response = request.responseText
+
+                get('players').value = response;
+            }
+            else {
+                alert("Error: status code " + request.status)
+            }
+        }
+    }
+    function get(id) { return document.getElementById(id) }
+</script>
+
+<h2>CommentPlayer</h2>
+
+<form method="post" action="~/Comment/CommentPlayer" id="commentForm">
+    <ul>
+        <li>
+            <p><label>Choose Team</label></p>
+            @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name" onclick="checkTeam()"></label>
+            }
+        </li>
+        <li><label>Comment<input name="comment" value="@Model.CommentValue" type="text" /></label></li>
+    </ul>
+    <div><input type="text" id="players" readonly" /></div>
+    <p><input type="submit"  value="Add Comment" /></p>
+</form>

@@ -83,5 +83,14 @@ namespace CMPE312_PROJECT.Controllers
                 return View(team);
             }
         }
+
+        [HttpGet]
+        public string GetTeamPlayers(string teamName)
+        {
+            Team team = TeamPersistance.GetTeam(new Team(teamName));
+            List<Player> teamPlayers = TeamPersistance.GetTeamPlayers(team.ID);
+
+            return teamName;
+        }
     }
 }
