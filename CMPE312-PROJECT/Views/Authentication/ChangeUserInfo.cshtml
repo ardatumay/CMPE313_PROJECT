@@ -1,0 +1,25 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Credential
+@{
+    ViewBag.Title = "ChangeUserInfo";
+}
+
+<script type="text/javascript">
+document.getElementById('1').value = '@Model.Name';
+</script>
+
+<h2>ChangeUserInfo</h2>
+
+<form method="post" action="~/Authentication/ChangeUserInfo">
+    <ul>
+        <li><label>Name<input id ="1"name="Name" value="@Model.Name" type="text" /> asd</label></li>
+        <li><label>User ID<input name="UserId" value="@Model.UserId" type="text" /></label></li>
+        <li><label>Current Password<input name="OldPassword" value="@Model.OldPassword" type="password" /></label></li>
+        <li><label>New Password<input name="Password1" value="@Model.Password1" type="password" /></label></li>
+        <li><label>New Password Again<input name="Password2" value="@Model.Password2" type="password" /></label></li>
+        <li><label>E-Mail<input name="Email" value="@Model.Email" type="text" /></label></li>
+    </ul>
+
+    <input type="submit" value="Save Changes" />
+
+</form>

@@ -49,7 +49,7 @@ namespace CMPE312_PROJECT.Models.Repository
         public static bool UpdateUser(User user1)
         {
 
-            string sql = "Update USER set USER_ID='" + user1.UserID + "', NAME='" + user1.Name + "', EMAIL='" + user1.Email + "', IS_ADMIN='" + user1.IsAdmin + "', STATUS='" + user1.Status + "' where USER_ID=" + user1.UserID;
+            string sql = "Update USER set USER_ID='" + user1.UserID + "', NAME='" + user1.Name + "', EMAIL='" + user1.Email + "', SALT='" + user1.Salt + "', HASHEDPASSWORD='" + user1.PasswordHash + "', IS_ADMIN='" + user1.IsAdmin + "', STATUS='" + user1.Status + "' where USER_ID='" + user1.UserID + "'";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

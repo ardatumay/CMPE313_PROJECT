@@ -96,5 +96,75 @@ namespace CMPE312_PROJECT.Controllers
             TempData["message"] = "Logged out";
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public ActionResult GetUserInfo()
+        {
+            User user = UserManager.user;
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult GetUserInfo(User user)
+        {
+            return RedirectToAction("ChangeUserInfo", "Authentication");
+        }
+
+        [HttpGet]
+        public ActionResult ChangeUserInfo()
+        {
+            return View(new Credential());
+        }
+
+        [HttpPost]
+        public ActionResult ChangeUserInfo(Credential credential)
+        {
+            bool login;
+            string newPassword = credential.Password1;
+
+            if (credential == null)
+            {
+                return View(new Credential());
+            }
+
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
+            {
+                TempData["message"] = "Both user id and password are required";
+                return View(credential);
+            }
+
+            if (credential.Password1.Equals(credential.OldPassword))
+            {
+                TempData["message"] = "Your new password cannot be the same with your current password!";
+                return View(credential);
+            }
+
+            else if (!credential.Password1.Equals(credential.Password2))
+            {
+                TempData["message"] = "Passwords are not same.";
+                return View(credential);
+            }
+
+            else
+            {
+                credential.Password1 = credential.OldPassword;
+                login = UserManager.AuthenticateUser(credential, Session);
+            }
+
+            if (login)
+            {
+                credential.Password1 = newPassword;
+                UserManager.UpdateUser(credential, Session);
+                TempData["message"] = "Changes saved successfully.";
+                return RedirectToAction("GetUserInfo", "Authentication");
+            }
+
+            else
+            {
+                TempData["message"] = "Invalid login credentials";
+                return View(credential);
+            }
+
+        }
     }
 }
