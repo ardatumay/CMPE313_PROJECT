@@ -27,6 +27,23 @@ namespace CMPE312_PROJECT.Models.Persistance
             return team;
         }
 
+        public static Team GetTeamByID(Team team1)
+        {
+            string sqlQuery = "select * from TEAM where ID='" + team1.ID + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+            //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
+            Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5] };
+            return team;
+        }
+
         /*
          *Updates the team information.
          */
@@ -34,7 +51,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static bool UpdateTeam(Team team1)
         {
 
-            string sql = "Update TEAM set NAME='" + team1.Name.ToUpper() + "', CITY='" + team1.City.ToUpper() + "', FOUNDATION='" + team1.Foundation + "', BUDGET='" + team1.Budget + "', NUMBER_OF_CHAMPIONSHIP='" + team1.NumberOfChampionship + "' where ID=" + team1.ID;
+            string sql = "Update TEAM set NAME='" + team1.Name.ToUpper() + "', CITY='" + team1.City.ToUpper() + "', FOUNDATION='" + team1.Foundation + "', BUDGET='" + team1.Budget + "', NUMBER_OF_CHAMPIONSHIP='" + team1.NumberOfChampionship + "' where ID='" + team1.ID + "'";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {

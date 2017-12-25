@@ -98,5 +98,45 @@ namespace CMPE312_PROJECT.Controllers
             }
             return playerList;
         }
+
+        [HttpGet]
+        public ActionResult ChangeBudget()
+        {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
+
+            Team team = TeamPersistance.GetTeamByID(new Team { ID = UserManager.user.PresidentID });
+            ViewData["TeamName"] = team.Name;
+            
+            return View(team);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeBudget(Team team)
+        {
+            if (team == null)
+            {
+                return View(new Team());
+            }
+
+            Team team1 = TeamPersistance.GetTeamByID(new Team { ID = UserManager.user.PresidentID });
+            team1.Budget = team.Budget;
+            team = team1;
+
+            if ((team.Name == null) || (team.Name.Length == 0))
+            {
+                TempData["message"] = "All fields are required.";
+
+                team = TeamPersistance.GetTeamByID(new Team { ID = UserManager.user.PresidentID });
+                ViewData["TeamName"] = team.Name;
+
+                return View(team);
+            }
+
+            TeamPersistance.UpdateTeam(team1);
+            TempData["message"] = "Budget of " + team.Name + " is successfully changed.";
+            return RedirectToAction("Index", "Home");
+
+        }
     }
 }

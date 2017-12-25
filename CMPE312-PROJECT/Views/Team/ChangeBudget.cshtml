@@ -1,0 +1,17 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model Team
+@{
+    ViewBag.Title = "ChangeBudget";
+}
+
+<h2>ChangeBudget</h2>
+
+<form method="post" action="~/Team/ChangeBudget">
+
+    <p><label>@ViewData["TeamName"]</label></p>
+
+    <p><label>Team Budget: <input name="Budget" value="@Model.Budget" type="text" /></label>Million €</p>
+
+    <p><input type="submit" value="Save Changes" /></p>
+
+</form>
