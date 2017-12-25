@@ -82,10 +82,9 @@ namespace CMPE312_PROJECT.Models.Persistance
         /*
          * Get all Team data from the database and return an array of Teams.
          */
-        public static List<Player> GetTeamPlayers(int teamID)
+        public static List<Player> GetTeamPlayers(decimal teamID)
         {
             List<Player> players = new List<Player>();
-
             string sqlQuery = "select * from PLAYER where TEAM_ID='" + teamID + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
 

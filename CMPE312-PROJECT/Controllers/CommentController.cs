@@ -18,17 +18,8 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
-        /*public ActionResult CommentPlayer()
-        {
-
-        }
-        public ActionResult CommentCoach()
-        {
-
-        }*/
-
         [HttpGet]
-        public ActionResult CommentPresident()
+        public ActionResult CommentPlayer()
         {
             var teams = TeamPersistance.GetTeams();
             ViewData["Teams"] = teams;
@@ -36,17 +27,42 @@ namespace CMPE312_PROJECT.Controllers
         }
 
         [HttpPost]
-        public ActionResult CommentPresident(Comment comment)
+        public ActionResult CommentPlayer(Comment comment)
         {
-            return View();
+            bool isAdded;
+            if (comment == null)
+            {
+                return View(new Comment());
+            }
+            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0)
+            {
+                TempData["message"] = "All fields are required.";
+                return View(comment);
+            }
+            Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
+            if (team == null)
+            {
+                TempData["message"] = "Invalid Team! Please check team.";
+                return View(comment);
+            }
+            else
+            {
+                comment.TeamID = team.ID;
+            }
+            isAdded = CommentManager.AddComment(comment);
+            TempData["message"] = "Comment is added succesfully.";
+            return RedirectToAction("Index", "Home");
         }
+
+
+
 
         [HttpGet]
         public ActionResult CommentTeam()
         {
             var teams = TeamPersistance.GetTeams();
             ViewData["Teams"] = teams;
-            return View(new Comment());
+            return View(new Comment { TeamName = " ", CommentValue = "comment" });
         }
 
         [HttpPost]
@@ -55,22 +71,30 @@ namespace CMPE312_PROJECT.Controllers
             bool isAdded;
             if (comment == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "HERE";
+
                 return View(new Comment());
             }
-            if (comment.teamName == null || comment.teamName.Length == 0 || comment.comment == null || comment.comment.Length == 0)
+            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0)
             {
-                TempData["message"] = "All fields are required.";
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "All fields are required."+ comment.TeamName +","+ comment.CommentValue;
                 return View(comment);
             }
-            Team team = TeamPersistance.GetTeam(new Team(comment.teamName));
+            Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Invalid Team! Please check team.";
                 return View(comment);
             }
             else
             {
-                comment.teamID = team.ID;
+                comment.TeamID = team.ID;
             }
             isAdded = CommentManager.AddComment(comment);
             TempData["message"] = "Comment is added succesfully.";
