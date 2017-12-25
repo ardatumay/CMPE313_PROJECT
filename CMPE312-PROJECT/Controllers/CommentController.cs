@@ -7,6 +7,8 @@ using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
 using CMPE312_PROJECT.Models.Persistance;
+using System.Text.RegularExpressions;
+
 
 namespace CMPE312_PROJECT.Controllers
 {
@@ -44,7 +46,15 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required.";
                 return View(comment);
             }
-
+            string validComment = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            Match matchcomment = Regex.Match(comment.CommentValue, validComment);
+            if (!matchcomment.Success)
+            {
+                TempData["message"] = "Incorrect letters";
+                return View(comment);
+            }
+            Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
+            comment.TeamID = team.ID;
             isAdded = CommentManager.AddCommentPlayer(comment);
             TempData["message"] = "Comment is added succesfully.";
             return RedirectToAction("Index", "Home");
@@ -80,6 +90,13 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required."+ comment.TeamName +","+ comment.CommentValue;
                 return View(comment);
             }
+            string validComment = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            Match matchcomment = Regex.Match(comment.CommentValue, validComment);
+            if (!matchcomment.Success)
+            {
+                TempData["message"] = "Incorrect letters";
+                return View(comment);
+            }
             Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             if (team == null)
             {
@@ -96,5 +113,68 @@ namespace CMPE312_PROJECT.Controllers
             TempData["message"] = "Comment is added succesfully.";
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public ActionResult ListPlayerComments()
+        {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
+            return View();
+        }
+
+        [HttpGet]
+        public string GetPlayerComments(string teamName, decimal playerId)
+        {
+            Team team = TeamPersistance.GetTeam(new Team(teamName));
+            Player player = Player.CreatePlayerById(playerId);
+            List<Comment> comments = CommentPersistence.GetPlayerComments(team, player);
+            string playerComments = "";
+
+            if (comments == null)
+            {
+                TempData["message"] = "There are no comments about the player.";
+                return null;
+            }
+            else
+            {
+                for (int i = 0; i < comments.Count; i++)
+                {
+                    playerComments += comments[i].CommentValue + ",";
+                }
+            }
+            return playerComments;
+        }
+
+        [HttpGet]
+        public ActionResult ListTeamComments()
+        {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
+            return View();
+        }
+
+        [HttpGet]
+        public string GetTeamComments(string teamName)
+        {
+
+            Team team = TeamPersistance.GetTeam(new Team(teamName));
+            List<Comment> comments = CommentPersistence.GetTeamComments(team);
+            string teamComments = "";
+            if (comments == null)
+            {
+                TempData["message"] = "There are no comments about the team.";
+                return null;
+            }
+            else
+            {
+                for (int i = 0; i < comments.Count; i++)
+                {
+                    teamComments += comments[i].CommentValue + ",";
+                }
+            }
+
+            return teamComments;
+        }
+
+
     }
 }

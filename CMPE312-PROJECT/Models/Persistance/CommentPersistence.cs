@@ -54,7 +54,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + 1 + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + 0 + "')";
+                string sql2 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + 1 + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -68,14 +68,59 @@ namespace CMPE312_PROJECT.Models.Persistance
                     MaxId = Convert.ToDecimal(dataRow[0]);
                 }
                 decimal NewId = MaxId + 1;
-                string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + 0 + "')";
+                string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
-            }
+            } 
             if (result == 1)
             {
                 return true;
             }
             return false;
+        }
+
+
+        public static List<Comment> GetTeamComments(Team team)
+        {
+            List<Comment> comments = new List<Comment>();
+            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'"; 
+            List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
+            if (rows1.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                string sql2 = "Select COMMENT from COMMENT where TEAM_ID='" + team.ID + "'";
+                List<object[]> rows2 = RepositoryManager.Repository.DoQuery(sql2);
+                foreach (object[] dataRow in rows2)
+                {
+                    Comment comment = new Comment { CommentValue = (string)dataRow[0] };
+                    comments.Add(comment);
+                }
+            }
+            return comments;
+        }
+
+        public static List<Comment> GetPlayerComments(Team team, Player player)
+        {
+            List<Comment> comments = new List<Comment>();
+            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + player.ID + "'";
+            List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
+            if (rows1.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                string sql2 = "Select COMMENT from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + player.ID + "'";
+                List<object[]> rows2 = RepositoryManager.Repository.DoQuery(sql2);
+                foreach (object[] dataRow in rows2)
+                {
+                    Comment comment = new Comment { CommentValue = (string)dataRow[0] };
+                    comments.Add(comment);
+                }
+            }
+            return comments;
         }
     }
 }

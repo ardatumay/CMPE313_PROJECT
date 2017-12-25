@@ -21,5 +21,14 @@ namespace CMPE312_PROJECT.Models.Entity
         {
 
         }
+        private Player(decimal PlayerId)
+        {
+            ID = PlayerId;
+        }
+
+        public static Player CreatePlayerById(decimal ID_)
+        {
+            return new Player(ID_);
+        }
     }
 }

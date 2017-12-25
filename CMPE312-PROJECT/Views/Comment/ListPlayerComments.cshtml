@@ -23,13 +23,23 @@
         if (!request) return
         var team = get("selectTeam")
         var teamName = team.value
-        //var prefix = "GALATASARAY"
         var url = "/Team/GetTeamPlayers?teamName=" + teamName
             request.open("GET", url, true)
             request.onreadystatechange = updatePage
             request.send(null)
     }
-
+    function checkPlayerComments() {
+        if (!request) return
+        var player = get("players")
+        var playerId = player.value
+        var team = get("selectTeam")
+        var teamName = team.value
+        //var prefix = "GALATASARAY"
+        var url = "/Comment/GetPlayerComments?teamName=" + teamName + "&playerId=" + playerId
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePagePlayer
+        request.send(null)
+    }
     function updatePage() {
         if (request.readyState == 4) {
             if (request.status == 200) {
@@ -51,29 +61,55 @@
             }
         }
     }
+    function updatePagePlayer() {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                var response = request.responseText
+                var comments = response.split(",")
+                var commentParagraph = ''
+                for (var i = 0; i < comments.length - 1; i++) {
+                    commentParagraph += '<p>' + comments[i] + '</p>\n'
+                    console.log(comments[i])
+                    console.log(response)
+                }
+                console.log(commentParagraph)
+                //get('players').value = response
+                get('comments').innerHTML = commentParagraph
+            }
+            else {
+                alert("Error: status code " + request.status)
+            }
+        }
+    }
     function get(id) { return document.getElementById(id) }
 </script>
 
+<style>
+    #comments p {
+        border-width: 1.5px;
+        border-radius: 25px;
+        border-style: dashed;
+        width: 50px;
+        background-color: lightgray;
+    }
+</style>
+
 <h2>Comment Player</h2>
 
-<form method="post" action="~/Comment/CommentPlayer">
-            <p><label>Choose Team</label></p>
+<form method="get" action="~/Comment/ListPlayerComments">
+    <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
-                <option   value="@team.Name">@team.Name</option>
+                <option value="@team.Name">@team.Name</option>
             }
         </select>
     </p>
-    <div >
+    <div>
         <p>Choose Player</p>
-        <select id="players" name="PlayerId"></select>
+        <select id="players" name="PlayerId" onchange="checkPlayerComments()"></select>
     </div>
-
-    <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->
-
-    <label>Comment<input name="CommentValue" type="text" /></label>
-    
-    <p><input type="submit"  value="Add Comment" /></p>
+    <div id="comments">
+    </div>
 </form>

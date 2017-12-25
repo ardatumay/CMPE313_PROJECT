@@ -1,7 +1,7 @@
 ﻿@using CMPE312_PROJECT.Models.Entity;
 @model Comment
 @{
-    ViewBag.Title = "Comment Player";
+    ViewBag.Title = "GetTeamComments";
 }
 <script type="text/JavaScript">
     window.onload = function () {
@@ -24,27 +24,26 @@
         var team = get("selectTeam")
         var teamName = team.value
         //var prefix = "GALATASARAY"
-        var url = "/Team/GetTeamPlayers?teamName=" + teamName
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send(null)
+        var url = "/Comment/GetTeamComments?teamName=" + teamName
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
     }
 
     function updatePage() {
         if (request.readyState == 4) {
             if (request.status == 200) {
                 var response = request.responseText
-                var players = response.split(",")
-                var selectPlayer = ''
-                for (var i = 0; i < players.length; i = i + 2){
-                    selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
-                    console.log(players[i])
-                    console.log(players[i + 1])
+                var comments = response.split(",")
+                var commentParagraph = ''
+                for (var i = 0; i < comments.length-1; i++) {
+                    commentParagraph += '<p>' + comments[i] + '</p>\n'
+                    console.log(comments[i])
                     console.log(response)
                 }
-                console.log(selectPlayer)
+                console.log(commentParagraph)
                 //get('players').value = response
-                get('players').innerHTML = selectPlayer
+                get('comments').innerHTML = commentParagraph
             }
             else {
                 alert("Error: status code " + request.status)
@@ -53,27 +52,28 @@
     }
     function get(id) { return document.getElementById(id) }
 </script>
+<style>
+    #comments p {
+        border-width: 1.5px;
+        border-radius: 25px;
+        border-style: dashed;
+        width: 50px;
+        background-color: lightgray;
+    }
 
-<h2>Comment Player</h2>
+</style>
+<h2>Team Comments</h2>
 
-<form method="post" action="~/Comment/CommentPlayer">
-            <p><label>Choose Team</label></p>
+<form method="get" action="~/Comment/ListTeamComments" >
+    <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
-                <option   value="@team.Name">@team.Name</option>
+                <option value="@team.Name">@team.Name</option>
             }
         </select>
     </p>
-    <div >
-        <p>Choose Player</p>
-        <select id="players" name="PlayerId"></select>
+    <div id="comments">
     </div>
-
-    <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->
-
-    <label>Comment<input name="CommentValue" type="text" /></label>
-    
-    <p><input type="submit"  value="Add Comment" /></p>
 </form>

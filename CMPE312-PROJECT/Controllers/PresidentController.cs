@@ -7,6 +7,8 @@ using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
 using CMPE312_PROJECT.Models.Persistance;
+using System.Text.RegularExpressions;
+
 
 namespace CMPE312_PROJECT.Controllers
 {
@@ -41,7 +43,14 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required.";
                 return View(president);
             }
-
+            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            Match matchname = Regex.Match(president.Name, validName);
+            Match matchsurname = Regex.Match(president.Surname, validName);
+            if (!matchname.Success || !matchsurname.Success )
+            {
+                TempData["message"] = "Incorrect letters";
+                return View(president);
+            }
             if (PresidentPersistance.GetPresident(president) != null)
             {
                 TempData["message"] = "The president is already exist.";

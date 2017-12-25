@@ -30,6 +30,9 @@
                     <li>@Html.ActionLink("Change President", "ChangePresident", "President")</li>
                     <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
                     <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
+                    <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+                    <li>@Html.ActionLink("Team Comments", "ListTeamComments", "Comment")</li>
+
                     @{
                         if ((Session["LoggedIn"] == null)||((bool)Session["LoggedIn"] == false))
                         {

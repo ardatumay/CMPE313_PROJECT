@@ -7,6 +7,7 @@ using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
 using CMPE312_PROJECT.Models.Persistance;
+using System.Text.RegularExpressions;
 
 
 namespace CMPE312_PROJECT.Controllers
@@ -39,6 +40,17 @@ namespace CMPE312_PROJECT.Controllers
             if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() ==  null ||  coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
             {
                 TempData["message"] = "All fields are required.";
+                return View(coach);
+            }
+            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validsalary = @"/^[0 - 9 +] *$/";
+            Match matchname = Regex.Match(coach.Name, validName);
+            Match matchsurname = Regex.Match(coach.Surname, validName);
+            Match matchsalary = Regex.Match(coach.Salary.ToString(), validsalary);
+
+            if (!matchname.Success || !matchsurname.Success || !matchsalary.Success)
+            {
+                TempData["message"] = "Incorrect letters";
                 return View(coach);
             }
             Team team = TeamPersistance.GetTeam(new Team(coach.TeamName));

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
+using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
@@ -27,6 +28,8 @@ namespace CMPE312_PROJECT.Controllers
         public ActionResult Login(Credential credential)
         {
             bool login;
+            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
+            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             if (credential == null)
             {
                 return View(new Credential());
@@ -38,6 +41,13 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
+                Match matchid = Regex.Match(credential.UserId, validUserId);
+                Match matchpass = Regex.Match(credential.Password1, validPass);
+                if (!matchid.Success || !matchpass.Success)
+                {
+                    TempData["message"] = "Incorrect letters";
+                    return View(credential);
+                }
                 login = UserManager.AuthenticateUser(credential, Session);
             }
             if (login)
@@ -60,6 +70,10 @@ namespace CMPE312_PROJECT.Controllers
         [HttpPost]
         public ActionResult Signup(Credential credential)
         {
+            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
+            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
+            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+
             bool signup;
             if (credential == null)
             {
@@ -77,6 +91,14 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
+                Match matchid = Regex.Match(credential.UserId, validUserId);
+                Match matchname = Regex.Match(credential.Name, validName);
+                Match matchpass = Regex.Match(credential.Password1, validPass);
+                if (!matchid.Success || !matchpass.Success || !matchname.Success)
+                {
+                    TempData["message"] = "Incorrect letters";
+                    return View(credential);
+                }
                 signup = UserManager.SignupUser(credential);
                 if(signup == false)
                 {
@@ -119,6 +141,9 @@ namespace CMPE312_PROJECT.Controllers
         [HttpPost]
         public ActionResult ChangeUserInfo(Credential credential)
         {
+            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
+            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
+            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
             bool login;
             string newPassword = credential.Password1;
 
