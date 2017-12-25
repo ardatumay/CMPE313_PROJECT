@@ -68,6 +68,7 @@ namespace CMPE312_PROJECT.Controllers
         [HttpPost]
         public ActionResult CommentTeam(Comment comment)
         {
+            
             bool isAdded;
             if (comment == null)
             {
