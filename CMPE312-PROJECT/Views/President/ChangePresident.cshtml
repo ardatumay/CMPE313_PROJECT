@@ -6,16 +6,16 @@
 
 <script>
     var dropdown = document.getElementById("select");
-    @Model.teamName = dropdown.value
+    @Model.TeamName = dropdown.value
 </script>
 
 <h2>ChangePresident</h2>
 
 <form method="post" action="~/President/ChangePresident">
     <ul>
-        <li><label>Name<input name="name" value="@Model.name" type="text" /></label></li>
-        <li><label>Surname<input name="surname" value="@Model.surname" type="text" /></label></li>
-        <li><label>Birth Date<input name="birthDate" value="@Model.birthDate" type="date" /></label></li>
+        <li><label>Name<input name="name" value="@Model.Name" type="text" /></label></li>
+        <li><label>Surname<input name="surname" value="@Model.Surname" type="text" /></label></li>
+        <li><label>Birth Date<input name="birthDate" value="@Model.BirthDate" type="date" /></label></li>
         <!--<li><label>Team Name<input name="teamName" value="" type="text" /></label></li>-->
         <li>
             @foreach (Team team in (List<Team>)ViewData["Teams"])

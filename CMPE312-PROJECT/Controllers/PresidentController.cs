@@ -36,7 +36,7 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new President());
             }
 
-            if (president.name == null || president.name.Length == 0 || president.surname == null || president.surname.Length == 0 || president.birthDate == null || president.birthDate.Length == 0 || president.teamName == null || president.teamName.Length == 0)
+            if (president.Name == null || president.Name.Length == 0 || president.Surname == null || president.Surname.Length == 0 || president.BirthDate == null || president.BirthDate.Length == 0 || president.TeamName == null || president.TeamName.Length == 0)
             {
                 TempData["message"] = "All fields are required.";
                 return View(president);
@@ -48,7 +48,7 @@ namespace CMPE312_PROJECT.Controllers
                 return View(president);
             }
 
-            Team team = TeamPersistance.GetTeam(new Team(president.teamName));
+            Team team = TeamPersistance.GetTeam(new Team(president.TeamName));
             if (team == null)
             {
                 TempData["message"] = "Invalid Team! Please check team name.";
@@ -57,7 +57,7 @@ namespace CMPE312_PROJECT.Controllers
 
             else
             {
-                president.teamID = team.ID;
+                president.TeamID = team.ID;
             }
 
             isExist = PresidentManager.CheckPresident(president);
@@ -69,7 +69,7 @@ namespace CMPE312_PROJECT.Controllers
 
             else
             {
-                President presidentDeleted = new President(president.teamID);
+                President presidentDeleted = new President(president.TeamID);
                 PresidentPersistance.DeletePresident(presidentDeleted);
 
                 PresidentPersistance.AddPresident(president);

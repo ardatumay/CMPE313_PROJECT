@@ -7,13 +7,13 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class User
     {
-        public String userID { get; set; }
-        public String name { get; set; }
-        public String email { get; set; }
-        public String salt { get; set; }
-        public String passwordHash { get; set; }
-        public decimal isAdmin { get; set; }
-        public String status { get; set; }
+        public String UserID { get; set; }
+        public String Name { get; set; }
+        public String Email { get; set; }
+        public String Salt { get; set; }
+        public String PasswordHash { get; set; }
+        public decimal IsAdmin { get; set; }
+        public String Status { get; set; }
 
         public User()
         {
@@ -21,13 +21,13 @@ namespace CMPE312_PROJECT.Models.Entity
         }
         public User(String userID_, String name_, String email_, String salt_, String passwordHash_, int isAdmin_, String status_)
         {
-            userID = userID_;
-            name = name_;
-            email = email_;
-            salt = salt_;
-            passwordHash = passwordHash_;
-            isAdmin = isAdmin_;
-            status = status_;        
+            UserID = userID_;
+            Name = name_;
+            Email = email_;
+            Salt = salt_;
+            PasswordHash = passwordHash_;
+            IsAdmin = isAdmin_;
+            Status = status_;        
         }
     }
 }

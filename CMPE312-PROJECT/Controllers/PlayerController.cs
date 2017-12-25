@@ -38,13 +38,13 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Player());
             }
-            if (player.name == null || player.name.Length == 0 || player.surname == null || player.surname.Length == 0 || player.birthDate == null || player.birthDate.Length == 0 || player.position == null || player.position.Length == 0 || player.transferFee < 0 || player.transferFee.ToString().Equals(null) || player.salary < 0 || player.salary.ToString().Equals(null) || player.teamName == null || player.teamName.Length == 0 )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 )
             {
                 TempData["message"] = "All fields are required.";
                 return View(player);
             }
 
-            Team team = TeamPersistance.GetTeam(new Team(player.teamName));
+            Team team = TeamPersistance.GetTeam(new Team(player.TeamName));
             if (team == null)
             {
                 TempData["message"] = "Invalid Team! Please check team name.";
@@ -52,7 +52,7 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
-                player.teamID = team.ID;
+                player.TeamID = team.ID;
 
             }
             isExist = PlayerManager.CheckPlayer(player);
@@ -83,7 +83,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Player());
             }
-            if (player.name == null || player.name.Length == 0 || player.surname == null || player.surname.Length == 0 )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 )
             {
                 TempData["message"] = "All fields are required.";
                 return View(player);
@@ -95,7 +95,7 @@ namespace CMPE312_PROJECT.Controllers
             if (isExist)
             {
                 PlayerPersistence.DeletePlayer(player1);
-                TempData["message"] = player1.name + " " + player1.surname + " is deleted successfully.";
+                TempData["message"] = player1.Name + " " + player1.Surname + " is deleted successfully.";
                 return RedirectToAction("Index", "Home");
             }
             else

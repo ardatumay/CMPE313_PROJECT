@@ -36,12 +36,12 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Player());
             }
-            if (coach.name == null || coach.name.Length == 0 || coach.surname == null || coach.surname.Length == 0 || coach.birthDate == null || coach.birthDate.Length == 0 || coach.salary.ToString() ==  null ||  coach.salary.ToString().Length == 0 || coach.salary == 0 || coach.teamName == null || coach.teamName.Length == 0)
+            if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() ==  null ||  coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
             {
                 TempData["message"] = "All fields are required.";
                 return View(coach);
             }
-            Team team = TeamPersistance.GetTeam(new Team(coach.teamName));
+            Team team = TeamPersistance.GetTeam(new Team(coach.TeamName));
             if (team == null)
             {
                 TempData["message"] = "Invalid Team! Please check team name.";
@@ -49,7 +49,7 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
-                coach.teamID = team.ID;
+                coach.TeamID = team.ID;
 
             }
             coach.ID = 1;

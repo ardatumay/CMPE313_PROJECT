@@ -9,29 +9,29 @@
     //var dropdown = document.getElementById("select");
     //Model.teamID = dropdown.value
     var selectTeam = document.getElementById("selectTeam");
-    @Model.teamName = selectTeam.value
+    @Model.TeamName = selectTeam.value
 
     var selectPosition = document.getElementById("selectPosition");
-    @Model.position = selectPosition.value
+    @Model.Position = selectPosition.value
 </script>
     <h2>AddPlayer</h2>
 
     <form method="post" action="~/Player/AddPlayer">
         <ul>
-            <li><label>Name<input name="Name" value="@Model.name" type="text" /></label></li>
-            <li><label>Surname<input name="Surname" value="@Model.surname" type="text" /></label></li>
-            <li><label>Birth Date<input name="BirthDate" value="@Model.birthDate" type="date" /></label></li>
+            <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
+            <li><label>Surname<input name="Surname" value="@Model.Surname" type="text" /></label></li>
+            <li><label>Birth Date<input name="BirthDate" value="@Model.BirthDate" type="date" /></label></li>
             <li>
                 <p><label>Select Position</label></p>
                 @foreach (Position position in (List<Position>)ViewData["Positions"])
                 {
-                    <label>@position.position<input id="selectPosition" type="radio" name="position" value="@position.position"></label>
+                    <label>@position.PositionText<input id="selectPosition" type="radio" name="position" value="@position.PositionText"></label>
                     <br />
                 }
             </li>
 
-            <li><label>Transfer Fee<input name="TransferFee" value="@Model.transferFee" type="number" /></label></li>
-            <li><label>Salary<input name="Salary" value="@Model.salary" type="number" /></label></li>
+            <li><label>Transfer Fee<input name="TransferFee" value="@Model.TransferFee" type="number" /></label></li>
+            <li><label>Salary<input name="Salary" value="@Model.Salary" type="number" /></label></li>
             <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
             <!--Html.DropDownList("select", list, "All", null)-->
             <!--Html.DropDownListFor(model => model.teamID, (SelectList)ViewBag.Teams)-->
