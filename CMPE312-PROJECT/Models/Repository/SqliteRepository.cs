@@ -125,7 +125,7 @@ namespace CMPE312_PROJECT.Models.Repository
                 string PlayerTable = "CREATE TABLE PLAYER (ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), POSITION VARCHAR(50), TRANSFER_FEE DECIMAL, SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID), FOREIGN KEY (POSITION) REFERENCES POSITIONS(POSITION))";
                 string CoachTable = "CREATE TABLE COACH ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), SALARY DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
                 string PresidentTable = "CREATE TABLE PRESIDENT ( ID DECIMAL, NAME VARCHAR(50), SURNAME VARCHAR(50), BIRTH_DATE VARCHAR(50), TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM(ID))";
-                string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN DECIMAL, STATUS VARCHAR(1), PRIMARY KEY (USER_ID))";
+                string UserTable = "CREATE TABLE USER (USER_ID VARCHAR(50), NAME VARCHAR(50), EMAIL VARCHAR(50), SALT VARCHAR(50), HASHEDPASSWORD VARCHAR(50), IS_ADMIN DECIMAL, PRESIDENT_ID DECIMAL, STATUS VARCHAR(1), PRIMARY KEY (USER_ID), FOREIGN KEY (PRESIDENT_ID) REFERENCES PRESIDENT(ID))";
                 string PositionsTable = "CREATE TABLE POSITIONS (POSITION VARCHAR(50), PRIMARY KEY (POSITION))";
                 string CommentTable = "CREATE TABLE COMMENT (ID DECIMAL, COMMENT VARCHAR(280), PLAYER_ID DECIMAL, COACH_ID DECIMAL, PRESIDENT_ID DECIMAL, TEAM_ID DECIMAL, PRIMARY KEY(ID), FOREIGN KEY (PLAYER_ID) REFERENCES PLAYER (ID), FOREIGN KEY (COACH_ID) REFERENCES COACH (ID), FOREIGN KEY (PRESIDENT_ID) REFERENCES PRESIDENT (ID), FOREIGN KEY (TEAM_ID) REFERENCES TEAM (ID))";
                 DoCommand(TeamTable);
@@ -146,8 +146,10 @@ namespace CMPE312_PROJECT.Models.Repository
         {
             string AddingPositions = "INSERT INTO POSITIONS VALUES ('GK'), ('LB'), ('CB'), ('RB'), ('CDM'), ('LM'), ('CM'), ('RM'), ('CAM'), ('ST');";
             DoCommand(AddingPositions);
-
-            UserManager.SignupUser(new Credential("admin", "123", "email", "admin", 1));
+        /*
+         * Default user information for all of presidents.
+         */
+            UserManager.SignupUser(new Credential("admin", "123", "email", "admin", 1, 0));
 
             string DefaultTeams = "INSERT INTO TEAM VALUES ('1', 'BEÞÝKTAÞ', 'ISTANBUL', '1903', '19', '15', '30')," +
                 "('2', 'GALATASARAY', 'ISTANBUL', '1905', '18', '20', '32')," +
@@ -205,7 +207,26 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('16', 'TURGAY', 'CÝNER', '01/03/1956', '16')," +
                 "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
                 "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
-                
+
+            UserManager.SignupUser(new Credential("f.orman", "123", "email", "Fikret Orman", 0, 1));
+            UserManager.SignupUser(new Credential("d.ozbek", "123", "email", "Dursun Özbek", 0, 2));
+            UserManager.SignupUser(new Credential("a.yildirim", "123", "email", "Aziz Yýldýrým", 0, 3));
+            UserManager.SignupUser(new Credential("g.gumusdag", "123", "email", "Göksel Gümüþdað", 0, 4));
+            UserManager.SignupUser(new Credential("m.usta", "123", "email", "Muharrem Usta", 0, 5));
+            UserManager.SignupUser(new Credential("a.safak", "123", "email", "Ali Þafak", 0, 6));
+            UserManager.SignupUser(new Credential("s.dik", "123", "email", "Sadýk Dik", 0, 7));
+            UserManager.SignupUser(new Credential("a.ay", "123", "email", "Ali Ay", 0, 8));
+            UserManager.SignupUser(new Credential("e.bedir", "123", "email", "Erol Bedir", 0, 9));
+            UserManager.SignupUser(new Credential("m.serpil", "123", "email", "Mehmet Serpil", 0, 10));
+            UserManager.SignupUser(new Credential("f.yilmaz", "123", "email", "Fatih Yýlmaz", 0, 11));
+            UserManager.SignupUser(new Credential("h.cavusoglu", "123", "email", "Hasan Çavuþoðlu", 0, 12));
+            UserManager.SignupUser(new Credential("m.cavcav", "123", "email", "Murat Cavcav", 0, 13));
+            UserManager.SignupUser(new Credential("a.gevrek", "123", "email", "Adil Gevrek", 0, 14));
+            UserManager.SignupUser(new Credential("h.eryuksel", "123", "email", "Hüseyin Eryüksel", 0, 15));
+            UserManager.SignupUser(new Credential("t.ciner", "123", "email", "Turgay Ciner", 0, 16));
+            UserManager.SignupUser(new Credential("m.otyakmaz", "123", "email", "Mecnun Otyakmaz", 0, 17));
+            UserManager.SignupUser(new Credential("f.tankut", "123", "email", "Feridun Tankut", 0, 18));
+
 
             string DefaultPlayers1 = "INSERT INTO PLAYER VALUES ('1', 'ATIBA', 'HUTCHINSON', '08/02/1983', 'CDM', '1.5', '1.5', '1')," +
                 "('2', 'FABRICIO', 'RAMIREZ', '31/12/1987', 'GK', '2.75', '1.5', '1')," +

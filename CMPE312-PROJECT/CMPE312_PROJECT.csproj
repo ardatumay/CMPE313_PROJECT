@@ -246,6 +246,7 @@
     <Content Include="Views\Comment\CommentPlayer.cshtml" />
     <Content Include="Views\Authentication\GetUserInfo.cshtml" />
     <Content Include="Views\Authentication\ChangeUserInfo.cshtml" />
+    <Content Include="Views\Team\ChangeBudget.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

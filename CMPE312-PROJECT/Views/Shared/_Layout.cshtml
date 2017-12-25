@@ -40,15 +40,21 @@
                             <li style="float:right">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
                         }
 
-                        if ((Session["LoggedIn"] == null) || (Session["IsAdmin"] == null))
+                        if ((Session["LoggedIn"] == null) || (Session["IsAdmin"] == null) || (Session["IsPresident"] == null))
                         {
 
                         }
 
-                        else if ((bool)Session["IsAdmin"] == false)
+                        else if ((bool)Session["IsAdmin"] == false && (bool)Session["LoggedIn"] == true && (Session["IsPresident"] != null))
                         {
                             <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
                             <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+
+                            if (Convert.ToDecimal(Session["IsPresident"]) != 0)
+                            {
+                                <li>@Html.ActionLink("Change Budget", "ChangeBudget", "Team")</li>
+
+                            }
                         }
 
                         else if ((bool)Session["IsAdmin"] == true)
@@ -62,9 +68,6 @@
                             <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
                             <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
                         }
-
-
-
 
 
 

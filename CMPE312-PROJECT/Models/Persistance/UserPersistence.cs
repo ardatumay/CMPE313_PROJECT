@@ -29,7 +29,7 @@ namespace CMPE312_PROJECT.Models.Repository
             {
                 foreach (object[] dataRow in rows)
                 {
-                    user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (decimal)dataRow[5], Status = (String)dataRow[6] };
+                    user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (decimal)dataRow[5], PresidentID = (decimal)dataRow[6], Status = (String)dataRow[7] };
                 }
 
                 if (user == null)
@@ -49,7 +49,7 @@ namespace CMPE312_PROJECT.Models.Repository
         public static bool UpdateUser(User user1)
         {
 
-            string sql = "Update USER set USER_ID='" + user1.UserID + "', NAME='" + user1.Name + "', EMAIL='" + user1.Email + "', SALT='" + user1.Salt + "', HASHEDPASSWORD='" + user1.PasswordHash + "', IS_ADMIN='" + user1.IsAdmin + "', STATUS='" + user1.Status + "' where USER_ID='" + user1.UserID + "'";
+            string sql = "Update USER set USER_ID='" + user1.UserID + "', NAME='" + user1.Name + "', EMAIL='" + user1.Email + "', SALT='" + user1.Salt + "', HASHEDPASSWORD='" + user1.PasswordHash + "', IS_ADMIN='" + user1.IsAdmin + "', PRESIDENT_ID='" + user1.PresidentID + "', STATUS='" + user1.Status + "' where USER_ID='" + user1.UserID + "'";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -71,7 +71,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
         public static bool InsertUser(User user1)
         {
-            string sql = "insert into USER (USER_ID, NAME, EMAIL, SALT, HASHEDPASSWORD, IS_ADMIN, STATUS) VALUES ('" + user1.UserID + "','" + user1.Name + "','" + user1.Email + "','" + user1.Salt + "','" + user1.PasswordHash + "','" + user1.IsAdmin + "','" + user1.Status + "')";
+            string sql = "insert into USER VALUES ('" + user1.UserID + "','" + user1.Name + "','" + user1.Email + "','" + user1.Salt + "','" + user1.PasswordHash + "','" + user1.IsAdmin + "','" + user1.PresidentID + "','" + user1.Status + "')";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -88,7 +88,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             foreach (object[] dataRow in rows)
             {
-                User user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (int)dataRow[5], Status = (String)dataRow[6] };
+                User user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (int)dataRow[5], PresidentID = (decimal)dataRow[6], Status = (String)dataRow[6] };
                 users.Add(user);
             }
 

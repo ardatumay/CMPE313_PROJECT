@@ -13,13 +13,14 @@ namespace CMPE312_PROJECT.Models.Entity
         public String Salt { get; set; }
         public String PasswordHash { get; set; }
         public decimal IsAdmin { get; set; }
+        public decimal PresidentID { get; set; }
         public String Status { get; set; }
 
         public User()
         {
 
         }
-        public User(String userID_, String name_, String email_, String salt_, String passwordHash_, decimal isAdmin_, String status_)
+        public User(String userID_, String name_, String email_, String salt_, String passwordHash_, decimal isAdmin_, decimal presidentID_, String status_)
         {
             UserID = userID_;
             Name = name_;
@@ -27,6 +28,7 @@ namespace CMPE312_PROJECT.Models.Entity
             Salt = salt_;
             PasswordHash = passwordHash_;
             IsAdmin = isAdmin_;
+            PresidentID = presidentID_;
             Status = status_;        
         }
     }

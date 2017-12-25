@@ -14,14 +14,15 @@ namespace CMPE312_PROJECT.Models.Entity
         public string OldPassword { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
-        public int IsAdmin { get; set; }
+        public decimal IsAdmin { get; set; }
+        public decimal IsPresident { get; set; }
 
         public Credential()
         {
 
         }
 
-        public Credential(string UserId1, string Password, string Email1, string Name1, int IsAdmin1) 
+        public Credential(string UserId1, string Password, string Email1, string Name1, int IsAdmin1, int IsPresident1) 
         {
             UserId = UserId1;
             Password1 = Password;
@@ -29,6 +30,7 @@ namespace CMPE312_PROJECT.Models.Entity
             Email = Email1;
             Name = Name1;
             IsAdmin = IsAdmin1;
+            IsPresident = IsPresident1;
         }
 
     }
