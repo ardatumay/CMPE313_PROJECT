@@ -21,7 +21,7 @@ namespace CMPE312_PROJECT.Controllers
 
             return View();
         }
-
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

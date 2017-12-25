@@ -7,10 +7,10 @@
 <script>
     function submit() {
         var comment = document.getElementsByName("comment")
-        @Model.comment= comment.text;
+        @Model.CommentText= comment.text;
 
         var selectTeam = document.getElementById("selectTeam");
-        @Model.teamName = selectTeam.value
+        @Model.TeamName = selectTeam.value
     }
 
 </script>
@@ -38,7 +38,7 @@
         </li>
     </ul>
 
-    <label>Enter your comment here: <input id="Addcomment" name="comment" value="@Model.comment"></label>
+    <label>Enter your comment here: <input id="Addcomment" name="comment" value="@Model.CommentText"></label>
         <p><input type="submit" onclick="submit()" value="Add Comment" /></p>
 </form>
 
