@@ -90,9 +90,13 @@ namespace CMPE312_PROJECT.Controllers
         public string GetTeamPlayers(string teamName)
         {
             Team team = TeamPersistance.GetTeam(new Team(teamName));
-            List<Player> teamPlayers = TeamPersistance.GetTeamPlayers(team.ID);
-
-            return teamName;
+            List<Player> teamPlayers = TeamPersistance.GetTeamPlayers(team);
+            string playerList = null;
+            foreach(Player player in teamPlayers)
+            {
+                playerList += player.ID.ToString()+","+player.Name+",";
+            }
+            return playerList;
         }
     }
 }

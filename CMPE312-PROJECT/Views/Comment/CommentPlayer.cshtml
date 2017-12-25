@@ -23,6 +23,7 @@
         if (!request) return
         var team = get("selectTeam")
         var prefix = team.value
+        //var prefix = "GALATASARAY"
         var url = "/Team/GetTeamPlayers?teamName=" + prefix
             request.open("GET", url, true)
             request.onreadystatechange = updatePage
@@ -33,8 +34,17 @@
         if (request.readyState == 4) {
             if (request.status == 200) {
                 var response = request.responseText
-
-                get('players').value = response;
+                var players = response.split(",")
+                var selectPlayer = ''
+                for (var i = 0; i < players.length; i = i + 2){
+                    selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
+                    console.log(players[i])
+                    console.log(players[i + 1])
+                    console.log(response)
+                }
+                console.log(selectPlayer)
+                //get('players').value = response
+                get('players').innerHTML = selectPlayer
             }
             else {
                 alert("Error: status code " + request.status)
@@ -47,16 +57,23 @@
 <h2>CommentPlayer</h2>
 
 <form method="post" action="~/Comment/CommentPlayer" id="commentForm">
-    <ul>
-        <li>
             <p><label>Choose Team</label></p>
+    <p>
+        <select name="TeamName" id="selectTeam" onchange="checkTeam()">
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
-                <label>@team.Name<input id="selectTeam" type="radio" name="teamName" value="@team.Name" onclick="checkTeam()"></label>
+                <option   value="@team.Name">@team.Name</option>
             }
-        </li>
-        <li><label>Comment<input name="comment" value="@Model.CommentValue" type="text" /></label></li>
-    </ul>
-    <div><input type="text" id="players" readonly" /></div>
+        </select>
+    </p>
+    <div >
+        <p>Choose Player</p>
+        <select id="players" name="PlayerId"></select>
+    </div>
+
+    <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->
+
+    <label>Comment<input name="CommentValue" type="text" /></label>
+    
     <p><input type="submit"  value="Add Comment" /></p>
 </form>

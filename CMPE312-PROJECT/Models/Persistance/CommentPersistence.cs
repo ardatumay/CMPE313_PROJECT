@@ -12,7 +12,7 @@ namespace CMPE312_PROJECT.Models.Persistance
 {
     public class CommentPersistence
     {
-        public static bool addComment(Comment comment)
+        public static bool addCommentTeam(Comment comment)
         {
             int result = -2;
             string sql1 = "Select * from COMMENT";
@@ -45,6 +45,37 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
-
+        public static bool addCommentPlayer(Comment comment)
+        {
+            int result = -2;
+            string sql1 = "Select * from COMMENT";
+            List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
+            //object[] dataRowCount = rows1[0];
+            //decimal IdCount = (decimal)dataRowCount[0];
+            if (rows1.Count == 0)
+            {
+                string sql2 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + 1 + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + 0 + "')";
+                result = RepositoryManager.Repository.DoCommand(sql2);
+            }
+            else
+            {
+                decimal MaxId = -1;
+                string sql3 = "Select max(ID) from COMMENT";
+                List<object[]> rows2 = RepositoryManager.Repository.DoQuery(sql3);
+                foreach (object[] dataRow in rows2)
+                {
+                    //int.TryParse((String)dataRow[0], out MaxId);
+                    MaxId = Convert.ToDecimal(dataRow[0]);
+                }
+                decimal NewId = MaxId + 1;
+                string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + 0 + "')";
+                result = RepositoryManager.Repository.DoCommand(sql4);
+            }
+            if (result == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

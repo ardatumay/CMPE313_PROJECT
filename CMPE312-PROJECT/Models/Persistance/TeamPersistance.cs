@@ -97,6 +97,21 @@ namespace CMPE312_PROJECT.Models.Persistance
             return players;
         }
 
+        public static List<Player> GetTeamPlayers(Team team)
+        {
+            List<Player> players = new List<Player>();
+            string sqlQuery = "select * from PLAYER where TEAM_ID='" + team.ID + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+
+            foreach (object[] dataRow in rows)
+            {
+                Player player = new Player { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], Position = (String)dataRow[4], TransferFee = (decimal)dataRow[5], Salary = (decimal)dataRow[6], TeamID = (decimal)dataRow[7] };
+                players.Add(player);
+            }
+
+            return players;
+        }
+
         public static List<Team> GetTeams ()
         {
             List<Team> teams = new List<Team>();

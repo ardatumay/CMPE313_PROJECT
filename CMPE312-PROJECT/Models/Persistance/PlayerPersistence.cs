@@ -36,7 +36,7 @@ namespace CMPE312_PROJECT.Models.Repository
          * Add a Player to the database.
          * Return true iff the add succeeds.
          */
-         public static bool AddPlayer(Player player1)
+        public static bool AddPlayer(Player player1)
          {
             string sql1 = "SELECT * FROM PLAYER WHERE ID = (SELECT MAX(ID) from PLAYER); ";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sql1);

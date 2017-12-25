@@ -11,13 +11,18 @@ namespace CMPE312_PROJECT.Models.Transaction
 {
     public class CommentManager
     {
-        public static bool AddComment(Comment comment)
+        public static bool AddCommentTeam(Comment comment)
         {
             bool isAdded;
-            isAdded = CommentPersistence.addComment(comment);
+            isAdded = CommentPersistence.addCommentTeam(comment);
             return isAdded;
         }
 
-
+        public static bool AddCommentPlayer(Comment comment)
+        {
+            bool isAdded;
+            isAdded = CommentPersistence.addCommentPlayer(comment);
+            return isAdded;
+        }
     }
 }

@@ -32,24 +32,20 @@ namespace CMPE312_PROJECT.Controllers
             bool isAdded;
             if (comment == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "Comment object is null.";
                 return View(new Comment());
             }
-            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0)
+            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0 || comment.PlayerId == 0 ||comment.PlayerId.ToString().Equals(null) || comment.PlayerId.ToString().Length ==0)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "All fields are required.";
                 return View(comment);
             }
-            Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
-            if (team == null)
-            {
-                TempData["message"] = "Invalid Team! Please check team.";
-                return View(comment);
-            }
-            else
-            {
-                comment.TeamID = team.ID;
-            }
-            isAdded = CommentManager.AddComment(comment);
+
+            isAdded = CommentManager.AddCommentPlayer(comment);
             TempData["message"] = "Comment is added succesfully.";
             return RedirectToAction("Index", "Home");
         }
@@ -75,7 +71,6 @@ namespace CMPE312_PROJECT.Controllers
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
                 TempData["message"] = "Comment object is null.";
-
                 return View(new Comment());
             }
             if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0)
@@ -97,7 +92,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 comment.TeamID = team.ID;
             }
-            isAdded = CommentManager.AddComment(comment);
+            isAdded = CommentManager.AddCommentTeam(comment);
             TempData["message"] = "Comment is added succesfully.";
             return RedirectToAction("Index", "Home");
         }
