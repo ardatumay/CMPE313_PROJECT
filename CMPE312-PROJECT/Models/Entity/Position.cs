@@ -7,7 +7,7 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class Position
     {
-        public string PositionText { get; set; }
+        public string PositionValue { get; set; }
 
         public Position()
         {

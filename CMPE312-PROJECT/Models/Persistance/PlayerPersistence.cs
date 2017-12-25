@@ -107,7 +107,7 @@ namespace CMPE312_PROJECT.Models.Repository
             foreach (object[] dataRow in rows)
             {
                 //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-                Position position = new Position { PositionText = (string)dataRow[0] };
+                Position position = new Position { PositionValue = (string)dataRow[0] };
                 positions.Add(position);
             }
 

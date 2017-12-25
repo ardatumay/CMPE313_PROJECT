@@ -8,7 +8,16 @@
 
 <form method="post" action="~/Team/DeleteTeam">
     <ul>
-        <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
+        <li>
+            <p>
+                <select name="Name">
+                    @foreach (Team team in (List<Team>)ViewData["Teams"])
+                    {
+                        <option value="@team.Name">@team.Name</option>
+                    }
+                </select>
+            </p>
+        </li>
     </ul>
 
     <p><input type="submit" value="Delete Team" /></p>

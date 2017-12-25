@@ -54,6 +54,8 @@ namespace CMPE312_PROJECT.Controllers
         [HttpGet]
         public ActionResult DeleteTeam()
         {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
             return View(new Team());
         }
 
