@@ -4,15 +4,6 @@
 @{
     ViewBag.Title = "Comment Team";
 }
-<script>
-    function submit() {
-
-        var comment = document.getElementById("comment");
-        @Model.CommentValue= comment.text;
-
-    }
-
-</script>
 
 <h2>Comment Team</h2>
 
@@ -21,6 +12,7 @@
 <form method="post" action="~/Comment/CommentTeam" id="commentForm">    
     <p>
         <select name="TeamName">
+            <option selected="selected">-</option>
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
                 <option value="@team.Name">@team.Name</option>
@@ -34,8 +26,3 @@
 </form>
 
 
-<div >
-
-
-
-</div>

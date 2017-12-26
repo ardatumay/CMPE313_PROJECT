@@ -133,7 +133,7 @@ namespace CMPE312_PROJECT.Controllers
 
             if (comments == null)
             {
-                TempData["message"] = "There are no comments about the player.";
+                //TempData["message"] = "There are no comments about the player.";
                 return null;
             }
             else

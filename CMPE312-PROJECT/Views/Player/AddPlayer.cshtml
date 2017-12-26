@@ -24,6 +24,7 @@
             <li>
                 <p>
                     <select name="Position">
+                        <option selected="selected">-</option>
                         @foreach (Position position in (List<Position>)ViewData["Positions"])
                         {
                             <option value="@position.PositionValue">@position.PositionValue</option>
@@ -40,6 +41,7 @@
             <li>
                 <p>
                     <select name="TeamName">
+                        <option selected="selected">-</option>
                         @foreach (Team team in (List<Team>)ViewData["Teams"])
                         {
                             <option value="@team.Name">@team.Name</option>

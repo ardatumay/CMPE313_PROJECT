@@ -88,7 +88,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             foreach (object[] dataRow in rows)
             {
-                User user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (int)dataRow[5], PresidentID = (decimal)dataRow[6], Status = (String)dataRow[6] };
+                User user = new User { UserID = (String)dataRow[0], Name = (String)dataRow[1], Email = (String)dataRow[2], Salt = (String)dataRow[3], PasswordHash = (String)dataRow[4], IsAdmin = (decimal)dataRow[5], PresidentID = (decimal)dataRow[6], Status = (String)dataRow[7] };
                 users.Add(user);
             }
 

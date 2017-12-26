@@ -18,9 +18,13 @@ namespace CMPE312_PROJECT.Models.Transaction
             session["IsAdmin"] = false;
             session["IsPresident"] = 0;
 
-            user = UserPersistence.GetUser(cre.UserId);
+            user = UserManager.getUserById(cre.UserId);
             if(user == null) { 
             return false;
+            }
+            if(user.Status.Equals("I"))
+            {
+                return false;
             }
             string passHash = EncryptionManager.EncodePassword(cre.Password1, user.Salt);
             if(passHash != user.PasswordHash)
@@ -28,10 +32,10 @@ namespace CMPE312_PROJECT.Models.Transaction
                 return false;
             }
 
-            else if (user.Status.Equals("I"))
+            /*else if (user.Status.Equals("I"))
             {
                 return false;
-            }
+            }*/
 
             else
             {
@@ -75,6 +79,18 @@ namespace CMPE312_PROJECT.Models.Transaction
             signup = UserPersistence.InsertUser(user);
             return signup;
         }
+
+        public static bool ChangeUserPassword(User user, Credential cre)
+        {
+            string salt = EncryptionManager.PasswordSalt;
+            string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
+            user.Salt = salt;
+            user.PasswordHash = passHash;
+            bool updated = UserManager.UpdateUser(user);
+            return updated;
+        }
+            
+
         public static void LogoutUSer(HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
@@ -98,6 +114,26 @@ namespace CMPE312_PROJECT.Models.Transaction
 
             bool done = UserPersistence.UpdateUser(user);
             return done;
+
+        }
+
+        public static User getUserById(string ID)
+        {
+            User user = UserPersistence.GetUser(ID);
+            if(user == null)
+            {
+                return null;
+            }
+            else
+            {
+                return user;
+            }
+        }
+
+        public static bool UpdateUser(User user)
+        {
+            bool updated = UserPersistence.UpdateUser(user);
+            return updated;
 
         }
     }

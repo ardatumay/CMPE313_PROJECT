@@ -72,7 +72,7 @@ namespace CMPE312_PROJECT.Controllers
         {
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
-            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
 
             bool signup;
             if (credential == null)
@@ -191,5 +191,109 @@ namespace CMPE312_PROJECT.Controllers
             }
 
         }
+
+        [HttpGet]
+        public ActionResult ChangeStatus()
+        {
+            List<User> users = UserPersistence.GetAllUsers();
+            ViewData["Users"] = users;
+            return View(new User());
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(User user_)
+        {
+            bool updated;
+            User user = UserManager.getUserById(user_.UserID);
+            if(user_.Status == null || user_.Status.Length == 0 || user_.UserID == null || user_.UserID.Length == 0)
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "All fields are required.";
+                return View(user_);
+            }
+            if(user_.Status == user.Status)
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                string status = user_.Status == "A" ? "active" : "Inactive";
+                TempData["message"] = "This User account is already " + status;
+                return View(user_);
+            }
+            else
+            {
+                user.Status = user_.Status;
+                updated = UserManager.UpdateUser(user);
+            }
+            if (updated)
+            {
+                TempData["message"] = "User status is changed.";
+                return RedirectToAction("Index", "Home");
+            }else
+            {
+                TempData["message"] = "User status cannot chaned.";
+                return View(user_);
+
+            }
+        }
+
+        [HttpGet]
+        public string GetUserStatus(string UserId)
+        {
+            User user = UserManager.getUserById(UserId);
+            return user.Status == "A" ? "Active" : "Inactive";
+        }
+
+
+        [HttpGet]
+        public ActionResult ChangeUserPassword()
+        {
+            List<User> users = UserPersistence.GetAllUsers();
+            ViewData["Users"] = users;
+            return View(new Credential());
+        }
+
+        [HttpPost] 
+        public ActionResult ChangeUserPassword(Credential cre)
+        {
+            if(cre == null)
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "User is null";
+                return View(new Credential());
+            }
+            if(cre.UserId == null || cre.UserId.Length == 0 || cre.Password1 == null || cre.Password1.Length == 0)
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "All fields are required.";
+                return View(cre);
+            }
+            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
+            Match matchpass = Regex.Match(cre.Password1, validPass);
+            if (!matchpass.Success)
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "Incorrect letters";
+                return View(cre);
+            }
+            User user = UserManager.getUserById(cre.UserId);
+            bool updated = UserManager.ChangeUserPassword(user, cre);
+            if (updated)
+            {
+                TempData["message"] = "User password is changed successfully. \n New password is set to "+ cre.Password1;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "A problem occured during password change.";
+                return View(cre);
+            }
+        }
+
     }
 }

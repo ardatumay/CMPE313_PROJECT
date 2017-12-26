@@ -61,6 +61,7 @@
             <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">
+            <option selected="selected">-</option>
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
                 <option   value="@team.Name">@team.Name</option>
@@ -69,7 +70,8 @@
     </p>
     <div >
         <p>Choose Player</p>
-        <select id="players" name="PlayerId"></select>
+        <select id="players" name="PlayerId"> <option selected="selected">-</option>
+</select>
     </div>
 
     <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->

@@ -44,17 +44,23 @@
         if (request.readyState == 4) {
             if (request.status == 200) {
                 var response = request.responseText
-                var players = response.split(",")
-                var selectPlayer = ''
-                for (var i = 0; i < players.length; i = i + 2){
-                    selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
-                    console.log(players[i])
-                    console.log(players[i + 1])
-                    console.log(response)
+                if (response != "") {
+                    var players = response.split(",")
+                    var selectPlayer = ''
+                    for (var i = 0; i < players.length; i = i + 2) {
+                        selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
+                        console.log(players[i])
+                        console.log(players[i + 1])
+                        console.log(response)
+                    }
+                    console.log(selectPlayer)
+                    get('alert').innerHTML = ""
+                    get('players').innerHTML = selectPlayer
+                } else {
+                    get('players').innerHTML = selectPlayer
+                    get('alert').innerHTML = "The team has no players. Please add players to write comment."
                 }
-                console.log(selectPlayer)
-                //get('players').value = response
-                get('players').innerHTML = selectPlayer
+
             }
             else {
                 alert("Error: status code " + request.status)
@@ -65,16 +71,22 @@
         if (request.readyState == 4) {
             if (request.status == 200) {
                 var response = request.responseText
-                var comments = response.split(",")
-                var commentParagraph = ''
-                for (var i = 0; i < comments.length - 1; i++) {
-                    commentParagraph += '<p>' + comments[i] + '</p>\n'
-                    console.log(comments[i])
-                    console.log(response)
+                if (response != "") {
+                    var comments = response.split(",")
+                    var commentParagraph = ''
+                    for (var i = 0; i < comments.length - 1; i++) {
+                        commentParagraph += '<p>' + comments[i] + '</p>\n'
+                        console.log(comments[i])
+                        console.log(response)
+                    }
+                    console.log(commentParagraph)
+                    get('alert').innerHTML = ""
+                    get('comments').innerHTML = commentParagraph
+                } else {
+                    get('comments').innerHTML = ""
+                    get('alert').innerHTML = "There is no comment about the player."
                 }
-                console.log(commentParagraph)
-                //get('players').value = response
-                get('comments').innerHTML = commentParagraph
+
             }
             else {
                 alert("Error: status code " + request.status)
@@ -99,6 +111,7 @@
     <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">
+            <option selected="selected">-</option>
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
                 <option value="@team.Name">@team.Name</option>
@@ -107,8 +120,12 @@
     </p>
     <div>
         <p>Choose Player</p>
-        <select id="players" name="PlayerId" onchange="checkPlayerComments()"></select>
+        <select id="players" name="PlayerId" onchange="checkPlayerComments()">
+            <option selected="selected">-</option>
+        </select>
     </div>
     <div id="comments">
+    </div>
+    <div id="alert">
     </div>
 </form>

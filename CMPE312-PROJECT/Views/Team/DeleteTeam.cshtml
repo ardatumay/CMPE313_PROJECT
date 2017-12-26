@@ -10,7 +10,9 @@
     <ul>
         <li>
             <p>
+
                 <select name="Name">
+                    <option selected="selected">-</option>
                     @foreach (Team team in (List<Team>)ViewData["Teams"])
                     {
                         <option value="@team.Name">@team.Name</option>

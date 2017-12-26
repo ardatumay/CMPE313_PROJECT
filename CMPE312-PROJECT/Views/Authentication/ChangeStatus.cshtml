@@ -1,0 +1,72 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model User
+
+@{
+    ViewBag.Title = "ChangeStatus";
+}
+<script type="text/JavaScript">
+    window.onload = function () {
+        try { // Firefox, Opera, IE7
+            request = new XMLHttpRequest()
+        }
+        catch (e) {
+            try { // IE6
+                request = new ActiveXObject('MSXML2.XMLHTTP.5.0')
+            }
+            catch (e) {
+                request = false
+            }
+        }
+        if (!request) alert('Ajax setup failed')
+    }
+
+    function checkStatus() {
+        if (!request) return
+        var userId = get("userId")
+        var UserId = userId.value
+        //var prefix = "GALATASARAY"
+        var url = "/Authentication/GetUserStatus?UserId=" + UserId
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send(null)
+    }
+
+    function updatePage() {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                var response = request.responseText
+                console.log(response)
+                get('userStatus').innerHTML = response
+            }
+            else {
+                alert("Error: status code " + request.status)
+            }
+        }
+    }
+    function get(id) { return document.getElementById(id) }
+</script>
+<h2>Change Status</h2>
+
+<form method="post" action="~/Authentication/ChangeStatus" >
+    <p><label>Choose User</label></p>
+    <p>
+        <select id="userId" name="UserID" onchange="checkStatus()">
+            <option selected="selected">-</option>
+            @foreach (User user in (List<User>)ViewData["Users"])
+            {
+                <option value="@user.UserID">@user.Name</option>
+            }
+        </select>
+    </p>
+    <label>Current Status</label>
+    <p id="userStatus" style="border:solid; width:55px;"></p>
+    <ul>
+        <li>
+            <p><label>Choose Status</label></p>
+                <label>Active<input  type="radio" name="Status" value="A"></label>
+                <label>Inactive<input type="radio" name="Status" value="I"></label>
+        </li>
+    </ul>
+    <!--<input type="hidden" name="TeamName" val />-->
+    <p><input type="submit" value="Change Status" /></p>
+</form>
