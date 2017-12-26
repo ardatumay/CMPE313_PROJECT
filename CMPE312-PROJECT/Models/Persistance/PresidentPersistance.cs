@@ -73,5 +73,23 @@ namespace CMPE312_PROJECT.Models.Persistance
             }
             return false;
         }
+
+        public static decimal GetNumberOfPresident()
+        {
+            string sqlQuery = "SELECT COUNT(*) FROM PRESIDENT";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return -1;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+
+            decimal number = Convert.ToDecimal(dataRow[0]);
+
+            return number;
+        }
     }
 }

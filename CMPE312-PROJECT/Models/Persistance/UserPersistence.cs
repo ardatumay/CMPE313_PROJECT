@@ -60,7 +60,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
         public static bool DeleteUser(User user1)
         {
-            string sql = "delete from USER where USER_ID=" + user1.UserID;
+            string sql = "delete from USER where USER_ID='" + user1.UserID + "'";
             int result = RepositoryManager.Repository.DoCommand(sql);
             if (result == 1)
             {
@@ -93,6 +93,60 @@ namespace CMPE312_PROJECT.Models.Repository
             }
 
             return users;
+        }
+
+        public static decimal GetNumberOfInactive()
+        {
+            string sqlQuery = "SELECT COUNT(*) FROM USER WHERE STATUS ='I'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return -1;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+
+            decimal number = Convert.ToDecimal(dataRow[0]);
+
+            return number;
+        }
+
+        public static decimal GetNumberOfActive()
+        {
+            string sqlQuery = "SELECT COUNT(*) FROM USER WHERE STATUS ='A'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return -1;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+
+            decimal number = Convert.ToDecimal(dataRow[0]);
+
+            return number;
+        }
+
+        public static decimal GetNumberOfUsers()
+        {
+            string sqlQuery = "SELECT COUNT(*) FROM USER";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return -1;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+
+            decimal number = Convert.ToDecimal(dataRow[0]);
+
+            return number;
         }
     }
 }

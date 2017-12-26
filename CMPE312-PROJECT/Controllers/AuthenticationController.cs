@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
+using CMPE312_PROJECT.Models.Persistance;
 using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
@@ -34,11 +35,21 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Credential());
             }
+
+            User user = UserPersistence.GetUser((credential.UserId));
+
             if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
             {
                 TempData["message"] = "Both user id and password are required";
                 return View(credential);
             }
+
+            else if (user.Status.Equals("I"))
+            {
+                TempData["message"] = "This user is inactive. Please contact with admins.";
+                return View(credential);
+            }
+
             else
             {
                 Match matchid = Regex.Match(credential.UserId, validUserId);
@@ -152,7 +163,7 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential());
             }
 
-            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0) || (credential.Password2 == null) || (credential.Password2.Length == 0) || (credential.Name == null) || (credential.Name.Length == 0) || (credential.Email == null) || (credential.Email.Length == 0) || (credential.OldPassword == null) || (credential.OldPassword.Length == 0))
             {
                 TempData["message"] = "Both user id and password are required";
                 return View(credential);
@@ -172,6 +183,15 @@ namespace CMPE312_PROJECT.Controllers
 
             else
             {
+                Match matchid = Regex.Match(credential.UserId, validUserId);
+                Match matchname = Regex.Match(credential.Name, validName);
+                Match matchpass = Regex.Match(credential.Password1, validPass);
+                if (!matchid.Success || !matchpass.Success || !matchname.Success)
+                {
+                    TempData["message"] = "Incorrect letters";
+                    return View(credential);
+                }
+
                 credential.Password1 = credential.OldPassword;
                 login = UserManager.AuthenticateUser(credential, Session);
             }
@@ -251,6 +271,27 @@ namespace CMPE312_PROJECT.Controllers
             List<User> users = UserPersistence.GetAllUsers();
             ViewData["Users"] = users;
             return View(new Credential());
+        }
+
+        [HttpGet]
+        public ActionResult UserInformation()
+        {
+            ViewData["Users"] = UserPersistence.GetAllUsers();
+            return View(new User());
+        }
+
+        [HttpGet]
+        public ActionResult Statistics()
+        {
+            ViewData["Inactive"] = UserPersistence.GetNumberOfInactive();
+            ViewData["Active"] = UserPersistence.GetNumberOfActive();
+            ViewData["UserNumber"] = UserPersistence.GetNumberOfUsers();
+            ViewData["TeamNumber"] = TeamPersistance.GetNumberOfTeams();
+            ViewData["PlayerNumber"] = PlayerPersistence.GetNumberOfPlayers();
+            ViewData["CoachNumber"] = CoachPersistence.GetNumberOfCoaches();
+            ViewData["PresidentNumber"] = PresidentPersistance.GetNumberOfPresident();
+            ViewData["CommentNumber"] = CommentPersistence.GetNumberOfComments();
+            return View();
         }
 
         [HttpPost] 

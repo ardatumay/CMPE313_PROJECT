@@ -113,5 +113,23 @@ namespace CMPE312_PROJECT.Models.Repository
 
             return positions;
         }
+
+        public static decimal GetNumberOfPlayers()
+        {
+            string sqlQuery = "SELECT COUNT(*) FROM PLAYER";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return -1;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            object[] dataRow = rows[0];
+
+            decimal number = Convert.ToDecimal(dataRow[0]);
+
+            return number;
+        }
     }
 }
