@@ -7,14 +7,14 @@ namespace CMPE312_PROJECT.Models.Entity
 {
     public class User
     {
-        public String UserID { get; set; }
-        public String Name { get; set; }
-        public String Email { get; set; }
-        public String Salt { get; set; }
-        public String PasswordHash { get; set; }
+        public string UserID { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Salt { get; set; }
+        public string PasswordHash { get; set; }
         public decimal IsAdmin { get; set; }
         public decimal PresidentID { get; set; }
-        public String Status { get; set; }
+        public string Status { get; set; }
 
         public User()
         {

@@ -1,0 +1,23 @@
+﻿@using CMPE312_PROJECT.Models.Entity;
+@model User
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>User Information</h2>
+
+<form method="post" action="~/Authentication/UserInformation">
+
+    @foreach (User user in (List<User>)ViewData["Users"])
+    {
+        if (user.IsAdmin == 1)
+        {
+            <p><b> @user.Name - @user.UserID - @user.Email - @user.Status</b></p>
+        }
+
+        if (user.PresidentID != 0)
+        {
+            <p><i> @user.Name - @user.UserID - @user.Email - @user.Status</i></p>
+        }
+
+    }
