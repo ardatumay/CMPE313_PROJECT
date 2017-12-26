@@ -35,24 +35,32 @@ namespace CMPE312_PROJECT.Controllers
             bool isExist = true;
             if (president == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 return View(new President());
             }
 
             if (president.Name == null || president.Name.Length == 0 || president.Surname == null || president.Surname.Length == 0 || president.BirthDate == null || president.BirthDate.Length == 0 || president.TeamName == null || president.TeamName.Length == 0)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "All fields are required.";
                 return View(president);
             }
-            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             Match matchname = Regex.Match(president.Name, validName);
             Match matchsurname = Regex.Match(president.Surname, validName);
             if (!matchname.Success || !matchsurname.Success )
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Incorrect letters";
                 return View(president);
             }
             if (PresidentPersistance.GetPresident(president) != null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "The president is already exist.";
                 return View(president);
             }
@@ -60,6 +68,8 @@ namespace CMPE312_PROJECT.Controllers
             Team team = TeamPersistance.GetTeam(new Team(president.TeamName));
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Invalid Team! Please check team name.";
                 return View(president);
             }
@@ -72,6 +82,8 @@ namespace CMPE312_PROJECT.Controllers
             isExist = PresidentManager.CheckPresident(president);
             if (isExist)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "This player is already exist.";
                 return View(president);
             }

@@ -82,7 +82,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static List<Comment> GetTeamComments(Team team)
         {
             List<Comment> comments = new List<Comment>();
-            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'"; 
+            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + 0 + "'"; 
             List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
             if (rows1.Count == 0)
             {
@@ -90,7 +90,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             }
             else
             {
-                string sql2 = "Select COMMENT from COMMENT where TEAM_ID='" + team.ID + "'";
+                string sql2 = "Select COMMENT from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + 0 + "'";
                 List<object[]> rows2 = RepositoryManager.Repository.DoQuery(sql2);
                 foreach (object[] dataRow in rows2)
                 {

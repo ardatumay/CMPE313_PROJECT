@@ -149,7 +149,7 @@ namespace CMPE312_PROJECT.Models.Repository
         /*
          * Default user information for all of presidents.
          */
-            UserManager.SignupUser(new Credential("admin", "123", "email", "admin", 1, 0));
+            UserManager.SignupUser(new Credential("admin", "adminadmin", "email", "admin", 1, 0));
 
             string DefaultTeams = "INSERT INTO TEAM VALUES ('1', 'BEÞÝKTAÞ', 'ISTANBUL', '1903', '19', '15', '30')," +
                 "('2', 'GALATASARAY', 'ISTANBUL', '1905', '18', '20', '32')," +
@@ -208,7 +208,7 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
                 "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
 
-            UserManager.SignupUser(new Credential("f.orman", "123", "email", "Fikret Orman", 0, 1));
+            UserManager.SignupUser(new Credential("f.orman", "123456789", "email", "Fikret Orman", 0, 1));
             UserManager.SignupUser(new Credential("d.ozbek", "123", "email", "Dursun Özbek", 0, 2));
             UserManager.SignupUser(new Credential("a.yildirim", "123", "email", "Aziz Yýldýrým", 0, 3));
             UserManager.SignupUser(new Credential("g.gumusdag", "123", "email", "Göksel Gümüþdað", 0, 4));

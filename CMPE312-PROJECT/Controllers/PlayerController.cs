@@ -23,7 +23,6 @@ namespace CMPE312_PROJECT.Controllers
         {
             var teams = TeamPersistance.GetTeams();
             ViewData["Teams"] = teams;
-            //ViewBag.Teams = new SelectList(teams,"ID", "Name");
 
             var positions = PlayerPersistence.GetPositions();
             ViewData["Positions"] = positions;
@@ -36,10 +35,20 @@ namespace CMPE312_PROJECT.Controllers
             bool isExist = true;
             if (player == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                var positions = PlayerPersistence.GetPositions();
+                ViewData["Positions"] = positions;
                 return View(new Player());
             }
             if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 )
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                var positions = PlayerPersistence.GetPositions();
+                ViewData["Positions"] = positions;
                 TempData["message"] = "All fields are required.";
                 return View(player);
             }
@@ -47,6 +56,11 @@ namespace CMPE312_PROJECT.Controllers
             Team team = TeamPersistance.GetTeam(new Team(player.TeamName));
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                var positions = PlayerPersistence.GetPositions();
+                ViewData["Positions"] = positions;
                 TempData["message"] = "Invalid Team! Please check team name.";
                 return View(player);
             }
@@ -58,6 +72,11 @@ namespace CMPE312_PROJECT.Controllers
             isExist = PlayerManager.CheckPlayer(player);
             if (isExist)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                var positions = PlayerPersistence.GetPositions();
+                ViewData["Positions"] = positions;
                 TempData["message"] = "This player is already exist.";
                 return View(player);
             }

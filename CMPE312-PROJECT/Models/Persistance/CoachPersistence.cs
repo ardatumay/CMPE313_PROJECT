@@ -28,19 +28,6 @@ namespace CMPE312_PROJECT.Models.Persistance
 
         public static bool AddCoach(Coach coach1)
         {
-           /* System.Diagnostics.Debug.WriteLine("DateTime: " + coach1.birthDate.ToString("yyyy-MM-dd"));
-
-            string sql = "insert into COACH values ('"
-                + coach1.ID + "', '"
-                + coach1.name + "', "
-                + coach1.surname + "', '"
-                + coach1.birthDate + "', '"
-                + coach1.salary + "', '"
-                + coach1.teamID + "')";
-                
-            RepositoryManager.Repository.DoCommand(sql);
-            return true;*/
-
             int result = -2;
             string sql1 = "Select * from COACH";
             List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
@@ -53,7 +40,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             }
             else
             {
-                decimal MaxId = -1;
+                /*decimal MaxId = -1;
                 string sql3 = "Select max(ID) from COACH";
                 List<object[]> rows2 = RepositoryManager.Repository.DoQuery(sql3);
                 foreach (object[] dataRow in rows2)
@@ -63,13 +50,14 @@ namespace CMPE312_PROJECT.Models.Persistance
                 }
                 decimal NewId = MaxId + 1;
                 string sql4 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + NewId + "','" + coach1.Name.ToUpper() + "','" + coach1.Surname.ToUpper() + "','" + coach1.BirthDate + "','" + coach1.Salary + "','" + coach1.TeamID + "')";
-                result = RepositoryManager.Repository.DoCommand(sql4);
+                result = RepositoryManager.Repository.DoCommand(sql4);*/
+                UpdateCoach(coach1);
             }
-            if (result == 1)
-            {
+            //if (result == 1)
+            //{
                 return true;
-            }
-            return false;
+            //}
+            //return false;
         }
 
         public static bool DeleteCoach(Coach coach1)

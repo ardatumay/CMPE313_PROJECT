@@ -35,27 +35,35 @@ namespace CMPE312_PROJECT.Controllers
             bool isAdded = true;
             if (coach == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 return View(new Player());
             }
             if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() ==  null ||  coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "All fields are required.";
                 return View(coach);
             }
-            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validsalary = @"/^[0 - 9 +] *$/";
             Match matchname = Regex.Match(coach.Name, validName);
             Match matchsurname = Regex.Match(coach.Surname, validName);
             Match matchsalary = Regex.Match(coach.Salary.ToString(), validsalary);
 
-            if (!matchname.Success || !matchsurname.Success || !matchsalary.Success)
+            if (!matchname.Success || !matchsurname.Success )
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Incorrect letters";
                 return View(coach);
             }
             Team team = TeamPersistance.GetTeam(new Team(coach.TeamName));
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Invalid Team! Please check team name.";
                 return View(coach);
             }
@@ -74,6 +82,8 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Coach is already registered.";
                 return View(coach);
             } 

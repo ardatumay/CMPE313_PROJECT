@@ -46,7 +46,7 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required.";
                 return View(comment);
             }
-            string validComment = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validComment = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             Match matchcomment = Regex.Match(comment.CommentValue, validComment);
             if (!matchcomment.Success)
             {
@@ -90,10 +90,12 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required."+ comment.TeamName +","+ comment.CommentValue;
                 return View(comment);
             }
-            string validComment = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validComment = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             Match matchcomment = Regex.Match(comment.CommentValue, validComment);
             if (!matchcomment.Success)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "Incorrect letters";
                 return View(comment);
             }

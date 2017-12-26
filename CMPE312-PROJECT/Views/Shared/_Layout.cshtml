@@ -16,26 +16,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Football League Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <!--<li>Html.ActionLink("Contact", "Contact", "Home")</li>-->
-                    <li>@Html.ActionLink("Add Team", "AddTeam", "Team")</li>
-                    <li>@Html.ActionLink("Delete Team", "DeleteTeam", "Team")</li>
-                    <li>@Html.ActionLink("Add Player", "AddPlayer", "Player")</li>
-                    <li>@Html.ActionLink("Delete Player", "DeletePlayer", "Player")</li>
-                    <li>@Html.ActionLink("Change President", "ChangePresident", "President")</li>
-                    <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
-                    <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                   
                     @{
 
                         if ((Session["LoggedIn"] == null) || ((bool)Session["LoggedIn"] == false))
                         {
                             <li style="float:right">@Html.ActionLink("Login", "Login", "Authentication")</li>
                             <li style="float:right">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
+                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
+                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
                         }
 
                         else
@@ -53,6 +49,9 @@
                         {
                             <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
                             <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
+                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
+
 
                             if (Convert.ToDecimal(Session["IsPresident"]) != 0)
                             {
@@ -71,6 +70,8 @@
                             <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
                             <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
                             <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
+                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
+                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
                         }
 
 
@@ -80,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="margin-top:150px">
         @RenderBody()
         @ViewBag.message
         @TempData["message"]
