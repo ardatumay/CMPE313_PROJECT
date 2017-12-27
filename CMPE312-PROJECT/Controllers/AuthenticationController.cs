@@ -84,6 +84,7 @@ namespace CMPE312_PROJECT.Controllers
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
+            string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
 
             bool signup;
             if (credential == null)
@@ -105,7 +106,9 @@ namespace CMPE312_PROJECT.Controllers
                 Match matchid = Regex.Match(credential.UserId, validUserId);
                 Match matchname = Regex.Match(credential.Name, validName);
                 Match matchpass = Regex.Match(credential.Password1, validPass);
-                if (!matchid.Success || !matchpass.Success || !matchname.Success)
+                Match matchmail = Regex.Match(credential.Email, validMail);
+
+                if (!matchid.Success || !matchpass.Success || !matchname.Success || !matchmail.Success)
                 {
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
@@ -155,6 +158,8 @@ namespace CMPE312_PROJECT.Controllers
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
+
             bool login;
             string newPassword = credential.Password1;
 
@@ -186,7 +191,9 @@ namespace CMPE312_PROJECT.Controllers
                 Match matchid = Regex.Match(credential.UserId, validUserId);
                 Match matchname = Regex.Match(credential.Name, validName);
                 Match matchpass = Regex.Match(credential.Password1, validPass);
-                if (!matchid.Success || !matchpass.Success || !matchname.Success)
+                Match matchmail = Regex.Match(credential.Email, validMail);
+
+                if (!matchid.Success || !matchpass.Success || !matchname.Success || !matchmail.Success)
                 {
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
