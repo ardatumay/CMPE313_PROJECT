@@ -146,25 +146,112 @@ namespace CMPE312_PROJECT.Controllers
         public ActionResult GetUserInfo()
         {
             User user = UserManager.user;
-            return View(user);
+            return View(new Credential { UserId = user.UserID, Name = user.Name, Email = user.Email });
         }
 
         [HttpPost]
-        public ActionResult GetUserInfo(User user)
+        public ActionResult GetUserInfo(Credential credential)
         {
-            return RedirectToAction("ChangeUserInfo", "Authentication");
+            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
+            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
+            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
+
+            bool login;
+            string newPassword = credential.Password1;
+
+            if (credential == null)
+            {
+                return View(new Credential());
+            }
+
+            if (((credential.Name == null) || (credential.Name.Length == 0)) && ((credential.Email == null) || (credential.Email.Length == 0)))
+            {
+                TempData["message"] = "Nothing has changed.";
+                User user1 = UserManager.user;
+                return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
+            }
+
+            /*if (credential.Password1.Equals(credential.OldPassword))
+            {
+                TempData["message"] = "Your new password cannot be the same with your current password!";
+                return View(credential);
+            }
+
+            else if (!credential.Password1.Equals(credential.Password2))
+            {
+                TempData["message"] = "Passwords are not same.";
+                return View(credential);
+            }
+            */
+            if (credential.Name != null && credential.Email != null)
+            {
+                Match matchname = Regex.Match(credential.Name, validName);
+                Match matchmail = Regex.Match(credential.Email, validMail);
+
+                if (!matchname.Success && !matchmail.Success)
+                {
+                    TempData["message"] = "Invalid Name and Email!";
+                    User user1 = UserManager.user;
+                    return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
+                }
+            }
+
+
+            if (credential.Name != null)
+            {
+                Match matchname = Regex.Match(credential.Name, validName);
+
+                if (!matchname.Success)
+                {
+                    TempData["message"] = "Invalid Name!";
+                    User user1 = UserManager.user;
+                    return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
+                }
+
+                else
+                {
+                    User user = UserManager.user;
+                    user.Name = credential.Name;
+                    UserManager.UpdateUser(user);
+                }
+            }
+
+            if (credential.Email != null)
+            {
+                Match matchmail = Regex.Match(credential.Email, validMail);
+
+                if (!matchmail.Success)
+                {
+                    TempData["message"] = "Invalid Email!";
+                    User user1 = UserManager.user;
+                    return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
+                }
+
+                else
+                {
+                    User user = UserManager.user;
+                    user.Email = credential.Email;
+                    UserManager.UpdateUser(user);
+                }
+            }
+
+            TempData["message"] = "Changes saved successfully.";
+            User user3 = UserManager.user;
+            return View(new Credential { UserId = user3.UserID, Name = user3.Name, Email = user3.Email });
+
         }
 
         [HttpGet]
-        public ActionResult ChangeUserInfo()
+        public ActionResult UserChangePassword()
         {
-            return View(new Credential());
+            User user = UserManager.user;
+            return View(new Credential ());
         }
 
         [HttpPost]
-        public ActionResult ChangeUserInfo(Credential credential)
+        public ActionResult UserChangePassword(Credential credential)
         {
-            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
@@ -177,9 +264,9 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential());
             }
 
-            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0) || (credential.Password2 == null) || (credential.Password2.Length == 0) || (credential.Name == null) || (credential.Name.Length == 0) || (credential.Email == null) || (credential.Email.Length == 0) || (credential.OldPassword == null) || (credential.OldPassword.Length == 0))
+            if ((credential.Password1 == null) || (credential.Password1.Length == 0) || (credential.Password2 == null) || (credential.Password2.Length == 0) || (credential.OldPassword == null) || (credential.OldPassword.Length == 0))
             {
-                TempData["message"] = "Both user id and password are required";
+                TempData["message"] = "All fields are required.";
                 return View(credential);
             }
 
@@ -197,17 +284,14 @@ namespace CMPE312_PROJECT.Controllers
 
             else
             {
-                Match matchid = Regex.Match(credential.UserId, validUserId);
-                Match matchname = Regex.Match(credential.Name, validName);
                 Match matchpass = Regex.Match(credential.Password1, validPass);
-                Match matchmail = Regex.Match(credential.Email, validMail);
 
-                if (!matchid.Success || !matchpass.Success || !matchname.Success || !matchmail.Success)
+                if (!matchpass.Success)
                 {
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
-
+                credential.UserId = UserManager.user.UserID;
                 credential.Password1 = credential.OldPassword;
                 login = UserManager.AuthenticateUser(credential, Session);
             }
@@ -215,6 +299,11 @@ namespace CMPE312_PROJECT.Controllers
             if (login)
             {
                 credential.Password1 = newPassword;
+                credential.Name = UserManager.user.Name;
+                credential.Email = UserManager.user.Email;
+                credential.IsAdmin = UserManager.user.IsAdmin;
+                credential.IsPresident = UserManager.user.PresidentID;
+
                 UserManager.UpdateUser(credential, Session);
                 TempData["message"] = "Changes saved successfully.";
                 return RedirectToAction("GetUserInfo", "Authentication");
@@ -223,7 +312,7 @@ namespace CMPE312_PROJECT.Controllers
             else
             {
                 TempData["message"] = "Invalid login credentials";
-                return View(credential);
+                return View(new Credential());
             }
 
         }
