@@ -7,6 +7,7 @@ using CMPE312_PROJECT.Models.Entity;
 using CMPE312_PROJECT.Models.Repository;
 using CMPE312_PROJECT.Models.Transaction;
 using CMPE312_PROJECT.Models.Persistance;
+using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
@@ -42,16 +43,46 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Positions"] = positions;
                 return View(new Player());
             }
-            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 ||  player.TransferFee == 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary == 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 )
+            {
+
+                if(player.Salary == 0 ||player.TransferFee == 0)
+                {
+                    var teams = TeamPersistance.GetTeams();
+                    ViewData["Teams"] = teams;
+
+                    var positions = PlayerPersistence.GetPositions();
+                    ViewData["Positions"] = positions;
+                    TempData["message"] = "Salary and transfer fee cannot be 0.";
+                    return View(player);
+                }
+                else
+                {
+                    var teams = TeamPersistance.GetTeams();
+                    ViewData["Teams"] = teams;
+
+                    var positions = PlayerPersistence.GetPositions();
+                    ViewData["Positions"] = positions;
+                    TempData["message"] = "All fields are required.";
+                    return View(player);
+                }
+
+            }
+
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
+            Match matchname = Regex.Match(player.Name, validName);
+            Match matchsurname = Regex.Match(player.Surname, validName);
+            if (!matchname.Success || !matchsurname.Success)
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
-
                 var positions = PlayerPersistence.GetPositions();
                 ViewData["Positions"] = positions;
-                TempData["message"] = "All fields are required.";
+                TempData["message"] = "Incorrect letters";
                 return View(player);
             }
+            player.Name = player.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            player.Surname = player.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
 
             Team team = TeamPersistance.GetTeam(new Team(player.TeamName));
             if (team == null)

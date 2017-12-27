@@ -41,10 +41,20 @@ namespace CMPE312_PROJECT.Controllers
             }
             if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() ==  null ||  coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
             {
-                var teams = TeamPersistance.GetTeams();
-                ViewData["Teams"] = teams;
-                TempData["message"] = "All fields are required.";
-                return View(coach);
+                if(coach.Salary == 0)
+                {
+                    var teams = TeamPersistance.GetTeams();
+                    ViewData["Teams"] = teams;
+                    TempData["message"] = "Salary can not be 0.";
+                    return View(coach);
+                }
+                else
+                {
+                    var teams = TeamPersistance.GetTeams();
+                    ViewData["Teams"] = teams;
+                    TempData["message"] = "All fields are required.";
+                    return View(coach);
+                }            
             }
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validsalary = @"/^[0 - 9 +] *$/";
@@ -59,6 +69,9 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(coach);
             }
+            coach.Name = coach.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            coach.Surname = coach.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
             Team team = TeamPersistance.GetTeam(new Team(coach.TeamName));
             if (team == null)
             {

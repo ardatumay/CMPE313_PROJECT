@@ -11,10 +11,11 @@
         <li><label>Coach Name<input name="Name" value="@Model.Name" type="text" /></label></li>
         <li><label>Coach Surname<input name="Surname" value="@Model.Surname" type="text" /></label></li>
         <li><label>Birth Date<input name="BirthDate" value="@Model.BirthDate" type="date" /></label></li>
-        <li><p><label>Coach Salary<input name="Salary" value="@Model.Salary" type="text" /></label>Million €</p></li>
+        <li><p><label>Coach Salary<input name="Salary" value="@Model.Salary" type="number" /></label>Million €</p></li>
         <!--<li><label>Team Name<input name="TeamName" value="" type="text" /></label></li>-->
         <li>
             <p>
+                <label>Choose Team</label>
                 <select name="TeamName">
                     @foreach (Team team in (List<Team>)ViewData["Teams"])
                     {

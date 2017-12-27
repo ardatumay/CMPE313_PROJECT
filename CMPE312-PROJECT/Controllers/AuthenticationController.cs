@@ -29,7 +29,7 @@ namespace CMPE312_PROJECT.Controllers
         public ActionResult Login(Credential credential)
         {
             bool login;
-            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
+            string validUserId = @"^[A-Za-z.][A-Za-z0-9\-.]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             if (credential == null)
             {
@@ -59,6 +59,9 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
+                credential.UserId = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
                 login = UserManager.AuthenticateUser(credential, Session);
             }
             if (login)
@@ -113,6 +116,12 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
+                credential.UserId = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Password2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Name = credential.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Email = credential.Email.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
                 signup = UserManager.SignupUser(credential);
                 if(signup == false)
                 {
@@ -157,7 +166,7 @@ namespace CMPE312_PROJECT.Controllers
         {
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
-            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
 
             bool login;
@@ -327,6 +336,7 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(cre);
             }
+            cre.Password1 = cre.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
             User user = UserManager.getUserById(cre.UserId);
             bool updated = UserManager.ChangeUserPassword(user, cre);
             if (updated)

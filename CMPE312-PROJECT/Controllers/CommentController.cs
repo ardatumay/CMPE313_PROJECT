@@ -53,6 +53,7 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(comment);
             }
+            comment.CommentValue = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
             Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             comment.TeamID = team.ID;
             isAdded = CommentManager.AddCommentPlayer(comment);
@@ -99,6 +100,8 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(comment);
             }
+            comment.CommentValue = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
             Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             if (team == null)
             {

@@ -57,6 +57,9 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(president);
             }
+            president.Name = president.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            president.Surname = president.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
             if (PresidentPersistance.GetPresident(president) != null)
             {
                 var teams = TeamPersistance.GetTeams();

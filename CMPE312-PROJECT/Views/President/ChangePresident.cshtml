@@ -1,7 +1,7 @@
 ﻿@using CMPE312_PROJECT.Models.Entity;
 @model President
 @{
-    ViewBag.Title = "ChangePresident";
+    ViewBag.Title = "Change President";
 }
 
 <script>
@@ -19,6 +19,7 @@
         <!--<li><label>Team Name<input name="teamName" value="" type="text" /></label></li>-->
         <li>
             <p>
+                <label>Choose Team</label>
                 <select name="TeamName">
                     @foreach (Team team in (List<Team>)ViewData["Teams"])
                     {

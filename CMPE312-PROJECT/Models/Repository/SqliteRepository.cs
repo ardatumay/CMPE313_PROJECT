@@ -208,7 +208,7 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
                 "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
 
-            UserManager.SignupUser(new Credential("f.orman", "123456789", "email", "Fikret Orman", 0, 1));
+            UserManager.SignupUser(new Credential("f.orman", "arda12345", "email", "Fikret Orman", 0, 1));
             UserManager.SignupUser(new Credential("d.ozbek", "123", "email", "Dursun Özbek", 0, 2));
             UserManager.SignupUser(new Credential("a.yildirim", "123", "email", "Aziz Yýldýrým", 0, 3));
             UserManager.SignupUser(new Credential("g.gumusdag", "123", "email", "Göksel Gümüþdað", 0, 4));

@@ -4,16 +4,6 @@
         ViewBag.Title = "Add Player";
     }
     
-
-<script>
-    //var dropdown = document.getElementById("select");
-    //Model.teamID = dropdown.value
-    var selectTeam = document.getElementById("selectTeam");
-    @Model.TeamName = selectTeam.value
-
-    var selectPosition = document.getElementById("selectPosition");
-    @Model.Position = selectPosition.value
-</script>
     <h2>AddPlayer</h2>
 
     <form method="post" action="~/Player/AddPlayer">
@@ -35,9 +25,6 @@
 
             <li><p><label>Transfer Fee<input name="TransferFee" value="@Model.TransferFee" type="number" /></label>Million €</p></li>
             <li><p><label>Salary<input name="Salary" value="@Model.Salary" type="number" /></label>Million €</p></li>
-            <!-- <li><label>Team Name<input name="TeamName" value="" type="text" /></label></li> -->
-            <!--Html.DropDownList("select", list, "All", null)-->
-            <!--Html.DropDownListFor(model => model.teamID, (SelectList)ViewBag.Teams)-->
             <li>
                 <p>
                     <select name="TeamName">
