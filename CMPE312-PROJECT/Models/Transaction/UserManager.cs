@@ -110,7 +110,7 @@ namespace CMPE312_PROJECT.Models.Transaction
             string salt = EncryptionManager.PasswordSalt;
             string passHash = EncryptionManager.EncodePassword(cre.Password1, salt);
 
-            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, cre.IsAdmin, 0, "A");
+            user = new User(cre.UserId, cre.Name, cre.Email, salt, passHash, cre.IsAdmin, cre.IsPresident, "A");
 
             bool done = UserPersistence.UpdateUser(user);
             return done;
