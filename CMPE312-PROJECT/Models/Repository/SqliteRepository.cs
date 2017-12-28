@@ -208,24 +208,24 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
                 "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
 
-            UserManager.SignupUser(new Credential("f.orman", "arda12345", "email", "Fikret Orman", 0, 1));
-            UserManager.SignupUser(new Credential("d.ozbek", "123", "email", "Dursun Özbek", 0, 2));
-            UserManager.SignupUser(new Credential("a.yildirim", "123", "email", "Aziz Yýldýrým", 0, 3));
-            UserManager.SignupUser(new Credential("g.gumusdag", "123", "email", "Göksel Gümüþdað", 0, 4));
-            UserManager.SignupUser(new Credential("m.usta", "123", "email", "Muharrem Usta", 0, 5));
-            UserManager.SignupUser(new Credential("a.safak", "123", "email", "Ali Þafak", 0, 6));
-            UserManager.SignupUser(new Credential("s.dik", "123", "email", "Sadýk Dik", 0, 7));
-            UserManager.SignupUser(new Credential("a.ay", "123", "email", "Ali Ay", 0, 8));
-            UserManager.SignupUser(new Credential("e.bedir", "123", "email", "Erol Bedir", 0, 9));
-            UserManager.SignupUser(new Credential("m.serpil", "123", "email", "Mehmet Serpil", 0, 10));
-            UserManager.SignupUser(new Credential("f.yilmaz", "123", "email", "Fatih Yýlmaz", 0, 11));
-            UserManager.SignupUser(new Credential("h.cavusoglu", "123", "email", "Hasan Çavuþoðlu", 0, 12));
-            UserManager.SignupUser(new Credential("m.cavcav", "123", "email", "Murat Cavcav", 0, 13));
-            UserManager.SignupUser(new Credential("a.gevrek", "123", "email", "Adil Gevrek", 0, 14));
-            UserManager.SignupUser(new Credential("h.eryuksel", "123", "email", "Hüseyin Eryüksel", 0, 15));
-            UserManager.SignupUser(new Credential("t.ciner", "123", "email", "Turgay Ciner", 0, 16));
-            UserManager.SignupUser(new Credential("m.otyakmaz", "123", "email", "Mecnun Otyakmaz", 0, 17));
-            UserManager.SignupUser(new Credential("f.tankut", "123", "email", "Feridun Tankut", 0, 18));
+            UserManager.SignupUser(new Credential("fikretorman", "fikretorman", "email", "Fikret Orman", 0, 1));
+            UserManager.SignupUser(new Credential("dursunozbek", "dursunozbek", "email", "Dursun Özbek", 0, 2));
+            UserManager.SignupUser(new Credential("azizyildirim", "azizyildirim", "email", "Aziz Yýldýrým", 0, 3));
+            UserManager.SignupUser(new Credential("gokselgumusdag", "gokselgumusdag", "email", "Göksel Gümüþdað", 0, 4));
+            UserManager.SignupUser(new Credential("muharremusta", "muharremusta", "email", "Muharrem Usta", 0, 5));
+            UserManager.SignupUser(new Credential("alisafak", "alisafak", "email", "Ali Þafak", 0, 6));
+            UserManager.SignupUser(new Credential("sadikdik", "sadikdik", "email", "Sadýk Dik", 0, 7));
+            UserManager.SignupUser(new Credential("aliay", "aliay", "email", "Ali Ay", 0, 8));
+            UserManager.SignupUser(new Credential("erolbedir", "erolbedir", "email", "Erol Bedir", 0, 9));
+            UserManager.SignupUser(new Credential("mehmetserpil", "mehmetserpil", "email", "Mehmet Serpil", 0, 10));
+            UserManager.SignupUser(new Credential("fatihyilmaz", "fatihyilmaz", "email", "Fatih Yýlmaz", 0, 11));
+            UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan Çavuþoðlu", 0, 12));
+            UserManager.SignupUser(new Credential("muratcavcav", "muratcavcav", "email", "Murat Cavcav", 0, 13));
+            UserManager.SignupUser(new Credential("adilgevrek", "adilgevrek", "email", "Adil Gevrek", 0, 14));
+            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "Hüseyin Eryüksel", 0, 15));
+            UserManager.SignupUser(new Credential("turgayciner", "turgayciner", "email", "Turgay Ciner", 0, 16));
+            UserManager.SignupUser(new Credential("mecnunotyakmaz", "mecnunotyakmaz", "email", "Mecnun Otyakmaz", 0, 17));
+            UserManager.SignupUser(new Credential("feriduntankut", "feriduntankut", "email", "Feridun Tankut", 0, 18));
 
 
             string DefaultPlayers1 = "INSERT INTO PLAYER VALUES ('1', 'ATIBA', 'HUTCHINSON', '08/02/1983', 'CDM', '1.5', '1.5', '1')," +
