@@ -13,19 +13,17 @@ namespace CMPE312_PROJECT.Controllers
 {
     public class TeamController : Controller
     {
-        // GET: Team
+
         public ActionResult Index()
         {
             return View();
         }
-
 
         [HttpGet]
         public ActionResult AddTeam()
         {
             return View(new Team());
         }
-
 
         [HttpPost]
         public ActionResult AddTeam(Team team)

@@ -14,8 +14,8 @@ namespace CMPE312_PROJECT.Models.Repository
             users = new List<User>();
         }
         /*
-         * Get one user from the repository, identified by userId
-         */
+        * This method takes a String object as parameter and returns a user if user, whose ID was given by that String object, is exist in the database.
+        */
         public static User GetUser(string userId)
         {
             string sqlQuery = "select * from USER where USER_ID='" + userId + "'";

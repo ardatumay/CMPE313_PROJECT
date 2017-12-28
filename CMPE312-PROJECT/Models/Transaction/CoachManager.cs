@@ -9,9 +9,15 @@ using CMPE312_PROJECT.Models.Persistance;
 
 namespace CMPE312_PROJECT.Models.Transaction
 {
+    /*
+    * This class is created for providing connection between model and controller about Coach in some cases.
+    */
     public class CoachManager
     {
-
+        /*
+        * This method takes a Coach object as parameter and adds this coach object to the database by using GetCoach() method of CoachPersistance class. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddCoach(Coach coach_)
         {
             bool isAdded = true;
