@@ -10,8 +10,15 @@ using CMPE312_PROJECT.Models.Persistance;
 
 namespace CMPE312_PROJECT.Models.Persistance
 {
+    /*
+    * This class is created for getting, adding, deleting and updating Comment data which is stored in the database.
+    */
     public class CommentPersistence
     {
+        /*
+        * This method takes a Comment object as parameter and adds that comment for a team to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool addCommentTeam(Comment comment)
         {
             int result = -2;
@@ -45,6 +52,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method takes a Comment object as parameter and adds that comment for a player to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool addCommentPlayer(Comment comment)
         {
             int result = -2;
@@ -78,7 +89,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
-
+        /*
+        * This method takes a Team object as parameter and returns all comments about a team from the database.
+        */
         public static List<Comment> GetTeamComments(Team team)
         {
             List<Comment> comments = new List<Comment>();
@@ -101,6 +114,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return comments;
         }
 
+        /*
+        * This method takes a Team object and a Player object as parameter and returns all comments about a player from the database.
+        */
         public static List<Comment> GetPlayerComments(Team team, Player player)
         {
             List<Comment> comments = new List<Comment>();
@@ -123,6 +139,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return comments;
         }
 
+        /*
+        * This method returns number of comments in the database.
+        */
         public static decimal GetNumberOfComments()
         {
             string sqlQuery = "SELECT COUNT(*) FROM COMMENT";

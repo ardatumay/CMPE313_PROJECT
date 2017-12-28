@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CMPE312_PROJECT.Models.Entity
 {
+    /*
+     * This class is created for storing Coach data in the application after getting it from the database.
+     */
     public class Coach
     {
         public decimal ID { get; set; }

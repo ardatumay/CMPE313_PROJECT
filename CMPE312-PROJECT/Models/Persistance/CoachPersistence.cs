@@ -7,8 +7,14 @@ using CMPE312_PROJECT.Models.Repository;
 
 namespace CMPE312_PROJECT.Models.Persistance
 {
+    /*
+    * This class is created for getting, adding, deleting and updating Coach data which is stored in the database.
+    */
     public class CoachPersistence
     {
+        /*
+        * This method takes a Coach object as parameter and returns a coach if the parameter is exist in the database.
+        */
         public static Coach GetCoach(Coach coach1)
         {
             string sqlQuery = "select * from COACH where NAME='" + coach1.Name.ToUpper() + "'"; 
@@ -26,6 +32,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return coach;
         }
 
+        /*
+        * This method takes a Coach object as parameter and adds this coach object to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddCoach(Coach coach1)
         {
             int result = -2;
@@ -60,6 +70,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             //return false;
         }
 
+        /*
+        * This method takes a Coach object as parameter and deletes this coach object from the database if it is exist. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool DeleteCoach(Coach coach1)
         {
             string sql = "delete from COACH where ID='" + coach1.ID + "'";
@@ -71,6 +85,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method takes a Coach object as parameter and checks this coach object if it is exist in the database by its ID. If it is exist, the method changes the data of that coach with given data. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdateCoach(Coach coach1)
         {
 
@@ -83,6 +101,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method returns number of coaches in the database.
+        */
         public static decimal GetNumberOfCoaches()
         {
             string sqlQuery = "SELECT COUNT(*) FROM COACH";

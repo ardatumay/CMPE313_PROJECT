@@ -10,8 +10,11 @@ using CMPE312_PROJECT.Models.Persistance;
 
 namespace CMPE312_PROJECT.Models.Transaction
 {
+    /*
+    * This class is created for providing connection between model and controller in some cases.
+    */
     public class TeamManager
-    {
+    
         public static bool AddTeam(Team team_)
         {
             bool isAdded;
