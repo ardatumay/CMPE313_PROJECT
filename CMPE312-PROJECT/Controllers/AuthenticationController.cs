@@ -38,6 +38,12 @@ namespace CMPE312_PROJECT.Controllers
 
             User user = UserPersistence.GetUser((credential.UserId));
 
+            if (user == null)
+            {
+                TempData["message"] = "User was not found.";
+                return View(credential);
+            }
+
             if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
             {
                 TempData["message"] = "Both user id and password are required";

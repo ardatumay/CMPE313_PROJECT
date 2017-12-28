@@ -6,6 +6,62 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        /* Dropdown Button */
+        .dropbtn {
+            background: #222;
+            color: #999;
+            padding: 16px;
+            font-family: sans-serif;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        a:hover {color:green;}
+
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,28 +72,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Football League Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Football League Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                   
+ 
                     @{
 
                         if ((Session["LoggedIn"] == null) || ((bool)Session["LoggedIn"] == false))
                         {
-                            <li style="float:right">@Html.ActionLink("Login", "Login", "Authentication")</li>
-                            <li style="float:right">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
-                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
-                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
+                            <li style="float:right;margin-left:335px;">@Html.ActionLink("Login", "Login", "Authentication")</li>
+                            <li style="float:right;margin-left:335px;margin-right:-335px;">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Comments</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Comment/ListPlayerComments">See Player Comments</a>
+                                        <a href="~/Comment/ListTeamComments">See Team Comments</a>
+                                    </div>
+                                </div>
+                            </li>
                         }
 
                         else
                         {
-                            <li style="float:right">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
-                            <li style="float:right">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+
                         }
 
                         if ((Session["LoggedIn"] == null) || (Session["IsAdmin"] == null) || (Session["IsPresident"] == null))
@@ -47,38 +107,91 @@
 
                         else if ((bool)Session["IsAdmin"] == false && (bool)Session["LoggedIn"] == true && (Session["IsPresident"] != null))
                         {
-                            <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
-                            <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
-                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
-                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Comments</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Comment/ListPlayerComments">See Player Comments</a>
+                                        <a href="~/Comment/ListTeamComments">See Team Comments</a>
+                                        <a href="~/Comment/CommentPlayer">Comment Player</a>
+                                        <a href="~/Comment/CommentTeam">Comment Team</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li style="float:right;margin-left:320px">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                            <li style="float:right;margin-left:320px;margin-right:-320px;">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
 
 
                             if (Convert.ToDecimal(Session["IsPresident"]) != 0)
                             {
-                                <li>@Html.ActionLink("Change Budget", "ChangeBudget", "Team")</li>
+                                <li>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Budget</button>
+                                        <div class="dropdown-content">
+                                            <a href="~/Team/ChangeBudget">Change Team Budget</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li style="float:right;margin-left:243px">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                                <li style="float:right;margin-left:243px;margin-right:-243px;">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
 
                             }
                         }
 
                         else if ((bool)Session["IsAdmin"] == true)
                         {
-                            <li>@Html.ActionLink("Add Team", "AddTeam", "Team")</li>
-                            <li>@Html.ActionLink("Delete Team", "DeleteTeam", "Team")</li>
-                            <li>@Html.ActionLink("Add Player", "AddPlayer", "Player")</li>
-                            <li>@Html.ActionLink("Delete Player", "DeletePlayer", "Player")</li>
-                            <li>@Html.ActionLink("Change President", "ChangePresident", "President")</li>
-                            <li>@Html.ActionLink("Change Coach", "ChangeCoach", "Coach")</li>
-                            <li>@Html.ActionLink("Comment Team", "CommentTeam", "Comment")</li>
-                            <li>@Html.ActionLink("Comment Player", "CommentPlayer", "Comment")</li>
-                            <li>@Html.ActionLink("See Player Comments", "ListPlayerComments", "Comment")</li>
-                            <li>@Html.ActionLink("See Team Comments", "ListTeamComments", "Comment")</li>
-                            <li>@Html.ActionLink("Users", "UserInformation", "Authentication")</li>
-                            <li>@Html.ActionLink("Statistics", "Statistics", "Authentication")</li>
-                            <li>@Html.ActionLink("Change User Status", "ChangeStatus", "Authentication")</li>
-                            <li>@Html.ActionLink("Change User Password", "ChangeUserPassword", "Authentication")</li>
-   
-                        }
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Comments</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Comment/ListPlayerComments">See Player Comments</a>
+                                        <a href="~/Comment/ListTeamComments">See Team Comments</a>
+                                        <a href="~/Comment/CommentPlayer">Comment Player</a>
+                                        <a href="~/Comment/CommentTeam">Comment Team</a>
+                                    </div>
+                                </div>
+                            </li>
 
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Teams</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Team/AddTeam">Add Team</a>
+                                        <a href="~/Team/DeleteTeam">Delete Team</a>
+                                        <a href="~/President/ChangePresident">Change President</a>
+                                        <a href="~/Coach/ChangeCoach">Change Coach</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Players</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Player/AddPlayer">Add Player</a>
+                                        <a href="~/Player/DeletePlayer">Delete Player</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Users</button>
+                                    <div class="dropdown-content">
+                                        <a href="~/Authentication/UserInformation">Users</a>
+                                        <a href="~/Authentication/ChangeStatus">Change User Status</a>
+                                        <a href="~/Authentication/ChangeUserPassword">Change User Password</a>
+                                        <a href="~/Authentication/Statistics">Statistics</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li style="float:right;margin-left:100px">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                            <li style="float:right;margin-left:100px;margin-right:-100px;">@Html.ActionLink("Account", "GetUserInfo", "Authentication")</li>
+
+                        }
 
 
                     }
@@ -86,6 +199,7 @@
             </div>
         </div>
     </div>
+
     <div class="container body-content" style="margin-top:150px">
         @RenderBody()
         @ViewBag.message
