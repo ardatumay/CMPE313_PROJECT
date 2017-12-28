@@ -4,7 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CMPE312_PROJECT.Models.Repository;
-
+using CMPE312_PROJECT.Models.Entity;
+using CMPE312_PROJECT.Models.Transaction;
+using CMPE312_PROJECT.Models.Persistance;
+using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
@@ -12,7 +15,9 @@ namespace CMPE312_PROJECT.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
+            return View("Index", new Team());
         }
 
         public ActionResult About()
@@ -28,5 +33,6 @@ namespace CMPE312_PROJECT.Controllers
 
             return View();
         }
+
     }
 }

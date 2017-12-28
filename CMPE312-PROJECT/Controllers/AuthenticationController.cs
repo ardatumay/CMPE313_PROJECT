@@ -154,7 +154,7 @@ namespace CMPE312_PROJECT.Controllers
         {
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
-            string validName = @"^[a-zA-Z][a-zA-Z0-9]*$";
+            string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
 
             bool login;
@@ -172,18 +172,6 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
             }
 
-            /*if (credential.Password1.Equals(credential.OldPassword))
-            {
-                TempData["message"] = "Your new password cannot be the same with your current password!";
-                return View(credential);
-            }
-
-            else if (!credential.Password1.Equals(credential.Password2))
-            {
-                TempData["message"] = "Passwords are not same.";
-                return View(credential);
-            }
-            */
             if (credential.Name != null && credential.Email != null)
             {
                 Match matchname = Regex.Match(credential.Name, validName);
@@ -230,6 +218,9 @@ namespace CMPE312_PROJECT.Controllers
 
                 else
                 {
+                    credential.Name = credential.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                    credential.Email = credential.Email.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
                     User user = UserManager.user;
                     user.Email = credential.Email;
                     UserManager.UpdateUser(user);
@@ -291,6 +282,10 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
+                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.Password2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+                credential.OldPassword = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
                 credential.UserId = UserManager.user.UserID;
                 credential.Password1 = credential.OldPassword;
                 login = UserManager.AuthenticateUser(credential, Session);
