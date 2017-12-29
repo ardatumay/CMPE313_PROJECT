@@ -159,7 +159,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             foreach (object[] dataRow in rows)
             {
                 //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-                Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5] };
+                Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5], Point = (decimal)dataRow[6] };
                 teams.Add(team); 
             }
 

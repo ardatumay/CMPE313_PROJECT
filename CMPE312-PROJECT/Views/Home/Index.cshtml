@@ -1,4 +1,6 @@
 ﻿@using CMPE312_PROJECT.Models.Repository;
+@using CMPE312_PROJECT.Models.Entity;
+@model Team
 @{
     ViewBag.Title = "Home Page";
 
@@ -9,3 +11,22 @@
 <h4>Home Page</h4>
 
 
+<form method="get" action="~/Home/Index">
+    <p><label>League Point Table</label></p>
+    <p>
+        <table style="width:100%">
+            <tr>
+                <th>Team</th>
+                <th>Point</th>
+            </tr>
+                @foreach (var team in (List<Team>)ViewData["Teams"])
+                {
+                    <tr>
+                        <td>@team.Name</td>
+                        <td>@team.Point</td>
+                    </tr>
+                }
+        </table>
+    </p>
+
+</form>

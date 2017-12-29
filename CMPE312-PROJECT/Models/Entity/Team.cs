@@ -18,7 +18,8 @@ namespace CMPE312_PROJECT.Models.Entity
         public decimal Budget { get; set; }
         public decimal NumberOfChampionship { get; set; }
         public ArrayList Players = new ArrayList();
-        
+        public decimal Point { get; set; }
+
         public Team()
         {
 
