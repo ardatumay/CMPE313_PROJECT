@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about Team.
+     */
     public class TeamController : Controller
     {
 
@@ -19,12 +22,19 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of add team feature for admins of the application. It returns a new Team object.
+         */
         [HttpGet]
         public ActionResult AddTeam()
         {
             return View(new Team());
         }
 
+        /*
+         * This method is HttpPost method of add team feature for admins of the application.
+         * It takes a Team object as parameter and sends this object to Model for adding current team.
+         */
         [HttpPost]
         public ActionResult AddTeam(Team team)
         {
@@ -65,6 +75,9 @@ namespace CMPE312_PROJECT.Controllers
             }   
         }
 
+        /*
+         * This method is HttpGet method of delete team feature for admins of the application. It returns a new Team object.
+         */
         [HttpGet]
         public ActionResult DeleteTeam()
         {
@@ -73,6 +86,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Team());
         }
 
+        /*
+         * This method is HttpPost method of delete team feature for admins of the application.
+         * It takes a Team object as parameter and sends this object to Model for deleting current team.
+         */
         [HttpPost]
         public ActionResult DeleteTeam(Team team)
         {
@@ -100,6 +117,9 @@ namespace CMPE312_PROJECT.Controllers
             }
         }
 
+        /*
+         * This method is HttpGet method of get players of a team feature for admins of the application. It returns a list of players.
+         */
         [HttpGet]
         public string GetTeamPlayers(string teamName)
         {
@@ -113,6 +133,9 @@ namespace CMPE312_PROJECT.Controllers
             return playerList;
         }
 
+        /*
+         * This method is HttpGet method of change budget feature for presidents of the application.
+         */
         [HttpGet]
         public ActionResult ChangeBudget()
         {
@@ -125,6 +148,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(team);
         }
 
+        /*
+         * This method is HttpPost method of change budget feature for presidents of the application.
+         * It takes a Team object as parameter and changes that team's budget by sending that team object to UpdateTeam() method of TeamPersistance class.
+         */
         [HttpPost]
         public ActionResult ChangeBudget(Team team)
         {

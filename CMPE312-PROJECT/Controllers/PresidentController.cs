@@ -12,14 +12,20 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about President.
+     */
     public class PresidentController : Controller
     {
-        // GET: President
+
         public ActionResult Index()
         {
             return View();
         }
 
+        /*
+         * This method is HttpGet method of change president feature for admins of the application. It returns a new President object.
+         */
         [HttpGet]
         public ActionResult ChangePresident()
         {
@@ -29,6 +35,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new President());
         }
 
+        /*
+         * This method is HttpPost method of change president feature for admins of the application.
+         * It takes a President object as parameter and sends this object to Model for updating current president.
+         */
         [HttpPost]
         public ActionResult ChangePresident(President president)
         {
