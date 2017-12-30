@@ -18,6 +18,7 @@ namespace CMPE312_PROJECT.Controllers
     {
         public ActionResult Index()
         {
+            bool result = RepositoryManager.Repository.Initialize();
             var teams = TeamPersistance.GetTeamsByPointOrder();
             ViewData["Teams"] = teams;
             return View("Index", new Team());
