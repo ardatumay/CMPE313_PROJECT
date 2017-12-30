@@ -166,7 +166,7 @@ namespace CMPE312_PROJECT.Models.Repository
                 "('10', 'GOZTEPE', 'IZMIR', '1925', '10', '0', '30')," +
                 "('11', 'KONYASPOR', 'KONYA', '1981', '9', '0', '15')," +
                 "('12', 'ALANYASPOR', 'ANTALYA', '1948', '8', '0', '18')," +
-                "('13', 'GENÇLERBÝRLÝÐÝ', 'ANKARA', '1923', '7', '0', '14')," +
+                "('13', 'GENÇLERBIRLIGI', 'ANKARA', '1923', '7', '0', '14')," +
                 "('14', 'YENI MALATYASPOR', 'MALATYA', '1986', '6', '0', '22')," +
                 "('15', 'AKSHISARSPOR', 'MANISA', '1970', '5', '0', '19')," +
                 "('16', 'KASIMPASA', 'ISTANBUL', '1921', '4', '0', '19')," +
@@ -221,11 +221,11 @@ namespace CMPE312_PROJECT.Models.Repository
             UserManager.SignupUser(new Credential("aliay", "aliay", "email", "Ali Ay", 0, 8));
             UserManager.SignupUser(new Credential("erolbedir", "erolbedir", "email", "Erol Bedir", 0, 9));
             UserManager.SignupUser(new Credential("mehmetserpil", "mehmetserpil", "email", "Mehmet Serpil", 0, 10));
-            UserManager.SignupUser(new Credential("fatihyilmaz", "fatihyilmaz", "email", "Fatih Yýlmaz", 0, 11));
-            UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan Çavuþoðlu", 0, 12));
+            UserManager.SignupUser(new Credential("fatihyilmaz", "fatihyilmaz", "email", "Fatih Yilmaz", 0, 11));
+            UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan Çavusoglu", 0, 12));
             UserManager.SignupUser(new Credential("muratcavcav", "muratcavcav", "email", "Murat Cavcav", 0, 13));
             UserManager.SignupUser(new Credential("adilgevrek", "adilgevrek", "email", "Adil Gevrek", 0, 14));
-            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "H�seyin Ery�ksel", 0, 15));
+            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "Huseyin Eryuksel", 0, 15));
             UserManager.SignupUser(new Credential("turgayciner", "turgayciner", "email", "Turgay Ciner", 0, 16));
             UserManager.SignupUser(new Credential("mecnunotyakmaz", "mecnunotyakmaz", "email", "Mecnun Otyakmaz", 0, 17));
             UserManager.SignupUser(new Credential("feriduntankut", "feriduntankut", "email", "Feridun Tankut", 0, 18));
@@ -233,7 +233,7 @@ namespace CMPE312_PROJECT.Models.Repository
 
             string DefaultPlayers1 = "INSERT INTO PLAYER VALUES ('1', 'ATIBA', 'HUTCHINSON', '08/02/1983', 'CDM', '1.5', '1.5', '1')," +
                 "('2', 'FABRICIO', 'RAMIREZ', '31/12/1987', 'GK', '2.75', '1.5', '1')," +
-                "('3', 'OÐUZHAN', 'ÖZYAKUP', '23/09/1992', 'CM', '12', '1.5', '1')," +
+                "('3', 'OgUZHAN', 'ÖZYAKUP', '23/09/1992', 'CM', '12', '1.5', '1')," +
                 "('4', 'FERNANDO', 'MUSLERA', '16/06/1986', 'GK', '11', '4', '2')," +
                 "('5', 'BAFETIMBI', 'GOMIS', '06/08/1985', 'ST', '4', '4', '2')," +
                 "('6', 'YASIN', 'OZTEKIN', '19/03/1987', 'LM', '3.5', '4', '2')," +

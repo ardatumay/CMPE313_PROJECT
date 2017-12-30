@@ -36,6 +36,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and send this object to Model for authentication.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Login(Credential credential)
         {
             bool login;
@@ -46,17 +47,27 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential());
             }
 
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
+            {
+                TempData["message"] = "Both user id and password are required";
+                return View(credential);
+            }
+
+
+            string checkUserID = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
+            if (!checkUserID.Equals(credential.UserId))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
+            }
+
             User user = UserPersistence.GetUser((credential.UserId));
 
             if (user == null)
             {
                 TempData["message"] = "User was not found.";
-                return View(credential);
-            }
-
-            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
-            {
-                TempData["message"] = "Both user id and password are required";
                 return View(credential);
             }
 
@@ -75,8 +86,6 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
-                credential.UserId = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
 
                 login = UserManager.AuthenticateUser(credential, Session);
             }
