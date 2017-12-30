@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -15,7 +15,7 @@ namespace CMPE312_PROJECT.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\User\\cmpe312-project.sqlite";
+        private string databaseFile = "C:\\Users\\Batuhan\\cmpe312-project.sqlite";
 
 
         private SQLiteConnection dbConnection;
@@ -154,78 +154,78 @@ namespace CMPE312_PROJECT.Models.Repository
          */
             UserManager.SignupUser(new Credential("admin", "adminadmin", "email", "admin", 1, 0));
 
-            string DefaultTeams = "INSERT INTO TEAM VALUES ('1', 'BEÞÝKTAÞ', 'ISTANBUL', '1903', '19', '15', '30')," +
+            string DefaultTeams = "INSERT INTO TEAM VALUES ('1', 'BEï¿½ï¿½KTAï¿½', 'ISTANBUL', '1903', '19', '15', '30')," +
                 "('2', 'GALATASARAY', 'ISTANBUL', '1905', '18', '20', '32')," +
-                "('3', 'FENERHABÇE', 'ISTANBUL', '1907', '17', '19', '33')," +
-                "('4', 'BAÞAKÞEHÝR', 'ISTANBUL', '1990', '16', '0', '36')," +
+                "('3', 'FENERHABï¿½E', 'ISTANBUL', '1907', '17', '19', '33')," +
+                "('4', 'BAï¿½AKï¿½EHï¿½R', 'ISTANBUL', '1990', '16', '0', '36')," +
                 "('5', 'TRABZONSPOR', 'TRABZON', '1967', '15', '6', '29')," +
                 "('6', 'ANTALYASPOR', 'ANTALYA', '1966', '14', '0', '17')," +
                 "('7', 'OSMANLISPOR', 'ANKARA', '1978', '13', '0', '14')," +
                 "('8', 'BURSASPOR', 'BURSA', '1963', '12', '1', '25')," +
-                "('9', 'KAYSERÝSPOR', 'KAYSERÝ', '1966', '11', '0', '30')," +
-                "('10', 'GÖZTEPE', 'ÝZMÝR', '1925', '10', '0', '30')," +
+                "('9', 'KAYSERï¿½SPOR', 'KAYSERï¿½', '1966', '11', '0', '30')," +
+                "('10', 'Gï¿½ZTEPE', 'ï¿½ZMï¿½R', '1925', '10', '0', '30')," +
                 "('11', 'KONYASPOR', 'KONYA', '1981', '9', '0', '15')," +
                 "('12', 'ALANYASPOR', 'ANTALYA', '1948', '8', '0', '18')," +
-                "('13', 'GENÇLERBÝRLÝÐÝ', 'ANKARA', '1923', '7', '0', '14')," +
-                "('14', 'YENÝ MALATYASPOR', 'MALATYA', '1986', '6', '0', '22')," +
-                "('15', 'AKHÝSARSPOR', 'MANÝSA', '1970', '5', '0', '19')," +
-                "('16', 'KASIMPAÞA', 'ISTANBUL', '1921', '4', '0', '19')," +
-                "('17', 'SÝVASSPOR', 'SÝVAS', '1967', '3', '0', '26')," +
-                "('18', 'KARABÜKSPOR', 'ZONGULDAK', '1969', '2', '0', '9');";
+                "('13', 'GENï¿½LERBï¿½RLï¿½ï¿½ï¿½', 'ANKARA', '1923', '7', '0', '14')," +
+                "('14', 'YENï¿½ MALATYASPOR', 'MALATYA', '1986', '6', '0', '22')," +
+                "('15', 'AKHï¿½SARSPOR', 'MANï¿½SA', '1970', '5', '0', '19')," +
+                "('16', 'KASIMPAï¿½A', 'ISTANBUL', '1921', '4', '0', '19')," +
+                "('17', 'Sï¿½VASSPOR', 'Sï¿½VAS', '1967', '3', '0', '26')," +
+                "('18', 'KARABï¿½KSPOR', 'ZONGULDAK', '1969', '2', '0', '9');";
 
-            string DefaultCoaches = "INSERT INTO COACH VALUES ('1', 'ÞENOL', 'GÜNEÞ', '01/06/1952', '4.8', '1')," +
-                "('2', 'FATÝH', 'TERÝM', '04/09/1953', '6', '2')," +
+            string DefaultCoaches = "INSERT INTO COACH VALUES ('1', 'ï¿½ENOL', 'Gï¿½NEï¿½', '01/06/1952', '4.8', '1')," +
+                "('2', 'FATï¿½H', 'TERï¿½M', '04/09/1953', '6', '2')," +
                 "('3', 'AYKUT', 'KOCAMAN', '05/04/1965', '4', '3')," +
                 "('4', 'ABDULLAH', 'AVCI', '31/07/1963', '3.5', '4')," +
-                "('5', 'RIZA', 'ÇALIMBAY', '02/02/1963', '3', '5')," +
+                "('5', 'RIZA', 'ï¿½ALIMBAY', '02/02/1963', '3', '5')," +
                 "('6', 'LEONARDO', 'ARAUJO', '05/09/1969', '3', '6')," +
-                "('7', 'ÝRFAN', 'BUZ', '15/04/1967', '2', '7')," +
+                "('7', 'ï¿½RFAN', 'BUZ', '15/04/1967', '2', '7')," +
                 "('8', 'PAUL', 'LE GUEN', '01/03/1964', '2.5', '8')," +
-                "('9', 'MARIUS', 'SUMUDÝCA', '04/03/1971', '2.5', '9')," +
+                "('9', 'MARIUS', 'SUMUDï¿½CA', '04/03/1971', '2.5', '9')," +
                 "('10', 'TAMER', 'TUNA', '01/07/1976', '2', '10')," +
-                "('11', 'MUSTAFA REÞÝT', 'AKÇAY', '12/12/1958', '2', '11')," +
-                "('12', 'SAFET', 'SUSÝC', '13/04/1955', '2', '12')," +
-                "('13', 'ÜMÝT', 'ÖZAT', '30/10/1976', '1.5', '13')," +
+                "('11', 'MUSTAFA REï¿½ï¿½T', 'AKï¿½AY', '12/12/1958', '2', '11')," +
+                "('12', 'SAFET', 'SUSï¿½C', '13/04/1955', '2', '12')," +
+                "('13', 'ï¿½Mï¿½T', 'ï¿½ZAT', '30/10/1976', '1.5', '13')," +
                 "('14', 'EROL', 'BULUT', '30/01/1975', '1.5', '14')," +
                 "('15', 'OKAN', 'BURUK', '19/10/1973', '2', '15')," +
-                "('16', 'KEMAL', 'ÖZDEÞ', '10/05/1970', '1.5', '16')," +
+                "('16', 'KEMAL', 'ï¿½ZDEï¿½', '10/05/1970', '1.5', '16')," +
                 "('17', 'SAMET', 'AYBABA', '05/09/1956', '1.5', '17')," +
-                "('18', 'TONY', 'POPOVÝC', '04/07/1973', '1.5', '18');";
+                "('18', 'TONY', 'POPOVï¿½C', '04/07/1973', '1.5', '18');";
 
-            string DefaultPresidents = "INSERT INTO PRESIDENT VALUES ('1', 'FÝKRET', 'ORMAN', '04/11/1967', '1')," +
-                "('2', 'DURSUN', 'ÖZBEK', '25/03/1949', '2')," +
-                "('3', 'AZÝZ', 'YILDIRIM', '02/11/1952', '3')," +
-                "('4', 'GÖKSEL', 'GÜMÜÞDAÐ', '10/10/1972', '4')," +
+            string DefaultPresidents = "INSERT INTO PRESIDENT VALUES ('1', 'Fï¿½KRET', 'ORMAN', '04/11/1967', '1')," +
+                "('2', 'DURSUN', 'ï¿½ZBEK', '25/03/1949', '2')," +
+                "('3', 'AZï¿½Z', 'YILDIRIM', '02/11/1952', '3')," +
+                "('4', 'Gï¿½KSEL', 'Gï¿½Mï¿½ï¿½DAï¿½', '10/10/1972', '4')," +
                 "('5', 'MUHARREM', 'USTA', '6/12/1965', '5')," +
-                "('6', 'ALÝ ÞAFAK', 'ÖZTÜRK', '17/02/1984', '6')," +
-                "('7', 'SADIK', 'DÝK', '01/01/1969', '7')," +
-                "('8', 'ALÝ', 'AY', '04/03/1957', '8')," +
-                "('9', 'EROL', 'BEDÝR', '15/10/1958', '9')," +
-                "('10', 'MEHMET', 'SERPÝL', '01/01/1955', '10')," +
-                "('11', 'FATÝH', 'YILMAZ', '01/01/1971', '11')," +
-                "('12', 'HASAN', 'ÇAVUÞOÐLU', '01/01/1975', '12')," +
+                "('6', 'ALï¿½ ï¿½AFAK', 'ï¿½ZTï¿½RK', '17/02/1984', '6')," +
+                "('7', 'SADIK', 'Dï¿½K', '01/01/1969', '7')," +
+                "('8', 'ALï¿½', 'AY', '04/03/1957', '8')," +
+                "('9', 'EROL', 'BEDï¿½R', '15/10/1958', '9')," +
+                "('10', 'MEHMET', 'SERPï¿½L', '01/01/1955', '10')," +
+                "('11', 'FATï¿½H', 'YILMAZ', '01/01/1971', '11')," +
+                "('12', 'HASAN', 'ï¿½AVUï¿½Oï¿½LU', '01/01/1975', '12')," +
                 "('13', 'MURAT', 'CAVCAV', '01/01/1963', '13')," +
-                "('14', 'ADÝL', 'GEVREK', '03/03/1976', '14')," +
-                "('15', 'HÜSEYÝN', 'ERYÜKSEL', '02/06/1960', '15')," +
-                "('16', 'TURGAY', 'CÝNER', '01/03/1956', '16')," +
+                "('14', 'ADï¿½L', 'GEVREK', '03/03/1976', '14')," +
+                "('15', 'Hï¿½SEYï¿½N', 'ERYï¿½KSEL', '02/06/1960', '15')," +
+                "('16', 'TURGAY', 'Cï¿½NER', '01/03/1956', '16')," +
                 "('17', 'MECNUN', 'OTYAKMAZ', '10/02/1965', '17')," +
-                "('18', 'FERÝDUN', 'TANKUT', '01/01/1951', '18');";
+                "('18', 'FERï¿½DUN', 'TANKUT', '01/01/1951', '18');";
 
             UserManager.SignupUser(new Credential("fikretorman", "fikretorman", "email", "Fikret Orman", 0, 1));
-            UserManager.SignupUser(new Credential("dursunozbek", "dursunozbek", "email", "Dursun Özbek", 0, 2));
-            UserManager.SignupUser(new Credential("azizyildirim", "azizyildirim", "email", "Aziz Yýldýrým", 0, 3));
-            UserManager.SignupUser(new Credential("gokselgumusdag", "gokselgumusdag", "email", "Göksel Gümüþdað", 0, 4));
+            UserManager.SignupUser(new Credential("dursunozbek", "dursunozbek", "email", "Dursun ï¿½zbek", 0, 2));
+            UserManager.SignupUser(new Credential("azizyildirim", "azizyildirim", "email", "Aziz Yï¿½ldï¿½rï¿½m", 0, 3));
+            UserManager.SignupUser(new Credential("gokselgumusdag", "gokselgumusdag", "email", "Gï¿½ksel Gï¿½mï¿½ï¿½daï¿½", 0, 4));
             UserManager.SignupUser(new Credential("muharremusta", "muharremusta", "email", "Muharrem Usta", 0, 5));
-            UserManager.SignupUser(new Credential("alisafak", "alisafak", "email", "Ali Þafak", 0, 6));
-            UserManager.SignupUser(new Credential("sadikdik", "sadikdik", "email", "Sadýk Dik", 0, 7));
+            UserManager.SignupUser(new Credential("alisafak", "alisafak", "email", "Ali ï¿½afak", 0, 6));
+            UserManager.SignupUser(new Credential("sadikdik", "sadikdik", "email", "Sadï¿½k Dik", 0, 7));
             UserManager.SignupUser(new Credential("aliay", "aliay", "email", "Ali Ay", 0, 8));
             UserManager.SignupUser(new Credential("erolbedir", "erolbedir", "email", "Erol Bedir", 0, 9));
             UserManager.SignupUser(new Credential("mehmetserpil", "mehmetserpil", "email", "Mehmet Serpil", 0, 10));
-            UserManager.SignupUser(new Credential("fatihyilmaz", "fatihyilmaz", "email", "Fatih Yýlmaz", 0, 11));
-            UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan Çavuþoðlu", 0, 12));
+            UserManager.SignupUser(new Credential("fatihyilmaz", "fatihyilmaz", "email", "Fatih Yï¿½lmaz", 0, 11));
+            UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan ï¿½avuï¿½oï¿½lu", 0, 12));
             UserManager.SignupUser(new Credential("muratcavcav", "muratcavcav", "email", "Murat Cavcav", 0, 13));
             UserManager.SignupUser(new Credential("adilgevrek", "adilgevrek", "email", "Adil Gevrek", 0, 14));
-            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "Hüseyin Eryüksel", 0, 15));
+            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "Hï¿½seyin Eryï¿½ksel", 0, 15));
             UserManager.SignupUser(new Credential("turgayciner", "turgayciner", "email", "Turgay Ciner", 0, 16));
             UserManager.SignupUser(new Credential("mecnunotyakmaz", "mecnunotyakmaz", "email", "Mecnun Otyakmaz", 0, 17));
             UserManager.SignupUser(new Credential("feriduntankut", "feriduntankut", "email", "Feridun Tankut", 0, 18));
@@ -233,12 +233,12 @@ namespace CMPE312_PROJECT.Models.Repository
 
             string DefaultPlayers1 = "INSERT INTO PLAYER VALUES ('1', 'ATIBA', 'HUTCHINSON', '08/02/1983', 'CDM', '1.5', '1.5', '1')," +
                 "('2', 'FABRICIO', 'RAMIREZ', '31/12/1987', 'GK', '2.75', '1.5', '1')," +
-                "('3', 'OÐUZHAN', 'ÖZYAKUP', '23/09/1992', 'CM', '12', '1.5', '1')," +
+                "('3', 'Oï¿½UZHAN', 'ï¿½ZYAKUP', '23/09/1992', 'CM', '12', '1.5', '1')," +
                 "('4', 'FERNANDO', 'MUSLERA', '16/06/1986', 'GK', '11', '4', '2')," +
-                "('5', 'BAFETÝMBÝ', 'GOMÝS', '06/08/1985', 'ST', '4', '4', '2')," +
-                "('6', 'YASÝN', 'ÖZTEKÝN', '19/03/1987', 'LM', '3.5', '4', '2')," +
+                "('5', 'BAFETï¿½MBï¿½', 'GOMï¿½S', '06/08/1985', 'ST', '4', '4', '2')," +
+                "('6', 'YASï¿½N', 'ï¿½ZTEKï¿½N', '19/03/1987', 'LM', '3.5', '4', '2')," +
                 "('7', 'MARTIN', 'SKRTEL', '15/12/1984', 'CB', '4.5', '3', '3')," +
-                "('8', 'ÝSMAÝL', 'KÖYBAÞI', '10/07/1989', 'LB', '3', '3', '3')," +
+                "('8', 'ï¿½SMAï¿½L', 'Kï¿½YBAï¿½I', '10/07/1989', 'LB', '3', '3', '3')," +
                 "('9', 'OZAN', 'TUFAN', '23/03/1995', 'CM', '5', '3', '3');";
 
             DoCommand(DefaultTeams);
