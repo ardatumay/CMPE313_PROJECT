@@ -10,8 +10,15 @@ using CMPE312_PROJECT.Models.Persistance;
 
 namespace CMPE312_PROJECT.Models.Transaction
 {
-    public class TeamManager
-    {
+    /*
+    * This class is created for providing connection between model and controller about Team in some cases.
+    */
+    public class TeamManager {
+
+        /*
+        * This method takes a Team object as parameter and adds this team object to the database by using GetTeam() method of TeamPersistance class. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddTeam(Team team_)
         {
             bool isAdded;

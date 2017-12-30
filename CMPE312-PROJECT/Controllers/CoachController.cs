@@ -12,14 +12,19 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about Coach.
+     */
     public class CoachController : Controller
     {
-        // GET: Coach
         public ActionResult Index()
         {
             return View();
         }
 
+        /*
+         * This method is HttpGet method of change coach feature for admins of the application. It returns a new Coach object.
+         */
         [HttpGet]
         public ActionResult ChangeCoach()
         {
@@ -28,6 +33,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Coach());
         }
 
+        /*
+         * This method is HttpPost method of change coach feature for admins of the application.
+         * It takes a Coach object as parameter and sends this object to Model for updating current coach.
+         */
         [HttpPost]
         public ActionResult ChangeCoach(Coach coach)
         {
@@ -101,7 +110,6 @@ namespace CMPE312_PROJECT.Controllers
                 return View(coach);
             } 
 
-            return View(new Coach());
         }
     }
 }

@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model.
+     */
     public class HomeController : Controller
     {
         public ActionResult Index()

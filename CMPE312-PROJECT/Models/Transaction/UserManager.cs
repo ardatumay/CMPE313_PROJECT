@@ -9,9 +9,17 @@ using CMPE312_PROJECT.Models.Transaction;
 
 namespace CMPE312_PROJECT.Models.Transaction
 {
+    /*
+    * This class is created for providing connection between model and controller about User in some cases.
+    */
     public class UserManager
     {
         public static User user;
+
+        /*
+        * This method takes a Credential object as parameter and checks the database if that credential can be authenticated or not.
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AuthenticateUser(Credential cre, HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
@@ -65,6 +73,11 @@ namespace CMPE312_PROJECT.Models.Transaction
                 return true;
             }
         }
+
+        /*
+        * This method takes a Credential object as parameter and adds this credential object to the database by converting it into a user object. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool SignupUser(Credential cre)
         {
             bool signup;
@@ -80,6 +93,10 @@ namespace CMPE312_PROJECT.Models.Transaction
             return signup;
         }
 
+        /*
+        * This method takes a Credential object and a User object as parameter and updates that user with credential data. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool ChangeUserPassword(User user, Credential cre)
         {
             string salt = EncryptionManager.PasswordSalt;
@@ -89,8 +106,10 @@ namespace CMPE312_PROJECT.Models.Transaction
             bool updated = UserManager.UpdateUser(user);
             return updated;
         }
-            
 
+        /*
+        * This method takes a HttpSessionStateBase object as parameter and logs out current user from the application. 
+        */
         public static void LogoutUSer(HttpSessionStateBase session)
         {
             session["LoggedIn"] = false;
@@ -99,6 +118,11 @@ namespace CMPE312_PROJECT.Models.Transaction
 
         }
 
+        /*
+        * This method takes a Credential object and HttpSessionStateBase object as parameter and checks this user object if it is exist in the database by its ID. 
+        * If it is exist, the method changes the data of that user with given data by using UpdateUser() method of UserPersistance class. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdateUser (Credential cre, HttpSessionStateBase session)
         {
             user = UserPersistence.GetUser(cre.UserId);
@@ -117,6 +141,9 @@ namespace CMPE312_PROJECT.Models.Transaction
 
         }
 
+        /*
+        * This method takes a String object as parameter and returns a user if user, whose ID was given by that String object, is exist in the database by using GetUser() method of UserPersistance class.
+        */
         public static User getUserById(string ID)
         {
             User user = UserPersistence.GetUser(ID);
@@ -130,6 +157,10 @@ namespace CMPE312_PROJECT.Models.Transaction
             }
         }
 
+        /*
+        * This method takes a User object as parameter and updates that user's data by using UpdateUser() method of UserPersistance class. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdateUser(User user)
         {
             bool updated = UserPersistence.UpdateUser(user);

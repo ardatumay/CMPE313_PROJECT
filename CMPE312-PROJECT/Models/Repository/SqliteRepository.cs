@@ -142,6 +142,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return success;
         }
 
+        /*
+         * This method inserts default data to the database.
+         */
         public void DefaultData ()
         {
             string AddingPositions = "INSERT INTO POSITIONS VALUES ('GK'), ('LB'), ('CB'), ('RB'), ('CDM'), ('LM'), ('CM'), ('RM'), ('CAM'), ('ST');";

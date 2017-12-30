@@ -11,14 +11,20 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about Player.
+     */
     public class PlayerController : Controller
     {
-        // GET: Player
+
         public ActionResult Index()
         {
             return View();
         }
 
+        /*
+         * This method is HttpGet method of add player feature for admins of the application. It returns a new Player object.
+         */
         [HttpGet]
         public ActionResult AddPlayer()
         {
@@ -30,6 +36,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Player());
         }
 
+        /*
+         * This method is HttpPost method of add player feature for admins of the application.
+         * It takes a Player object as parameter and sends this object to Model for adding current player.
+         */
         [HttpPost]
         public ActionResult AddPlayer(Player player)
         {
@@ -119,12 +129,19 @@ namespace CMPE312_PROJECT.Controllers
             }
         }
 
+        /*
+         * This method is HttpGet method of delete player feature for admins of the application. It returns a new Player object.
+         */
         [HttpGet]
         public ActionResult DeletePlayer()
         {
             return View(new Player());
         }
-        
+
+        /*
+         * This method is HttpPost method of delete player feature for admins of the application.
+         * It takes a Player object as parameter and sends this object to Model for deleting current player.
+         */
         [HttpPost]
         public ActionResult DeletePlayer (Player player)
         {
@@ -155,7 +172,9 @@ namespace CMPE312_PROJECT.Controllers
             }
         }
 
-
+        /*
+         * This method returns all teams which are obtained from the database.
+         */
         public List<Team> GetTeams ()
         {
             return TeamPersistance.GetTeams();

@@ -12,6 +12,9 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about Comment.
+     */
     public class CommentController : Controller
     {
         // GET: Comment
@@ -20,6 +23,9 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of comment on a player feature for logged in users. It returns a new Comment object.
+         */
         [HttpGet]
         public ActionResult CommentPlayer()
         {
@@ -28,6 +34,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Comment());
         }
 
+        /*
+         * This method is HttpPost method of comment on a player feature for logged in users.
+         * It takes a Comment object as parameter and sends this object to Model for adding this comment object to the database.
+         */
         [HttpPost]
         public ActionResult CommentPlayer(Comment comment)
         {
@@ -62,8 +72,9 @@ namespace CMPE312_PROJECT.Controllers
         }
 
 
-
-
+        /*
+         * This method is HttpGet method of comment on a team feature for logged in users. It returns a new Comment object.
+         */
         [HttpGet]
         public ActionResult CommentTeam()
         {
@@ -72,6 +83,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Comment { TeamName = " ", CommentValue = "comment" });
         }
 
+        /*
+         * This method is HttpPost method of comment on a team feature for logged in users.
+         * It takes a Comment object as parameter and sends this object to Model for adding this comment object to the database.
+         */
         [HttpPost]
         public ActionResult CommentTeam(Comment comment)
         {
@@ -118,6 +133,10 @@ namespace CMPE312_PROJECT.Controllers
             TempData["message"] = "Comment is added succesfully.";
             return RedirectToAction("Index", "Home");
         }
+
+        /*
+         * This method is HttpGet method of list comments of a player feature of the application.
+         */
         [HttpGet]
         public ActionResult ListPlayerComments()
         {
@@ -126,6 +145,9 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of list comments of a player feature of the application.
+         */
         [HttpGet]
         public string GetPlayerComments(string teamName, decimal playerId)
         {
@@ -149,6 +171,9 @@ namespace CMPE312_PROJECT.Controllers
             return playerComments;
         }
 
+        /*
+         * This method is HttpGet method of list comments of a team feature of the application.
+         */
         [HttpGet]
         public ActionResult ListTeamComments()
         {
@@ -157,6 +182,9 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of list comments of a team feature of the application.
+         */
         [HttpGet]
         public string GetTeamComments(string teamName)
         {

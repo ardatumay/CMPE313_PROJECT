@@ -7,8 +7,14 @@ using CMPE312_PROJECT.Models.Repository;
 
 namespace CMPE312_PROJECT.Models.Persistance
 {
+    /*
+    * This class is created for getting, adding, deleting and updating President data which is stored in the database.
+    */
     public class PresidentPersistance
     {
+        /*
+        * This method takes a President object as parameter and returns a president if the parameter is exist in the database.
+        */
         public static President GetPresident(President president1)
         {
             string sqlQuery = "select * from PRESIDENT where ID='" + president1.ID + "'"; 
@@ -25,6 +31,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return president;
         }
 
+        /*
+        * This method takes a President object as parameter and adds this president object to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddPresident(President president1)
         {
             string sql1 = "SELECT * FROM PRESIDENT WHERE ID = (SELECT MAX(ID) from PRESIDENT); ";
@@ -51,6 +61,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return true;
         }
 
+        /*
+        * This method takes a President object as parameter and deletes this president object from the database if it is exist. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool DeletePresident(President president1)
         {
             string sql = "delete from PRESIDENT where TEAM_ID=" + president1.TeamID;
@@ -62,6 +76,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method takes a President object as parameter and checks this president object if it is exist in the database by its ID. If it is exist, the method changes the data of that president with given data. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdatePresident(President president1)
         {
 
@@ -74,6 +92,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method returns number of presidents in the database.
+        */
         public static decimal GetNumberOfPresident()
         {
             string sqlQuery = "SELECT COUNT(*) FROM PRESIDENT";

@@ -7,9 +7,14 @@ using CMPE312_PROJECT.Models.Repository;
 
 namespace CMPE312_PROJECT.Models.Persistance
 {
+    /*
+    * This class is created for getting, adding, deleting and updating Team data which is stored in the database.
+    */
     public class TeamPersistance
     {
-
+        /*
+        * This method takes a Team object as parameter and returns a team by its name if the parameter is exist in the database.
+        */
         public static Team GetTeam (Team team1)
         {
             string sqlQuery = "select * from TEAM where NAME='" + team1.Name.ToUpper() + "'"; 
@@ -27,6 +32,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return team;
         }
 
+        /*
+        * This method takes a Team object as parameter and returns a team by its ID if the parameter is exist in the database.
+        */
         public static Team GetTeamByID(Team team1)
         {
             string sqlQuery = "select * from TEAM where ID='" + team1.ID + "'";
@@ -45,9 +53,9 @@ namespace CMPE312_PROJECT.Models.Persistance
         }
 
         /*
-         *Updates the team information.
-         */
-
+        * This method takes a Team object as parameter and checks this team object if it is exist in the database by its ID. If it is exist, the method changes the data of that team with given data. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdateTeam(Team team1)
         {
 
@@ -61,8 +69,9 @@ namespace CMPE312_PROJECT.Models.Persistance
         }
 
         /*
-         * Inserts new team into database.
-         */
+        * This method takes a Team object as parameter and adds this team object to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddTeam(Team team1)
         {
             int result = -2;
@@ -97,7 +106,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         }
 
         /*
-         * Get all Team data from the database and return an array of Teams.
+         * This method takes a decimal parameter which is teamID. Then checks the database and returns all of the players of that team.
          */
         public static List<Player> GetTeamPlayers(decimal teamID)
         {
@@ -114,6 +123,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return players;
         }
 
+        /*
+         * This method takes a Team object as parameter and checks the database and returns all of the players of that team.
+         */
         public static List<Player> GetTeamPlayers(Team team)
         {
             List<Player> players = new List<Player>();
@@ -129,6 +141,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return players;
         }
 
+        /*
+         * This method returns all of teams from the database.
+         */
         public static List<Team> GetTeams ()
         {
             List<Team> teams = new List<Team>();
@@ -174,6 +189,10 @@ namespace CMPE312_PROJECT.Models.Persistance
             return teams;
         }
 
+        /*
+        * This method takes a Team object as parameter and deletes this team object from the database if it is exist. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool DeleteTeam(Team team1)
         {
             string sql = "delete from TEAM where NAME='" + team1.Name.ToUpper() + "'";
@@ -185,6 +204,9 @@ namespace CMPE312_PROJECT.Models.Persistance
             return false;
         }
 
+        /*
+        * This method returns number of teams in the database.
+        */
         public static decimal GetNumberOfTeams()
         {
             string sqlQuery = "SELECT COUNT(*) FROM TEAM";

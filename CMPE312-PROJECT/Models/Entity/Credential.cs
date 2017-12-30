@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CMPE312_PROJECT.Models.Entity
 {
+    /*
+    * This class is created for getting inputs from user and storing it in the application to be able to do authentication.
+    */
     public class Credential
     {
 

@@ -5,6 +5,9 @@ using System.Web;
 
 namespace CMPE312_PROJECT.Models.Entity
 {
+    /*
+    * This class is created for storing User data in the application after getting it from the database.
+    */
     public class User
     {
         public string UserID { get; set; }

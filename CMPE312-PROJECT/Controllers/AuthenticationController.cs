@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace CMPE312_PROJECT.Controllers
 {
+    /*
+     * This class is created for providing connection between View and Model about User and Credential.
+     */
     public class AuthenticationController : Controller
     {
         // GET: Authentication
@@ -19,12 +22,19 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of login feature of the application. It returns a new Credential object.
+         */
         [HttpGet]
         public ActionResult Login()
         {
             return View(new Credential());
         }
 
+        /*
+         * This method is HttpPost method of login feature of the application. 
+         * It takes a Credential object as parameter and send this object to Model for authentication.
+         */
         [HttpPost]
         public ActionResult Login(Credential credential)
         {
@@ -81,12 +91,20 @@ namespace CMPE312_PROJECT.Controllers
                 return View(credential);
             }    
         }
+
+        /*
+         * This method is HttpGet method of signup feature of the application. It returns a new Credential object.
+         */
         [HttpGet]
         public ActionResult Signup()
         {
             return View(new Credential());
         }
 
+        /*
+         * This method is HttpPost method of login feature of the application.
+         * It takes a Credential object as parameter and sends this object to Model for adding that user to database if everything is valid.
+         */
         [HttpPost]
         public ActionResult Signup(Credential credential)
         {
@@ -141,6 +159,10 @@ namespace CMPE312_PROJECT.Controllers
                 }
             }
         }
+
+        /*
+         * This method provides logout feature to the application by sending current user object to LogoutUser() method of UserManager class.
+         */
         public ActionResult Logout()
         {
             UserManager.LogoutUSer(Session);
@@ -148,6 +170,9 @@ namespace CMPE312_PROJECT.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /*
+         * This method is HttpGet method of "get user information" feature of the application. It returns a new Credential object which is created by current user's information.
+         */
         [HttpGet]
         public ActionResult GetUserInfo()
         {
@@ -155,6 +180,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Credential { UserId = user.UserID, Name = user.Name, Email = user.Email });
         }
 
+        /*
+         * This method is HttpPost method of "get user information" feature of the application.
+         * It takes a Credential object as parameter and sends this object to Model for updating current user's information if everything is valid.
+         */
         [HttpPost]
         public ActionResult GetUserInfo(Credential credential)
         {
@@ -239,6 +268,9 @@ namespace CMPE312_PROJECT.Controllers
 
         }
 
+        /*
+         * This method is HttpGet method of change password feature of the application. It returns a new Credential object.
+         */
         [HttpGet]
         public ActionResult UserChangePassword()
         {
@@ -246,6 +278,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new Credential ());
         }
 
+        /*
+         * This method is HttpPost method of change password feature of the application.
+         * It takes a Credential object as parameter and sends this object to Model for updating current user's password if everything is valid.
+         */
         [HttpPost]
         public ActionResult UserChangePassword(Credential credential)
         {
@@ -318,6 +354,9 @@ namespace CMPE312_PROJECT.Controllers
 
         }
 
+        /*
+         * This method is HttpGet method of change status feature of the application. It returns a new User object.
+         */
         [HttpGet]
         public ActionResult ChangeStatus()
         {
@@ -326,6 +365,10 @@ namespace CMPE312_PROJECT.Controllers
             return View(new User());
         }
 
+        /*
+         * This method is HttpPost method of change status feature of the application.
+         * It takes a User object as parameter and sends this object to Model for updating current user's status if everything is valid.
+         */
         [HttpPost]
         public ActionResult ChangeStatus(User user_)
         {
@@ -363,6 +406,9 @@ namespace CMPE312_PROJECT.Controllers
             }
         }
 
+        /*
+         * This method is HttpGet method of get user status feature of the application.
+         */
         [HttpGet]
         public string GetUserStatus(string UserId)
         {
@@ -370,15 +416,9 @@ namespace CMPE312_PROJECT.Controllers
             return user.Status == "A" ? "Active" : "Inactive";
         }
 
-
-        [HttpGet]
-        public ActionResult ChangeUserPassword()
-        {
-            List<User> users = UserPersistence.GetAllUsers();
-            ViewData["Users"] = users;
-            return View(new Credential());
-        }
-
+        /*
+         * This method is HttpGet method of "Information for all users" feature of the application. It returns a new User object.
+         */
         [HttpGet]
         public ActionResult UserInformation()
         {
@@ -386,6 +426,9 @@ namespace CMPE312_PROJECT.Controllers
             return View(new User());
         }
 
+        /*
+         * This method is HttpGet method of statistics feature of the application.
+         */
         [HttpGet]
         public ActionResult Statistics()
         {
@@ -400,6 +443,21 @@ namespace CMPE312_PROJECT.Controllers
             return View();
         }
 
+        /*
+         * This method is HttpGet method of change password feature for admins of the application. It returns a new Credential object.
+         */
+        [HttpGet]
+        public ActionResult ChangeUserPassword()
+        {
+            List<User> users = UserPersistence.GetAllUsers();
+            ViewData["Users"] = users;
+            return View(new Credential());
+        }
+
+        /*
+         * This method is HttpPost method of change password feature for admins of the application.
+         * It takes a Credential object as parameter and sends this object to Model for updating selected user's password if everything is valid.
+         */
         [HttpPost] 
         public ActionResult ChangeUserPassword(Credential cre)
         {

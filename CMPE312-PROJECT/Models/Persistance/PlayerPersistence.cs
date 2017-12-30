@@ -6,16 +6,13 @@ using CMPE312_PROJECT.Models.Repository;
 namespace CMPE312_PROJECT.Models.Repository
 {
     /*
-     * This class manages CRUD (create, retrieve, update, delete) operations
-     * for books.
-     */
+    * This class is created for getting, adding, deleting and updating Player data which is stored in the database.
+    */
     public class PlayerPersistence
     {
         /*
-         * Retrieve from the database the book matching the ISBN field of
-         * the parameter.
-         * Return null if the book can't be found.
-         */
+        * This method takes a Player object as parameter and returns a player if the parameter is exist in the database.
+        */
         public static Player GetPlayer(Player player1)
         {
             string sqlQuery = "select * from PLAYER where NAME='" + player1.Name.ToUpper() + "' AND SURNAME='" + player1.Surname.ToUpper() + "'";
@@ -33,9 +30,9 @@ namespace CMPE312_PROJECT.Models.Repository
         }
 
         /*
-         * Add a Player to the database.
-         * Return true iff the add succeeds.
-         */
+        * This method takes a Player object as parameter and adds this player object to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool AddPlayer(Player player1)
          {
             string sql1 = "SELECT * FROM PLAYER WHERE ID = (SELECT MAX(ID) from PLAYER); ";
@@ -64,6 +61,10 @@ namespace CMPE312_PROJECT.Models.Repository
             return true;
          }
 
+        /*
+        * This method takes a Player object as parameter and deletes this player object from the database if it is exist. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool DeletePlayer(Player player1)
         {
             string sql = "delete from PLAYER where ID=" + player1.ID;
@@ -76,11 +77,10 @@ namespace CMPE312_PROJECT.Models.Repository
         }
 
         /*
-         * Update a book that is in the database, replacing all field values except
-         * the key field.
-         * Return false if the book is not found, based on key field match.
-         */
-         public static bool UpdatePlayer(Player player1)
+        * This method takes a Player object as parameter and checks this player object if it is exist in the database by its ID. If it is exist, the method changes the data of that player with given data. 
+        * If this operation succeeds, the method returns true.
+        */
+        public static bool UpdatePlayer(Player player1)
          {
           
             string sql = "Update PLAYER set NAME='" +  player1.Name.ToUpper() + "', SURNAME='" + player1.Surname.ToUpper() + "', BIRTH_DATE='" + player1.BirthDate + "', POSITION='" + player1.Position.ToUpper() + "', TRANSFER_FEE='" + player1.TransferFee + "', SALARY='" + player1.Salary + "', TEAM_ID='" + player1.TeamID + "' where ID=" + player1.ID;
@@ -92,6 +92,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return false;
          }
 
+        /*
+        * This method returns number of positions in the database.
+        */
         public static List<Position> GetPositions()
         {
             List<Position> positions = new List<Position>();
@@ -114,6 +117,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return positions;
         }
 
+        /*
+        * This method returns number of players in the database.
+        */
         public static decimal GetNumberOfPlayers()
         {
             string sqlQuery = "SELECT COUNT(*) FROM PLAYER";

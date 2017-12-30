@@ -14,8 +14,8 @@ namespace CMPE312_PROJECT.Models.Repository
             users = new List<User>();
         }
         /*
-         * Get one user from the repository, identified by userId
-         */
+        * This method takes a String object as parameter and returns a user if user, whose ID was given by that String object, is exist in the database.
+        */
         public static User GetUser(string userId)
         {
             string sqlQuery = "select * from USER where USER_ID='" + userId + "'";
@@ -45,7 +45,10 @@ namespace CMPE312_PROJECT.Models.Repository
             return null;
         }
 
-        // Not Implemented
+        /*
+        * This method takes a User object as parameter and checks this user object if it is exist in the database by its ID. If it is exist, the method changes the data of that user with given data. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool UpdateUser(User user1)
         {
 
@@ -58,6 +61,10 @@ namespace CMPE312_PROJECT.Models.Repository
             return false;
         }
 
+        /*
+        * This method takes a User object as parameter and deletes this user object from the database if it is exist. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool DeleteUser(User user1)
         {
             string sql = "delete from USER where USER_ID='" + user1.UserID + "'";
@@ -69,6 +76,10 @@ namespace CMPE312_PROJECT.Models.Repository
             return false;
         }
 
+        /*
+        * This method takes a User object as parameter and adds this user object to the database. 
+        * If this operation succeeds, the method returns true.
+        */
         public static bool InsertUser(User user1)
         {
             string sql = "insert into USER VALUES ('" + user1.UserID + "','" + user1.Name + "','" + user1.Email + "','" + user1.Salt + "','" + user1.PasswordHash + "','" + user1.IsAdmin + "','" + user1.PresidentID + "','" + user1.Status + "')";
@@ -79,6 +90,10 @@ namespace CMPE312_PROJECT.Models.Repository
             }
             return false;
         }
+
+        /*
+         * This method returns all of users from the database.
+         */
         public static List<User> GetAllUsers()
         {
             List<User> users = new List<User>();
@@ -95,6 +110,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return users;
         }
 
+        /*
+        * This method returns number of inactive users in the database.
+        */
         public static decimal GetNumberOfInactive()
         {
             string sqlQuery = "SELECT COUNT(*) FROM USER WHERE STATUS ='I'";
@@ -113,6 +131,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return number;
         }
 
+        /*
+        * This method returns number of active users in the database.
+        */
         public static decimal GetNumberOfActive()
         {
             string sqlQuery = "SELECT COUNT(*) FROM USER WHERE STATUS ='A'";
@@ -131,6 +152,9 @@ namespace CMPE312_PROJECT.Models.Repository
             return number;
         }
 
+        /*
+        * This method returns number of users in the database.
+        */
         public static decimal GetNumberOfUsers()
         {
             string sqlQuery = "SELECT COUNT(*) FROM USER";

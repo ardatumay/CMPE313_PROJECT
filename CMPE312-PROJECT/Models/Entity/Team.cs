@@ -6,6 +6,9 @@ using System.Collections;
 
 namespace CMPE312_PROJECT.Models.Entity
 {
+    /*
+    * This class is created for storing Team data in the application after getting it from the database.
+    */
     public class Team
     {
         public decimal ID { get; set; }
