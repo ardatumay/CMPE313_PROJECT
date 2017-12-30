@@ -26,5 +26,16 @@ namespace CMPE312_PROJECT.Models.Entity
         {
             Name = name1;
         }
+
+        public static Team CreateTeamWithName(string name)
+        {
+            return new Team(name);
+        }
+
+        public string GetTeamInfo()
+        {
+            string info = "Name,"+ Name + ",City," + City + ",Foundation," + Foundation + ",Budget," + Budget + ",Number Of Championship," + NumberOfChampionship;
+            return info;
+        }
     }
 }

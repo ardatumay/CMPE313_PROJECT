@@ -166,7 +166,7 @@ namespace CMPE312_PROJECT.Controllers
             string teamComments = "";
             if (comments == null)
             {
-                TempData["message"] = "There are no comments about the team.";
+                //TempData["message"] = "There are no comments about the team.";
                 return null;
             }
             else

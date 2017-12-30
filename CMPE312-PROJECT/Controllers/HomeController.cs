@@ -15,7 +15,7 @@ namespace CMPE312_PROJECT.Controllers
     {
         public ActionResult Index()
         {
-            var teams = TeamPersistance.GetTeams();
+            var teams = TeamPersistance.GetTeamsByPointOrder();
             ViewData["Teams"] = teams;
             return View("Index", new Team());
         }
@@ -32,6 +32,14 @@ namespace CMPE312_PROJECT.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public string GetTeamInfo(string teamName)
+        {
+            Team team1 = Team.CreateTeamWithName(teamName);
+            Team team2 = TeamPersistance.GetTeam(team1);
+            return team2.GetTeamInfo();
         }
 
     }

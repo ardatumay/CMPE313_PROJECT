@@ -59,8 +59,26 @@
         }
 
         a:hover {color:green;}
-
+        body {
+            height:100%;
+            min-height:100%;
+            padding-bottom: 0px;
+            margin-bottom: 0px; 
         }
+        footer {
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            clear: both;
+            background-color: #222222;
+            color: #888;
+            height: 50px;
+        }
+            footer p {
+                bottom: 0;
+                width: 100%;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
     </style>
 </head>
 <body>
@@ -178,7 +196,7 @@
 
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Users</button>
+                                    <button class="dropbtn">System Management</button>
                                     <div class="dropdown-content">
                                         <a href="~/Authentication/UserInformation">Users</a>
                                         <a href="~/Authentication/ChangeStatus">Change User Status</a>
@@ -200,16 +218,16 @@
         </div>
     </div>
 
-    <div class="container body-content" style="margin-top:150px">
+    <div class="container body-content" >
         @RenderBody()
         @ViewBag.message
         @TempData["message"]
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
+    </div>
+    <hr style=" clear:both;" />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

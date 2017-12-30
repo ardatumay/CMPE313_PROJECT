@@ -331,7 +331,7 @@ namespace CMPE312_PROJECT.Controllers
         {
             bool updated;
             User user = UserManager.getUserById(user_.UserID);
-            if(user_.Status == null || user_.Status.Length == 0 || user_.UserID == null || user_.UserID.Length == 0)
+            if(user_.Status == null || user_.Status.Length == 0 || user_.UserID == null || user_.UserID.Length == 0 || user_.UserID == "-" || user_.UserID.Length == 0)
             {
                 List<User> users = UserPersistence.GetAllUsers();
                 ViewData["Users"] = users;

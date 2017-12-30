@@ -23,7 +23,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             // Use the data from the first returned row (should be the only one) to create a Team.
             object[] dataRow = rows[0];
             //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5]};
+            Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5], Point = (decimal)dataRow[6]};
             return team;
         }
 
@@ -40,7 +40,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             // Use the data from the first returned row (should be the only one) to create a Team.
             object[] dataRow = rows[0];
             //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
-            Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5] };
+            Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5], Point = (decimal)dataRow[6] };
             return team;
         }
 
@@ -72,7 +72,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + 1 + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
+                string sql2 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP, POINTS) values ('" + 1 + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "','" + team1.Point + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -86,7 +86,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                     MaxId = Convert.ToDecimal(dataRow[0]);
                 }
                 decimal NewId = MaxId + 1; 
-                string sql4 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP) values ('" + NewId + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "')";
+                string sql4 = "Insert into team (ID, NAME, CITY, FOUNDATION, BUDGET, NUMBER_OF_CHAMPIONSHIP, POINTS) values ('" + NewId + "','" + team1.Name.ToUpper() + "','" + team1.City.ToUpper() + "','" + team1.Foundation + "','" + team1.Budget + "','" + team1.NumberOfChampionship + "','" + team1.Point + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
             }
             if (result == 1)
@@ -146,6 +146,29 @@ namespace CMPE312_PROJECT.Models.Persistance
                 //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
                 Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5], Point = (decimal)dataRow[6] };
                 teams.Add(team); 
+            }
+
+            return teams;
+        }
+
+
+        public static List<Team> GetTeamsByPointOrder()
+        {
+            List<Team> teams = new List<Team>();
+            string sqlQuery = "select * from TEAM order by POINTS DESC";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Team.
+            foreach (object[] dataRow in rows)
+            {
+                //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
+                Team team = new Team { ID = (decimal)dataRow[0], Name = (String)dataRow[1], City = (String)dataRow[2], Foundation = (decimal)dataRow[3], Budget = (decimal)dataRow[4], NumberOfChampionship = (decimal)dataRow[5], Point = (decimal)dataRow[6] };
+                teams.Add(team);
             }
 
             return teams;

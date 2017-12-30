@@ -43,7 +43,7 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Positions"] = positions;
                 return View(new Player());
             }
-            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 ||  player.TransferFee == 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary == 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 ||  player.TransferFee == 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary == 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 || player.TeamName == "-" )
             {
 
                 if(player.Salary == 0 ||player.TransferFee == 0)

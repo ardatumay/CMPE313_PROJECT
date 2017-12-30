@@ -34,9 +34,9 @@ namespace CMPE312_PROJECT.Controllers
             {
                 return View(new Team());
             }
-            if ((team.Name == null) || (team.Name.Length == 0) || (team.City== null) || (team.City.Length == 0) || (team.Foundation.ToString().Equals(null)) || (team.Foundation.ToString().Length == 0) || (team.Foundation.ToString().Length > 4) || (team.Budget.ToString().Equals(null)) || (team.Budget.ToString().Length == 0) || (team.NumberOfChampionship.ToString().Equals(null)) || (team.NumberOfChampionship.ToString().Length == 0))
+            if ((team.Name == null) || (team.Name.Length == 0) || (team.City== null) || (team.City.Length == 0) || (team.Foundation.ToString().Equals(null)) || (team.Foundation.ToString().Length == 0) || (team.Foundation.ToString().Length > 4) || (team.Budget.ToString().Equals(null)) || (team.Budget.ToString().Length == 0) || (team.NumberOfChampionship.ToString().Equals(null)) || (team.NumberOfChampionship.ToString().Length == 0) || (team.Point == 0) || (team.Point.ToString().Length == 0))
             {
-                if(team.Foundation.ToString().Length > 4)
+                if(team.Foundation.ToString().Length != 4 )
                 {
                     TempData["message"] = "Foundation year must be 4 characters.";
                     return View(team);
@@ -80,10 +80,14 @@ namespace CMPE312_PROJECT.Controllers
         {
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 return View(new Team());
             }
-            if ((team.Name == null) || (team.Name.Length == 0))
+            if ((team.Name == null) || (team.Name.Length == 0) || (team.Name == "-"))
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "All fields are required.";
                 return View(team);
             }
@@ -97,6 +101,8 @@ namespace CMPE312_PROJECT.Controllers
             }
             else
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 TempData["message"] = "This team is not exist. Please check the fields.";
                 return View(team);
             }
@@ -132,6 +138,11 @@ namespace CMPE312_PROJECT.Controllers
         {
             if (team == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                Team teamx = TeamPersistance.GetTeamByID(new Team { ID = UserManager.user.PresidentID });
+                ViewData["TeamName"] = teamx.Name;
                 return View(new Team());
             }
 

@@ -6,26 +6,121 @@
 
     bool result = RepositoryManager.Repository.Initialize();
 }
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="UTF-8"></script>
 
+<script  type="text/JavaScript">
+    window.onload = function () {
+        try { // Firefox, Opera, IE7
+            request = new XMLHttpRequest()
+        }
+        catch (e) {
+            try { // IE6
+                request = new ActiveXObject('MSXML2.XMLHTTP.5.0')
+            }
+            catch (e) {
+                request = false
+            }
+        }
+        if (!request) alert('Ajax setup failed')
+    }
+    var info
+    $(function () {
+        $("#teamTable tbody").on("click", "tr", function () {
+            var rowinfo = $(this).closest('tr').find('td').map(function () {
+                return $(this).text();
+            }).get().join();
+            info = rowinfo
+            console.log(rowinfo);
+        });
+    });
+    function checkTeam() {
+        if (!request) return      
+        var team = get("select")
+        var teamName = team.value
+        console.log(teamName)
+        //var prefix = "GALATASARAY"
+        var url = "/Home/GetTeamInfo?teamName=" + teamName
+            request.open("GET", url, true)
+            request.onreadystatechange = updatePage
+            request.send(null)
+    }
+
+    function updatePage() {
+        console.log(request.readyState)
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                var response = request.responseText
+                var teamInfo = response.split(",")
+                var undefined = "undefined"
+                var teamTable = ''
+                for (var i = 0; i < teamInfo.length-1; i = i + 2){
+                    teamTable += '<tr><th>' + teamInfo[i] + '</th><td>' + teamInfo[i + 1] + '</td></tr>'
+                    console.log(teamInfo[i])
+                    console.log(teamInfo[i + 1])
+                    console.log(teamInfo)
+                }
+                console.log(teamTable)
+                get('teamInfo').innerHTML = teamTable
+            }
+            else {
+                alert("Error: status code " + request.status)
+            }
+        }
+    }
+    function get(id) { return document.getElementById(id) }
+    
+</script>
 
 <h4>Home Page</h4>
-
+<style>
+    #teamInformation {
+        float: right;
+        position: relative;
+        right: 300px;
+        top: 30px;
+        width: 35%;
+    }
+    #teamInfo {
+            float: right;
+    }
+</style>
 
 <form method="get" action="~/Home/Index">
+    <div id="teamInformation">
+        <p>Please choose a team for more information</p>
+        <p>
+            <select id="select" onchange="checkTeam()">
+                <option selected="selected">-</option>
+                @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                    <option value="@team.Name">@team.Name</option>
+                }
+            </select>
+        </p>
+        <p>
+            <table class="table table-striped" id="teamInfo"></table>
+        </p>
+    </div>
+
     <p><label>League Point Table</label></p>
     <p>
-        <table style="width:100%">
-            <tr>
-                <th>Team</th>
-                <th>Point</th>
-            </tr>
-                @foreach (var team in (List<Team>)ViewData["Teams"])
+        <table id="teamTable" class="table table-striped" style="width:30%; float:left;">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Point</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Team team in (List<Team>)ViewData["Teams"])
                 {
                     <tr>
-                        <td>@team.Name</td>
+                        <td id="teamName">@team.Name</td>
                         <td>@team.Point</td>
                     </tr>
                 }
+            </tbody>
+
         </table>
     </p>
 
