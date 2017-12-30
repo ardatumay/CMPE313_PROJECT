@@ -15,7 +15,7 @@ namespace CMPE312_PROJECT.Models.Repository
     public class SqliteRepository : IRepository
     {
         // Location of the database file 
-        private string databaseFile = "C:\\Users\\User\\cmpe312-project.sqlite";
+        private string databaseFile = "C:\\Users\\Batuhan\\cmpe312-project.sqlite";
 
 
         private SQLiteConnection dbConnection;
@@ -225,7 +225,7 @@ namespace CMPE312_PROJECT.Models.Repository
             UserManager.SignupUser(new Credential("hasancavusoglu", "hasancavusoglu", "email", "Hasan Çavuþoðlu", 0, 12));
             UserManager.SignupUser(new Credential("muratcavcav", "muratcavcav", "email", "Murat Cavcav", 0, 13));
             UserManager.SignupUser(new Credential("adilgevrek", "adilgevrek", "email", "Adil Gevrek", 0, 14));
-            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "Hüseyin Eryüksel", 0, 15));
+            UserManager.SignupUser(new Credential("huseyineryuksel", "huseyineryuksel", "email", "H�seyin Ery�ksel", 0, 15));
             UserManager.SignupUser(new Credential("turgayciner", "turgayciner", "email", "Turgay Ciner", 0, 16));
             UserManager.SignupUser(new Credential("mecnunotyakmaz", "mecnunotyakmaz", "email", "Mecnun Otyakmaz", 0, 17));
             UserManager.SignupUser(new Credential("feriduntankut", "feriduntankut", "email", "Feridun Tankut", 0, 18));
