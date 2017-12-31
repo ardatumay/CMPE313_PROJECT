@@ -69,27 +69,6 @@
 </script>
 
 <h4>Home Page</h4>
-<style>
-    #teamInformation {
-        float: right;
-        position: relative;
-        right: 300px;
-        top: 80px;
-        width: 35%;
-    }
-
-    #teamInfo {
-        float: right;
-    }
-
-    #teamTable {
-        position: relative;
-        top: 50px;
-        width: 30%;
-        float: left
-    }
-</style>
-
 <form method="get" action="~/Home/Index">
     <div id="teamInformation">
         <p>Please choose a team for more information</p>
@@ -102,30 +81,28 @@
                 }
             </select>
         </p>
-        <p>
-            <table class="table table-striped" id="teamInfo"></table>
-        </p>
+        <table class="table table-striped" id="teamInfo"></table>
     </div>
-    <p>
-        <table id="teamTable" class="table table-striped" style="width:30%; float:left;">
-            <caption><b>Point Table</b></caption>
-            <thead>
-                <tr>
-                    <th>Team</th>
-                    <th>Point</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Team team in (List<Team>)ViewData["Teams"])
-                {
-                    <tr>
-                        <td id="teamName">@team.Name</td>
-                        <td>@team.Point</td>
-                    </tr>
-                }
-            </tbody>
 
-        </table>
-    </p>
+    <table id="teamTable" class="table table-striped" style="width:30%; float:left;">
+        <caption><b>Point Table</b></caption>
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Point</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                <tr>
+                    <td class="teamName">@team.Name</td>
+                    <td>@team.Point</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
 
 </form>

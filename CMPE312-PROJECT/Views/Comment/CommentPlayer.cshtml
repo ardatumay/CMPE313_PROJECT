@@ -36,7 +36,7 @@
                 var response = request.responseText
                 var players = response.split(",")
                 var undefined = "undefined"
-                var selectPlayer = ''
+                var selectPlayer = '<option selected="selected">-</option>'
                 for (var i = 0; i < players.length - 1; i = i + 2) {
                     selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
                     console.log(players[i])
@@ -69,7 +69,7 @@
         </select>
     </p>
     <div>
-        <p>Choose Player</p>
+        <p><label>Choose Player</label></p>
         <select id="players" name="PlayerId">
             <option selected="selected">-</option>
         </select>

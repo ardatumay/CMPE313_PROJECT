@@ -85,6 +85,32 @@
                 margin-bottom: 0px;
                 clear: both;
             }
+
+        #teamInformation {
+            float: right;
+            position: relative;
+            right: 300px;
+            top: 80px;
+            width: 35%;
+        }
+
+        #teamInfo {
+            float: right;
+        }
+
+        #teamTable {
+            position: relative;
+            top: 50px;
+            width: 30%;
+            float: left
+        }
+
+        #comments p {
+            border-width: 1.5px;
+            border-style: dashed;
+            width: 200px;
+            background-color: lightgray;
+        }
     </style>
 </head>
 <body>
@@ -224,8 +250,6 @@
         @RenderBody()
         @ViewBag.message
         <p>@TempData["message"]</p>
-
-
     </div>
     <hr style=" clear:both;" />
     <footer>
