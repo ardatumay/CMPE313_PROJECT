@@ -218,6 +218,15 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential { UserId = user1.UserID, Name = user1.Name, Email = user1.Email });
             }
 
+            string checkUserID = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkEmail = credential.Email.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
+            if (!(checkUserID.Equals(credential.UserId)) || !(checkEmail.Equals(credential.Email)))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
+            }
+
             if (credential.Name != null && credential.Email != null)
             {
                 Match matchname = Regex.Match(credential.Name, validName);

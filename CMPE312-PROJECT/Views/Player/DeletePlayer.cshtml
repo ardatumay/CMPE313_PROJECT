@@ -3,14 +3,83 @@
 @{
     ViewBag.Title = "DeletePlayer";
 }
+
+<script type="text/JavaScript">
+    window.onload = function () {
+        try { // Firefox, Opera, IE7
+            request = new XMLHttpRequest()
+        }
+        catch (e) {
+            try { // IE6
+                request = new ActiveXObject('MSXML2.XMLHTTP.5.0')
+            }
+            catch (e) {
+                request = false
+            }
+        }
+        if (!request) alert('Ajax setup failed')
+    }
+
+    function checkTeam() {
+        if (!request) return
+        var team = get("selectTeam")
+        var teamName = team.value
+        //var prefix = "GALATASARAY"
+        var url = "/Team/GetTeamPlayers?teamName=" + teamName
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
+    }
+
+    function updatePage() {
+        if (request.readyState == 4) {
+            if (request.status == 200) {
+                var response = request.responseText
+                var players = response.split(",")
+                var undefined = "undefined"
+                var selectPlayer = ''
+                for (var i = 0; i < players.length - 1; i = i + 2) {
+                    selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
+                    console.log(players[i])
+                    console.log(players[i + 1])
+                    console.log(response)
+                }
+                console.log(selectPlayer)
+                //get('players').value = response
+                get('players').innerHTML = selectPlayer
+            }
+            else {
+                alert("Error: status code " + request.status)
+            }
+        }
+    }
+    function get(id) { return document.getElementById(id) }
+</script>
+
+
+
+
 <h2>DeletePlayer</h2>
 
 <form method="post" action="~/Player/DeletePlayer">
-    <ul>
-        <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
-        <li><label>Surname<input name="Surname" value="@Model.Surname" type="text" /></label></li>
-    </ul>
+    <p><label>Choose Team</label></p>
+    <p>
+        <select name="TeamName" id="selectTeam" onchange="checkTeam()">
+            <option selected="selected">-</option>
+            @foreach (Team team in (List<Team>)ViewData["Teams"])
+            {
+                <option value="@team.Name">@team.Name</option>
+            }
+        </select>
+    </p>
+    <div>
+        <p>Choose Player</p>
+        <select id="players" name="ID">
+            <option selected="selected">-</option>
+        </select>
+    </div>
+
+    <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->
 
     <p><input type="submit" value="Delete Player" /></p>
-
 </form>

@@ -146,6 +146,8 @@ namespace CMPE312_PROJECT.Controllers
         [HttpGet]
         public ActionResult DeletePlayer()
         {
+            var teams = TeamPersistance.GetTeams();
+            ViewData["Teams"] = teams;
             return View(new Player());
         }
 
@@ -159,6 +161,8 @@ namespace CMPE312_PROJECT.Controllers
             bool isExist = true;
             if (player == null)
             {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
                 return View(new Player());
             }
             if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0)
@@ -167,20 +171,11 @@ namespace CMPE312_PROJECT.Controllers
                 return View(player);
             }
 
-            isExist = PlayerManager.CheckPlayer(player);
-            Player player1 = PlayerPersistence.GetPlayer(player);
+            Player player1 = PlayerPersistence.GetPlayerByID(player);
 
-            if (isExist)
-            {
-                PlayerPersistence.DeletePlayer(player1);
-                TempData["message"] = player1.Name + " " + player1.Surname + " is deleted successfully.";
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                TempData["message"] = "This player is not exist. Please check the fields.";
-                return View(player);
-            }
+            PlayerPersistence.DeletePlayer(player1);
+            TempData["message"] = player1.Name + " " + player1.Surname + " is deleted successfully.";
+            return RedirectToAction("Index", "Home");
         }
 
         /*
