@@ -30,6 +30,27 @@ namespace CMPE312_PROJECT.Models.Repository
         }
 
         /*
+        * This method takes a String object as parameter and returns a player with that parameter ID if the parameter is exist in the database.
+        */
+        public static Player GetPlayerByID(Player player1)
+        {
+            string sqlQuery = "select * from PLAYER where ID='" + player1.ID + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Player.
+            object[] dataRow = rows[0];
+            Player player = new Player { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], Position = (String)dataRow[4], TransferFee = (decimal)dataRow[5], Salary = (decimal)dataRow[6], TeamID = (decimal)dataRow[7] };
+            return player;
+        }
+
+
+
+        /*
         * This method takes a Player object as parameter and adds this player object to the database. 
         * If this operation succeeds, the method returns true.
         */
