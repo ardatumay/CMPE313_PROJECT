@@ -13,6 +13,8 @@ namespace CMPE312_PROJECT.Models.Repository
      * 
      * Use of an interface enables the easy replacement of the actual
      * repository class in the future.
+     * 
+     * This class was given to us by Mr. Grove and we used it in our project with some changes of course.
      */
     public interface IRepository
     {

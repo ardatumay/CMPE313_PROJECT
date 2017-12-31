@@ -4,8 +4,8 @@ using CMPE312_PROJECT.Models.Repository;
 namespace CMPE312_PROJECT.Models.Repository
 {
     /*
-     * This class instantiates an instance of IRepository, and provides
-     * it to Persistence classes as needed.
+     * This class instantiates an instance of IRepository, and provides it to Persistence classes as needed.
+     * This class was given to us by Mr. Grove and we used it in our project with some changes of course.
      */
     public class RepositoryManager
     {

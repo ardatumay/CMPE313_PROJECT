@@ -7,7 +7,9 @@ namespace CMPE312_PROJECT.Models.Transaction
     public class EncryptionManager
     {
 
-        /* Generate a random salt value */
+        /* 
+         * This class was given to us by Mr. Grove and we used it in our project with some changes of course.
+         */
         public static string PasswordSalt
         {
             get

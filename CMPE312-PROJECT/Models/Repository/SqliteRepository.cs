@@ -10,7 +10,8 @@ using CMPE312_PROJECT.Models.Persistance;
 namespace CMPE312_PROJECT.Models.Repository
 {
     /*
-     * This class creates and accesses an SQLite database.
+     * This class creates and accesses an SQLite database. 
+     * This class was given to us by Mr. Grove and we used it in our project with some changes of course.
      */
     public class SqliteRepository : IRepository
     {
