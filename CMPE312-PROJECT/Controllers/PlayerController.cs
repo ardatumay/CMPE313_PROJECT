@@ -41,6 +41,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Player object as parameter and sends this object to Model for adding current player.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddPlayer(Player player)
         {
             bool isExist = true;
@@ -53,10 +54,10 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Positions"] = positions;
                 return View(new Player());
             }
-            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 ||  player.TransferFee == 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary == 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 || player.TeamName == "-" )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 || player.BirthDate == null || player.BirthDate.Length == 0 || player.Position == null || player.Position.Length == 0 || player.TransferFee < 0 || player.TransferFee == 0 || player.TransferFee.ToString().Equals(null) || player.Salary < 0 || player.Salary == 0 || player.Salary.ToString().Equals(null) || player.TeamName == null || player.TeamName.Length == 0 || player.TeamName == "-")
             {
 
-                if(player.Salary == 0 ||player.TransferFee == 0)
+                if (player.Salary == 0 || player.TransferFee == 0)
                 {
                     var teams = TeamPersistance.GetTeams();
                     ViewData["Teams"] = teams;
@@ -91,9 +92,19 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(player);
             }
-            player.Name = player.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-            player.Surname = player.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckName = player.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckSurname = player.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
 
+            if (!CheckName.Equals(player.Name) || !CheckSurname.Equals(player.Surname))
+            {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+
+                var positions = PlayerPersistence.GetPositions();
+                ViewData["Positions"] = positions;
+                TempData["message"] = "XSS attack found!";
+                return View(new Player());
+            }
             Team team = TeamPersistance.GetTeam(new Team(player.TeamName));
             if (team == null)
             {
@@ -143,14 +154,14 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Player object as parameter and sends this object to Model for deleting current player.
          */
         [HttpPost]
-        public ActionResult DeletePlayer (Player player)
+        public ActionResult DeletePlayer(Player player)
         {
             bool isExist = true;
             if (player == null)
             {
                 return View(new Player());
             }
-            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0 )
+            if (player.Name == null || player.Name.Length == 0 || player.Surname == null || player.Surname.Length == 0)
             {
                 TempData["message"] = "All fields are required.";
                 return View(player);
@@ -175,7 +186,7 @@ namespace CMPE312_PROJECT.Controllers
         /*
          * This method returns all teams which are obtained from the database.
          */
-        public List<Team> GetTeams ()
+        public List<Team> GetTeams()
         {
             return TeamPersistance.GetTeams();
         }

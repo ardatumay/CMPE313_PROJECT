@@ -26,9 +26,9 @@
         var UserId = userId.value
         //var prefix = "GALATASARAY"
         var url = "/Authentication/GetUserStatus?UserId=" + UserId
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send(null)
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
     }
 
     function updatePage() {
@@ -47,7 +47,7 @@
 </script>
 <h2>Change Status</h2>
 
-<form method="post" action="~/Authentication/ChangeStatus" >
+<form method="post" action="~/Authentication/ChangeStatus">
     <p><label>Choose User</label></p>
     <p>
         <select id="userId" name="UserID" onchange="checkStatus()">
@@ -63,8 +63,8 @@
     <ul>
         <li>
             <p><label>Choose Status</label></p>
-                <label>Active<input  type="radio" name="Status" value="A"></label>
-                <label>Inactive<input type="radio" name="Status" value="I"></label>
+            <label>Active<input type="radio" name="Status" value="A"></label>
+            <label>Inactive<input type="radio" name="Status" value="I"></label>
         </li>
     </ul>
     <!--<input type="hidden" name="TeamName" val />-->

@@ -36,6 +36,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and send this object to Model for authentication.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Login(Credential credential)
         {
             bool login;
@@ -46,17 +47,25 @@ namespace CMPE312_PROJECT.Controllers
                 return View(new Credential());
             }
 
+            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
+            {
+                TempData["message"] = "Both user id and password are required";
+                return View(credential);
+            }
+            string checkUserID = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserPass = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
+            if ((!checkUserID.Equals(credential.UserId)) || (!checkUserPass.Equals(credential.Password1)))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
+            }
+
             User user = UserPersistence.GetUser((credential.UserId));
 
             if (user == null)
             {
                 TempData["message"] = "User was not found.";
-                return View(credential);
-            }
-
-            if ((credential.UserId == null) || (credential.UserId.Length == 0) || (credential.Password1 == null) || (credential.Password1.Length == 0))
-            {
-                TempData["message"] = "Both user id and password are required";
                 return View(credential);
             }
 
@@ -75,9 +84,6 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
-                credential.UserId = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-
                 login = UserManager.AuthenticateUser(credential, Session);
             }
             if (login)
@@ -106,6 +112,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and sends this object to Model for adding that user to database if everything is valid.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Signup(Credential credential)
         {
             string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
@@ -122,6 +129,17 @@ namespace CMPE312_PROJECT.Controllers
             {
                 TempData["message"] = "All fields are required.";
                 return View(credential);
+            }
+
+            string checkUserID = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserPass1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserPass2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserName = credential.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserMail = credential.Email.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if ((!checkUserID.Equals(credential.UserId)) || (!checkUserPass1.Equals(credential.Password1)) || !checkUserPass2.Equals(credential.Password2) || !checkUserName.Equals(credential.Name) || !checkUserMail.Equals(credential.Email))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
             }
             else if (!credential.Password1.Equals(credential.Password2))
             {
@@ -140,12 +158,6 @@ namespace CMPE312_PROJECT.Controllers
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
-                credential.UserId = credential.UserId.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Password2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Name = credential.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Email = credential.Email.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-
                 signup = UserManager.SignupUser(credential);
                 if(signup == false)
                 {
@@ -185,14 +197,13 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and sends this object to Model for updating current user's information if everything is valid.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult GetUserInfo(Credential credential)
         {
-            string validUserId = @"^[A-Za-z][A-Za-z0-9\-]*$";
-            string validPass = @"^[a-z0-9!@#$*]{8,12}$";
+
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validMail = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[A-Za-z0-9]+";
 
-            bool login;
             string newPassword = credential.Password1;
 
             if (credential == null)
@@ -283,6 +294,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and sends this object to Model for updating current user's password if everything is valid.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult UserChangePassword(Credential credential)
         {
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
@@ -302,7 +314,14 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required.";
                 return View(credential);
             }
-
+            string checkUserOldPass = credential.OldPassword.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserPass1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string checkUserPass2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if ((!checkUserOldPass.Equals(credential.UserId)) || (!checkUserPass1.Equals(credential.Password1)) || !checkUserPass2.Equals(credential.Password2))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
+            }
             if (credential.Password1.Equals(credential.OldPassword))
             {
                 TempData["message"] = "Your new password cannot be the same with your current password!";
@@ -318,15 +337,13 @@ namespace CMPE312_PROJECT.Controllers
             else
             {
                 Match matchpass = Regex.Match(credential.Password1, validPass);
+                Match matchOldpass = Regex.Match(credential.OldPassword, validPass);
 
-                if (!matchpass.Success)
+                if (!matchpass.Success || !matchOldpass.Success)
                 {
                     TempData["message"] = "Incorrect letters";
                     return View(credential);
                 }
-                credential.Password1 = credential.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.Password2 = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-                credential.OldPassword = credential.Password2.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
 
                 credential.UserId = UserManager.user.UserID;
                 credential.Password1 = credential.OldPassword;
@@ -459,6 +476,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Credential object as parameter and sends this object to Model for updating selected user's password if everything is valid.
          */
         [HttpPost] 
+        [ValidateInput(false)]
         public ActionResult ChangeUserPassword(Credential cre)
         {
             if(cre == null)
@@ -475,6 +493,14 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "All fields are required.";
                 return View(cre);
             }
+            string checkUserPass1 = cre.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if ((!checkUserPass1.Equals(cre.Password1)))
+            {
+                List<User> users = UserPersistence.GetAllUsers();
+                ViewData["Users"] = users;
+                TempData["message"] = "XSS attack found!";
+                return View(new Credential());
+            }
             string validPass = @"^[a-z0-9!@#$*]{8,12}$";
             Match matchpass = Regex.Match(cre.Password1, validPass);
             if (!matchpass.Success)
@@ -484,7 +510,6 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(cre);
             }
-            cre.Password1 = cre.Password1.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
             User user = UserManager.getUserById(cre.UserId);
             bool updated = UserManager.ChangeUserPassword(user, cre);
             if (updated)

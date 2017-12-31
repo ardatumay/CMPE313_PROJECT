@@ -36,15 +36,16 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Team object as parameter and sends this object to Model for adding current team.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult AddTeam(Team team)
         {
             if (team == null)
             {
                 return View(new Team());
             }
-            if ((team.Name == null) || (team.Name.Length == 0) || (team.City== null) || (team.City.Length == 0) || (team.Foundation.ToString().Equals(null)) || (team.Foundation.ToString().Length == 0) || (team.Foundation.ToString().Length > 4) || (team.Budget.ToString().Equals(null)) || (team.Budget.ToString().Length == 0) || (team.NumberOfChampionship.ToString().Equals(null)) || (team.NumberOfChampionship.ToString().Length == 0) || (team.Point == 0) || (team.Point.ToString().Length == 0))
+            if ((team.Name == null) || (team.Name.Length == 0) || (team.City == null) || (team.City.Length == 0) || (team.Foundation.ToString().Equals(null)) || (team.Foundation.ToString().Length == 0) || (team.Foundation.ToString().Length > 4) || (team.Budget.ToString().Equals(null)) || (team.Budget.ToString().Length == 0) || (team.NumberOfChampionship.ToString().Equals(null)) || (team.NumberOfChampionship.ToString().Length == 0) || (team.Point == 0) || (team.Point.ToString().Length == 0))
             {
-                if(team.Foundation.ToString().Length != 4 )
+                if (team.Foundation.ToString().Length != 4)
                 {
                     TempData["message"] = "Foundation year must be 4 characters.";
                     return View(team);
@@ -60,8 +61,13 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(team);
             }
-            team.Name = team.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-            team.City = team.City.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckName = team.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckCity = team.City.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if (!CheckName.Equals(team.Name) || !CheckCity.Equals(team.City))
+            {
+                TempData["message"] = "XSS attack found!";
+                return View(new President());
+            }
             bool isAdded = TeamManager.AddTeam(team);
             if (isAdded)
             {
@@ -72,7 +78,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 TempData["message"] = "Team is already registered.";
                 return View(team);
-            }   
+            }
         }
 
         /*
@@ -132,9 +138,9 @@ namespace CMPE312_PROJECT.Controllers
             Team team = TeamPersistance.GetTeam(new Team(teamName));
             List<Player> teamPlayers = TeamPersistance.GetTeamPlayers(team);
             string playerList = null;
-            foreach(Player player in teamPlayers)
+            foreach (Player player in teamPlayers)
             {
-                playerList += player.ID.ToString()+","+player.Name+",";
+                playerList += player.ID.ToString() + "," + player.Name + ",";
             }
             return playerList;
         }
@@ -150,7 +156,7 @@ namespace CMPE312_PROJECT.Controllers
 
             Team team = TeamPersistance.GetTeamByID(new Team { ID = UserManager.user.PresidentID });
             ViewData["TeamName"] = team.Name;
-            
+
             return View(team);
         }
 

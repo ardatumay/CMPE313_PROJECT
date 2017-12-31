@@ -14,7 +14,7 @@ namespace CMPE312_PROJECT.Models.Entity
 
         public Position()
         {
-            
+
         }
 
     }

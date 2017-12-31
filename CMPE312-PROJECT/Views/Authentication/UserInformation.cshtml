@@ -8,16 +8,63 @@
 
 <form method="post" action="~/Authentication/UserInformation">
 
-    @foreach (User user in (List<User>)ViewData["Users"])
-    {
-        if (user.IsAdmin == 1)
-        {
-            <p><b> @user.Name - @user.UserID - @user.Email - @user.Status</b></p>
-        }
+    <p>
+        <table id="teamTable" class="table table-striped" style="width:30%; float:left;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>User ID</th>
+                    <th>E-mail</th>
+                    <th>Status</th>
+                    <th>Account Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (User user in (List<User>)ViewData["Users"])
+                {
+                    if (user.IsAdmin == 1)
+                    {
+                        <tr>
+                            <td><b>@user.Name</b></td>
+                            <td><b>@user.UserID</b></td>
+                            <td><b>@user.Email </b></td>
+                            @{
+                                string status = @user.Status == "A" ? "Active" : "Inactive";
+                            }
+                            <td><i>@status</i></td>
+                            <td>Admin</td>
+                        </tr>
+                                }
+                                if (user.PresidentID != 0)
+                                {
+                                    <tr>
+                                        <td><i>@user.Name</i></td>
+                                        <td><i>@user.UserID</i></td>
+                                        <td><i>@user.Email</i></td>
+                                        @{
+                                            string status = @user.Status == "A" ? "Active" : "Inactive";
+                                        }
+                                        <td><i>@status</i></td>
+                                        <td>Team President</td>
 
-        if (user.PresidentID != 0)
-        {
-            <p><i> @user.Name - @user.UserID - @user.Email - @user.Status</i></p>
-        }
+                                    </tr>
+                                            }
+                                            if (user.PresidentID == 0 && user.IsAdmin == 0)
+                                            {
+                                                <tr>
+                                                    <td><i>@user.Name</i></td>
+                                                    <td><i>@user.UserID</i></td>
+                                                    <td><i>@user.Email</i></td>
+                                                    @{
+                                                        string status = @user.Status == "A" ? "Active" : "Inactive";
+                                                    }
+                                                    <td><i>@status</i></td>
+                                                    <td>Nomal User</td>
 
-    }
+                                                </tr>
+                                                            }
+                                                        }
+            </tbody>
+        </table>
+    </p>
+</form>

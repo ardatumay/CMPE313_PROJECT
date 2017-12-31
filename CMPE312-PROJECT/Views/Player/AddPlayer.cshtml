@@ -1,50 +1,50 @@
-    @using CMPE312_PROJECT.Models.Entity;
-    @model Player
-    @{
-        ViewBag.Title = "Add Player";
-    }
-    
-    <h2>AddPlayer</h2>
+@using CMPE312_PROJECT.Models.Entity;
+@model Player
+@{
+    ViewBag.Title = "Add Player";
+}
 
-    <form method="post" action="~/Player/AddPlayer">
-        <ul>
-            <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
-            <li><label>Surname<input name="Surname" value="@Model.Surname" type="text" /></label></li>
-            <li><label>Birth Date<input name="BirthDate" value="@Model.BirthDate" type="date" /></label></li>
-            <li>             
-                    <p>
-                        <label>
-                            Player Position
-                            <select name="Position">
-                                <option selected="selected">-</option>
-                                @foreach (Position position in (List<Position>)ViewData["Positions"])
-                                {
-                                    <option value="@position.PositionValue">@position.PositionValue</option>
-                                }
-                            </select>
-                        </label>
-                    </p>
-            </li>
+<h2>AddPlayer</h2>
 
-            <li><p><label>Transfer Fee<input name="TransferFee" value="@Model.TransferFee" type="number" /></label>Million €</p></li>
-            <li><p><label>Salary<input name="Salary" value="@Model.Salary" type="number" /></label>Million €</p></li>
-            <li>
-                <p>
-                    <label>
-                        Player Team
-                        <select name="TeamName">
-                            <option selected="selected">-</option>
-                            @foreach (Team team in (List<Team>)ViewData["Teams"])
-                            {
-                                <option value="@team.Name">@team.Name</option>
-                            }
-                        </select>
-                    </label>
-                </p>
-            </li>
+<form method="post" action="~/Player/AddPlayer">
+    <ul>
+        <li><label>Name<input name="Name" value="@Model.Name" type="text" /></label></li>
+        <li><label>Surname<input name="Surname" value="@Model.Surname" type="text" /></label></li>
+        <li><label>Birth Date<input name="BirthDate" value="@Model.BirthDate" type="date" /></label></li>
+        <li>
+            <p>
+                <label>
+                    Player Position
+                    <select name="Position">
+                        <option selected="selected">-</option>
+                        @foreach (Position position in (List<Position>)ViewData["Positions"])
+                        {
+                            <option value="@position.PositionValue">@position.PositionValue</option>
+                        }
+                    </select>
+                </label>
+            </p>
+        </li>
 
-        </ul>
-        
-        <p><input type="submit" value="Add Player" /></p>
+        <li><p><label>Transfer Fee<input name="TransferFee" value="@Model.TransferFee" type="number" /></label>Million €</p></li>
+        <li><p><label>Salary<input name="Salary" value="@Model.Salary" type="number" /></label>Million €</p></li>
+        <li>
+            <p>
+                <label>
+                    Player Team
+                    <select name="TeamName">
+                        <option selected="selected">-</option>
+                        @foreach (Team team in (List<Team>)ViewData["Teams"])
+                        {
+                            <option value="@team.Name">@team.Name</option>
+                        }
+                    </select>
+                </label>
+            </p>
+        </li>
 
-    </form>
+    </ul>
+
+    <p><input type="submit" value="Add Player" /></p>
+
+</form>

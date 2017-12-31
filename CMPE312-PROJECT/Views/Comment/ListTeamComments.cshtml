@@ -49,7 +49,7 @@
                     get('comments').innerHTML = ""
                     get('alert').innerHTML = "There is no comment about the team."
                 }
-                }
+            }
 
             else {
                 alert("Error: status code " + request.status)
@@ -65,11 +65,10 @@
         width: 200px;
         background-color: lightgray;
     }
-
 </style>
 <h2>Comments of a Team</h2>
 
-<form method="get" action="~/Comment/ListTeamComments" >
+<form method="get" action="~/Comment/ListTeamComments">
     <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">

@@ -6,7 +6,7 @@
 }
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="UTF-8"></script>
 
-<script  type="text/JavaScript">
+<script type="text/JavaScript">
     window.onload = function () {
         try { // Firefox, Opera, IE7
             request = new XMLHttpRequest()
@@ -32,15 +32,14 @@
         });
     });
     function checkTeam() {
-        if (!request) return      
+        if (!request) return
         var team = get("select")
         var teamName = team.value
         console.log(teamName)
-        //var prefix = "GALATASARAY"
         var url = "/Home/GetTeamInfo?teamName=" + teamName
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send(null)
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
     }
 
     function updatePage() {
@@ -51,7 +50,7 @@
                 var teamInfo = response.split(",")
                 var undefined = "undefined"
                 var teamTable = ''
-                for (var i = 0; i < teamInfo.length-1; i = i + 2){
+                for (var i = 0; i < teamInfo.length - 1; i = i + 2) {
                     teamTable += '<tr><th>' + teamInfo[i] + '</th><td>' + teamInfo[i + 1] + '</td></tr>'
                     console.log(teamInfo[i])
                     console.log(teamInfo[i + 1])
@@ -66,7 +65,7 @@
         }
     }
     function get(id) { return document.getElementById(id) }
-    
+
 </script>
 
 <h4>Home Page</h4>
@@ -75,11 +74,19 @@
         float: right;
         position: relative;
         right: 300px;
-        top: 30px;
+        top: 80px;
         width: 35%;
     }
+
     #teamInfo {
-            float: right;
+        float: right;
+    }
+
+    #teamTable {
+        position: relative;
+        top: 50px;
+        width: 30%;
+        float: left
     }
 </style>
 
@@ -90,7 +97,7 @@
             <select id="select" onchange="checkTeam()">
                 <option selected="selected">-</option>
                 @foreach (Team team in (List<Team>)ViewData["Teams"])
-            {
+                {
                     <option value="@team.Name">@team.Name</option>
                 }
             </select>
@@ -99,10 +106,9 @@
             <table class="table table-striped" id="teamInfo"></table>
         </p>
     </div>
-
-    <p><label>League Point Table</label></p>
     <p>
         <table id="teamTable" class="table table-striped" style="width:30%; float:left;">
+            <caption><b>Point Table</b></caption>
             <thead>
                 <tr>
                     <th>Team</th>

@@ -81,7 +81,7 @@ namespace CMPE312_PROJECT.Models.Persistance
                 decimal NewId = MaxId + 1;
                 string sql4 = "Insert into COMMENT (ID, COMMENT, PLAYER_ID, COACH_ID, PRESIDENT_ID, TEAM_ID) values ('" + NewId + "','" + comment.CommentValue + "','" + comment.PlayerId + "','" + 0 + "','" + 0 + "','" + comment.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql4);
-            } 
+            }
             if (result == 1)
             {
                 return true;
@@ -95,7 +95,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         public static List<Comment> GetTeamComments(Team team)
         {
             List<Comment> comments = new List<Comment>();
-            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + 0 + "'"; 
+            string sql1 = "Select * from COMMENT where TEAM_ID='" + team.ID + "'and PLAYER_ID='" + 0 + "'";
             List<object[]> rows1 = RepositoryManager.Repository.DoQuery(sql1);
             if (rows1.Count == 0)
             {

@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="UTF-8"></script>
     <style>
         /* Dropdown Button */
         .dropbtn {
@@ -58,26 +58,32 @@
             background-color: #3e8e41;
         }
 
-        a:hover {color:green;}
-        body {
-            height:100%;
-            min-height:100%;
-            padding-bottom: 0px;
-            margin-bottom: 0px; 
+        a:hover {
+            color: green;
         }
+
+        body {
+            height: 100%;
+            min-height: 100%;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
         footer {
             padding-bottom: 0px;
             margin-bottom: 0px;
             clear: both;
             background-color: #222222;
             color: #888;
-            height: 50px;
+            height: 20px;
         }
+
             footer p {
                 bottom: 0;
                 width: 100%;
                 padding-bottom: 0px;
                 margin-bottom: 0px;
+                clear: both;
             }
     </style>
 </head>
@@ -90,12 +96,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                    @Html.ActionLink("Football League Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Football League Information System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
- 
+
                     @{
 
                         if ((Session["LoggedIn"] == null) || ((bool)Session["LoggedIn"] == false))
@@ -104,7 +110,7 @@
                             <li style="float:right;margin-left:335px;margin-right:-335px;">@Html.ActionLink("Signup", "Signup", "Authentication")</li>
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Comments</button>
+                                    <button class="dropbtn" disabled>Comments</button>
                                     <div class="dropdown-content">
                                         <a href="~/Comment/ListPlayerComments">See Player Comments</a>
                                         <a href="~/Comment/ListTeamComments">See Team Comments</a>
@@ -127,7 +133,7 @@
                         {
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Comments</button>
+                                    <button class="dropbtn" disabled>Comments</button>
                                     <div class="dropdown-content">
                                         <a href="~/Comment/ListPlayerComments">See Player Comments</a>
                                         <a href="~/Comment/ListTeamComments">See Team Comments</a>
@@ -145,7 +151,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="dropbtn">Budget</button>
+                                        <button class="dropbtn" disabled>Budget</button>
                                         <div class="dropdown-content">
                                             <a href="~/Team/ChangeBudget">Change Team Budget</a>
                                         </div>
@@ -162,7 +168,7 @@
                         {
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Comments</button>
+                                    <button class="dropbtn" disabled>Comments</button>
                                     <div class="dropdown-content">
                                         <a href="~/Comment/ListPlayerComments">See Player Comments</a>
                                         <a href="~/Comment/ListTeamComments">See Team Comments</a>
@@ -174,7 +180,7 @@
 
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Teams</button>
+                                    <button class="dropbtn" disabled>Teams</button>
                                     <div class="dropdown-content">
                                         <a href="~/Team/AddTeam">Add Team</a>
                                         <a href="~/Team/DeleteTeam">Delete Team</a>
@@ -186,7 +192,7 @@
 
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">Players</button>
+                                    <button class="dropbtn" disabled>Players</button>
                                     <div class="dropdown-content">
                                         <a href="~/Player/AddPlayer">Add Player</a>
                                         <a href="~/Player/DeletePlayer">Delete Player</a>
@@ -196,7 +202,7 @@
 
                             <li>
                                 <div class="dropdown">
-                                    <button class="dropbtn">System Management</button>
+                                    <button class="dropbtn" disabled>System Management</button>
                                     <div class="dropdown-content">
                                         <a href="~/Authentication/UserInformation">Users</a>
                                         <a href="~/Authentication/ChangeStatus">Change User Status</a>
@@ -218,10 +224,11 @@
         </div>
     </div>
 
-    <div class="container body-content" >
+    <div class="container body-content">
         @RenderBody()
         @ViewBag.message
-        @TempData["message"]
+        <p>@TempData["message"]</p>
+
 
     </div>
     <hr style=" clear:both;" />

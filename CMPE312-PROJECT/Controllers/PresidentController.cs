@@ -40,6 +40,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a President object as parameter and sends this object to Model for updating current president.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult ChangePresident(President president)
         {
             bool isExist = true;
@@ -60,16 +61,23 @@ namespace CMPE312_PROJECT.Controllers
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             Match matchname = Regex.Match(president.Name, validName);
             Match matchsurname = Regex.Match(president.Surname, validName);
-            if (!matchname.Success || !matchsurname.Success )
+            if (!matchname.Success || !matchsurname.Success)
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
                 TempData["message"] = "Incorrect letters";
                 return View(president);
             }
-            president.Name = president.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-            president.Surname = president.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckName = president.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckSurname = president.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
 
+            if (!CheckName.Equals(president.Name) || !CheckSurname.Equals(president.Surname))
+            {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "XSS attack found!";
+                return View(new President());
+            }
             if (PresidentPersistance.GetPresident(president) != null)
             {
                 var teams = TeamPersistance.GetTeams();

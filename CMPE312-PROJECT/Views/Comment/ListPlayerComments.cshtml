@@ -24,9 +24,9 @@
         var team = get("selectTeam")
         var teamName = team.value
         var url = "/Team/GetTeamPlayers?teamName=" + teamName
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send(null)
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
     }
     function checkPlayerComments() {
         if (!request) return

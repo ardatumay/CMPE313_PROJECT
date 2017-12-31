@@ -39,6 +39,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Comment object as parameter and sends this object to Model for adding this comment object to the database.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult CommentPlayer(Comment comment)
         {
             bool isAdded;
@@ -49,7 +50,7 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Comment object is null.";
                 return View(new Comment());
             }
-            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0 || comment.PlayerId == 0 ||comment.PlayerId.ToString().Equals(null) || comment.PlayerId.ToString().Length ==0)
+            if (comment.TeamName == null || comment.TeamName.Length == 0 || comment.CommentValue == null || comment.CommentValue.Length == 0 || comment.PlayerId == 0 || comment.PlayerId.ToString().Equals(null) || comment.PlayerId.ToString().Length == 0)
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
@@ -63,7 +64,14 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(comment);
             }
-            comment.CommentValue = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckComment = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if (!CheckComment.Equals(comment.CommentValue))
+            {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "XSS attack found!";
+                return View(new Comment());
+            }
             Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             comment.TeamID = team.ID;
             isAdded = CommentManager.AddCommentPlayer(comment);
@@ -88,9 +96,10 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Comment object as parameter and sends this object to Model for adding this comment object to the database.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult CommentTeam(Comment comment)
         {
-            
+
             bool isAdded;
             if (comment == null)
             {
@@ -103,7 +112,7 @@ namespace CMPE312_PROJECT.Controllers
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
-                TempData["message"] = "All fields are required."+ comment.TeamName +","+ comment.CommentValue;
+                TempData["message"] = "All fields are required." + comment.TeamName + "," + comment.CommentValue;
                 return View(comment);
             }
             string validComment = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
@@ -115,8 +124,14 @@ namespace CMPE312_PROJECT.Controllers
                 TempData["message"] = "Incorrect letters";
                 return View(comment);
             }
-            comment.CommentValue = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-
+            string CheckComment = comment.CommentValue.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            if (!CheckComment.Equals(comment.CommentValue))
+            {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "XSS attack found!";
+                return View(new Comment());
+            }
             Team team = TeamPersistance.GetTeam(new Team(comment.TeamName));
             if (team == null)
             {

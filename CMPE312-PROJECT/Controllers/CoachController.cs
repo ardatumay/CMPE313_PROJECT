@@ -38,6 +38,7 @@ namespace CMPE312_PROJECT.Controllers
          * It takes a Coach object as parameter and sends this object to Model for updating current coach.
          */
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult ChangeCoach(Coach coach)
         {
 
@@ -48,9 +49,9 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Teams"] = teams;
                 return View(new Player());
             }
-            if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() ==  null ||  coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
+            if (coach.Name == null || coach.Name.Length == 0 || coach.Surname == null || coach.Surname.Length == 0 || coach.BirthDate == null || coach.BirthDate.Length == 0 || coach.Salary.ToString() == null || coach.Salary.ToString().Length == 0 || coach.Salary == 0 || coach.TeamName == null || coach.TeamName.Length == 0)
             {
-                if(coach.Salary == 0)
+                if (coach.Salary == 0)
                 {
                     var teams = TeamPersistance.GetTeams();
                     ViewData["Teams"] = teams;
@@ -63,7 +64,7 @@ namespace CMPE312_PROJECT.Controllers
                     ViewData["Teams"] = teams;
                     TempData["message"] = "All fields are required.";
                     return View(coach);
-                }            
+                }
             }
             string validName = @"^[a-zA-Z ][a-zA-Z0-9 ]*$";
             string validsalary = @"/^[0 - 9 +] *$/";
@@ -71,15 +72,23 @@ namespace CMPE312_PROJECT.Controllers
             Match matchsurname = Regex.Match(coach.Surname, validName);
             Match matchsalary = Regex.Match(coach.Salary.ToString(), validsalary);
 
-            if (!matchname.Success || !matchsurname.Success )
+            if (!matchname.Success || !matchsurname.Success)
             {
                 var teams = TeamPersistance.GetTeams();
                 ViewData["Teams"] = teams;
                 TempData["message"] = "Incorrect letters";
                 return View(coach);
             }
-            coach.Name = coach.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
-            coach.Surname = coach.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckName = coach.Name.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+            string CheckSurname = coach.Surname.Replace("<", "&lt;").Replace(">", "&gt;").Replace("(", "&#40").Replace(")", "&#41").Replace("&", "&#38").Replace("|", "&#124");
+
+            if (!CheckName.Equals(coach.Name) || !CheckSurname.Equals(CheckSurname))
+            {
+                var teams = TeamPersistance.GetTeams();
+                ViewData["Teams"] = teams;
+                TempData["message"] = "XSS attack found!";
+                return View(new Coach());
+            }
 
             Team team = TeamPersistance.GetTeam(new Team(coach.TeamName));
             if (team == null)
@@ -108,7 +117,7 @@ namespace CMPE312_PROJECT.Controllers
                 ViewData["Teams"] = teams;
                 TempData["message"] = "Coach is already registered.";
                 return View(coach);
-            } 
+            }
 
         }
     }

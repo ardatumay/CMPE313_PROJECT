@@ -22,14 +22,15 @@ namespace CMPE312_PROJECT.Models.Transaction
         {
             bool isAdded = true;
             Coach Coach = CoachPersistence.GetCoach(coach_);
-            if(Coach != null && Coach.TeamID == coach_.TeamID)
+            if (Coach != null && Coach.TeamID == coach_.TeamID)
             {
                 return false;
             }
             else if (Coach != null)
             {
-                isAdded = CoachPersistence.UpdateCoach(coach_);            
-            }else if(Coach == null)
+                isAdded = CoachPersistence.UpdateCoach(coach_);
+            }
+            else if (Coach == null)
             {
                 isAdded = CoachPersistence.AddCoach(coach_);
             }

@@ -13,7 +13,8 @@ namespace CMPE312_PROJECT.Models.Transaction
     /*
     * This class is created for providing connection between model and controller about Team in some cases.
     */
-    public class TeamManager {
+    public class TeamManager
+    {
 
         /*
         * This method takes a Team object as parameter and adds this team object to the database by using GetTeam() method of TeamPersistance class. 

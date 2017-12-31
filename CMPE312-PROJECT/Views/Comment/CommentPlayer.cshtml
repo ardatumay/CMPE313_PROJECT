@@ -25,9 +25,9 @@
         var teamName = team.value
         //var prefix = "GALATASARAY"
         var url = "/Team/GetTeamPlayers?teamName=" + teamName
-            request.open("GET", url, true)
-            request.onreadystatechange = updatePage
-            request.send(null)
+        request.open("GET", url, true)
+        request.onreadystatechange = updatePage
+        request.send(null)
     }
 
     function updatePage() {
@@ -37,11 +37,11 @@
                 var players = response.split(",")
                 var undefined = "undefined"
                 var selectPlayer = ''
-                for (var i = 0; i < players.length-1; i = i + 2){
-                        selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
-                        console.log(players[i])
-                        console.log(players[i + 1])
-                        console.log(response)
+                for (var i = 0; i < players.length - 1; i = i + 2) {
+                    selectPlayer += '<option value="' + players[i] + '">' + players[i + 1] + '</option>\n'
+                    console.log(players[i])
+                    console.log(players[i + 1])
+                    console.log(response)
                 }
                 console.log(selectPlayer)
                 //get('players').value = response
@@ -58,25 +58,26 @@
 <h2>Comment Player</h2>
 
 <form method="post" action="~/Comment/CommentPlayer">
-            <p><label>Choose Team</label></p>
+    <p><label>Choose Team</label></p>
     <p>
         <select name="TeamName" id="selectTeam" onchange="checkTeam()">
             <option selected="selected">-</option>
             @foreach (Team team in (List<Team>)ViewData["Teams"])
             {
-                <option   value="@team.Name">@team.Name</option>
+                <option value="@team.Name">@team.Name</option>
             }
         </select>
     </p>
-    <div >
+    <div>
         <p>Choose Player</p>
-        <select id="players" name="PlayerId"> <option selected="selected">-</option>
-</select>
+        <select id="players" name="PlayerId">
+            <option selected="selected">-</option>
+        </select>
     </div>
 
     <!--<label>buraya bas<input  type="radio" onclick="checkTeam()"></label>-->
 
     <label>Comment<input name="CommentValue" type="text" /></label>
-    
-    <p><input type="submit"  value="Add Comment" /></p>
+
+    <p><input type="submit" value="Add Comment" /></p>
 </form>
