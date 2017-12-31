@@ -43,7 +43,9 @@ namespace CMPE312_PROJECT.Controllers
         {
             Team team1 = Team.CreateTeamWithName(teamName);
             Team team2 = TeamPersistance.GetTeam(team1);
-            return team2.GetTeamInfo();
+            Coach coach = CoachPersistence.GetCoachByTeam(team2);
+            President president = PresidentPersistance.GetPresidentByTeam(team2);
+            return team2.GetTeamInfo(coach, president);
         }
 
     }

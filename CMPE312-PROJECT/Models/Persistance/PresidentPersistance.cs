@@ -17,7 +17,7 @@ namespace CMPE312_PROJECT.Models.Persistance
         */
         public static President GetPresident(President president1)
         {
-            string sqlQuery = "select * from PRESIDENT where ID='" + president1.ID + "'"; 
+            string sqlQuery = "select * from PRESIDENT where ID='" + president1.ID + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -27,7 +27,27 @@ namespace CMPE312_PROJECT.Models.Persistance
 
             // Use the data from the first returned row (should be the only one) to create a Book.
             object[] dataRow = rows[0];
-            President president = new President { ID = (int)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], TeamID = (int)dataRow[4] };
+            President president = new President { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], TeamID = (decimal)dataRow[4] };
+            return president;
+        }
+
+
+        /*
+        * This method takes a Team object as parameter and returns a president object that beongs to this team.
+        */
+        public static President GetPresidentByTeam(Team team)
+        {
+            string sqlQuery = "select * from PRESIDENT where TEAM_ID='" + team.ID + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Book.
+            object[] dataRow = rows[0];
+            President president = new President { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], TeamID = (decimal)dataRow[4] };
             return president;
         }
 

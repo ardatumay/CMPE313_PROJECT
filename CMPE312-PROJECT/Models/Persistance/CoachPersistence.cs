@@ -17,7 +17,28 @@ namespace CMPE312_PROJECT.Models.Persistance
         */
         public static Coach GetCoach(Coach coach1)
         {
-            string sqlQuery = "select * from COACH where NAME='" + coach1.Name.ToUpper() + "'"; 
+            string sqlQuery = "select * from COACH where NAME='" + coach1.Name.ToUpper() + "'";
+            List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
+            //System.Console.WriteLine("$$rows: " + rows.Count);
+            if (rows.Count == 0)
+            {
+                return null;
+            }
+
+            // Use the data from the first returned row (should be the only one) to create a Book.
+            object[] dataRow = rows[0];
+            //DateTime dateAdded = DateTime.Parse(dataRow[3].ToString());
+            Coach coach = new Coach { ID = (decimal)dataRow[0], Name = (String)dataRow[1], Surname = (String)dataRow[2], BirthDate = (String)dataRow[3], Salary = (decimal)dataRow[4], TeamID = (decimal)dataRow[5] };
+            return coach;
+        }
+
+
+        /*
+        * This method takes a Team object as parameter and returns a coach object that belongs to this team.
+        */
+        public static Coach GetCoachByTeam(Team team)
+        {
+            string sqlQuery = "select * from COACH where TEAM_ID='" + team.ID + "'";
             List<object[]> rows = RepositoryManager.Repository.DoQuery(sqlQuery);
             //System.Console.WriteLine("$$rows: " + rows.Count);
             if (rows.Count == 0)
@@ -45,7 +66,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             //decimal IdCount = (decimal)dataRowCount[0];
             if (rows1.Count == 0)
             {
-                string sql2 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + 1 + "','" + coach1.Name.ToUpper() + "','" + coach1.Surname.ToUpper() + "','" + coach1.BirthDate + "','" + coach1.Salary + "','" + coach1 .TeamID + "')";
+                string sql2 = "Insert into COACH (ID, NAME, SURNAME, BIRTH_DATE, SALARY, TEAM_ID) values ('" + 1 + "','" + coach1.Name.ToUpper() + "','" + coach1.Surname.ToUpper() + "','" + coach1.BirthDate + "','" + coach1.Salary + "','" + coach1.TeamID + "')";
                 result = RepositoryManager.Repository.DoCommand(sql2);
             }
             else
@@ -65,7 +86,7 @@ namespace CMPE312_PROJECT.Models.Persistance
             }
             //if (result == 1)
             //{
-                return true;
+            return true;
             //}
             //return false;
         }

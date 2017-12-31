@@ -35,9 +35,9 @@ namespace CMPE312_PROJECT.Models.Entity
             return new Team(name);
         }
 
-        public string GetTeamInfo()
+        public string GetTeamInfo(Coach coach, President president)
         {
-            string info = "Name,"+ Name + ",City," + City + ",Foundation," + Foundation + ",Budget," + Budget + ",Number Of Championship," + NumberOfChampionship;
+            string info = "Name,"+ Name + ",City," + City + ",Foundation," + Foundation + ",Budget," + Budget + ",Number Of Championship," + NumberOfChampionship + ",Coach Name," + coach.Name + " " + coach.Surname +",President Name," + president.Name + " " + president.Surname;
             return info;
         }
     }
